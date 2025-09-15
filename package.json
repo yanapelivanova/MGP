@@ -1,4 +1,5 @@
-"name": "mgp-site",
+{
+  "name": "mgp-site",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -13,8 +14,4 @@
     "lucide-react": "0.452.0"
   },
   "devDependencies": {
-    "autoprefixer": "10.4.19",
-    "postcss": "8.4.40",
-    "tailwindcss": "3.4.10"
-  }
-}
+    "autoprefixer": "10.4.19
