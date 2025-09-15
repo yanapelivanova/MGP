@@ -15,15 +15,33 @@ export default function Page() {
             Elegant structure. Precise execution.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#contact" className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-neutral-900 text-white">
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-neutral-900 text-white"
+            >
               Start a project <ArrowRight size={18}/>
             </a>
-            <a href="#solutions" className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-neutral-300">
+            <a
+              href="#solutions"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-neutral-300"
+            >
               See solutions
             </a>
+            {/* Contact button с автофокусом */}
+            <button
+              onClick={() => {
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                setTimeout(() => {
+                  document.querySelector('input[name="name"]')?.focus();
+                }, 600); // ждём пока прокрутка дойдёт
+              }}
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-neutral-900 text-white text-xs"
+            >
+              Contact <ArrowRight size={14}/>
+            </button>
           </div>
         </div>
       </section>
     </main>
   );
-}
+            }
