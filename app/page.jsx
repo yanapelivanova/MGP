@@ -1,122 +1,66 @@
-// app/page.jsx
 export default function Page() {
   return (
-    <main className="relative">
-      {/* Hero */}
-      <section className="mx-auto max-w-6xl px-4 pt-20 pb-16 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-sm tracking-widest text-white/50 mb-4">
-            THE ARCHITECTURE OF FLOW
-          </p>
-          <h1 className="text-4xl/tight sm:text-5xl/tight lg:text-6xl/tight">
-            Your vision, <span className="text-white/70">worldwide</span>
+    <main className="flex flex-col items-center justify-center">
+      {/* Hero Section */}
+      <section className="relative flex min-h-screen flex-col items-center justify-center text-center px-6 w-full">
+        {/* затемнение поверх фона */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-transparent"></div>
+
+        <div className="relative z-10 max-w-3xl">
+          <h2 className="text-sm tracking-widest text-white/80 uppercase mb-3">
+            The Architecture of Flow
+          </h2>
+          <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight">
+            Your vision,<br />worldwide
           </h1>
-          <p className="mt-5 max-w-2xl text-base text-white/70">
-            Guiding your vision worldwide — from sourcing the right manufacturer to
-            delivering a finished product. Elegant structure. Precise execution.
+          <p className="mt-6 text-lg text-white/90 leading-relaxed">
+            Guiding your vision worldwide — from sourcing the right manufacturer 
+            to delivering a finished product. Elegant structure. Precise execution.
           </p>
-
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a href="#contact" className="btn">Start a Project →</a>
-            <a href="#solutions" className="btn-outline">See Solutions</a>
+          <div className="mt-8">
+            <a
+              href="#contact"
+              className="rounded-2xl bg-white/10 px-6 py-3 text-lg text-white 
+                         backdrop-blur-md border border-white/20 shadow-lg 
+                         hover:bg-white/20 transition-all"
+            >
+              Start a Project →
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Solutions */}
-      <section id="solutions" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <h2 className="text-xl mb-6">Solutions</h2>
-
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <article className="glass rounded-2xl p-6">
-            <h3 className="text-lg mb-2">Sourcing & Vetting</h3>
-            <p className="text-white/70 text-sm">
-              Vendor scouting, audits, samples and test runs to secure the right partner.
-            </p>
-          </article>
-
-          <article className="glass rounded-2xl p-6">
-            <h3 className="text-lg mb-2">Production Management</h3>
-            <p className="text-white/70 text-sm">
-              Calendars, QC checkpoints and on-site supervision for reliable timelines.
-            </p>
-          </article>
-
-          <article className="glass rounded-2xl p-6">
-            <h3 className="text-lg mb-2">Logistics & Compliance</h3>
-            <p className="text-white/70 text-sm">
-              End-to-end shipping, paperwork, duties and market-specific standards.
-            </p>
-          </article>
-        </div>
+      {/* Solutions Section */}
+      <section id="solutions" className="py-20 px-6 max-w-5xl w-full text-center">
+        <h2 className="text-3xl font-bold mb-6">Solutions</h2>
+        <p className="text-gray-700">
+          We provide tailored sourcing, logistics, and supply chain solutions to help your business
+          scale globally with confidence and precision.
+        </p>
       </section>
 
-      {/* Pricing */}
-      <section id="pricing" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mt-16">
-        <h2 className="text-xl mb-6">Pricing</h2>
-
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="glass rounded-2xl p-6">
-            <h3 className="text-lg">Starter</h3>
-            <p className="text-sm text-white/70 mt-1">Small batches, early validation.</p>
-            <p className="mt-4 text-3xl">$1.2k</p>
-            <ul className="mt-4 space-y-2 text-sm text-white/70">
-              <li>• 1 vendor search</li>
-              <li>• Basic QC checklist</li>
-              <li>• Shipping guidance</li>
-            </ul>
-            <a href="#contact" className="btn mt-6 w-full">Choose Starter</a>
-          </div>
-
-          <div className="glass rounded-2xl p-6 border-white/20">
-            <h3 className="text-lg">Growth</h3>
-            <p className="text-sm text-white/70 mt-1">Steady batches, multiple SKUs.</p>
-            <p className="mt-4 text-3xl">$3.8k</p>
-            <ul className="mt-4 space-y-2 text-sm text-white/70">
-              <li>• 2–3 vendors & sampling</li>
-              <li>• QC plan & reports</li>
-              <li>• Freight & customs</li>
-            </ul>
-            <a href="#contact" className="btn mt-6 w-full">Choose Growth</a>
-          </div>
-
-          <div className="glass rounded-2xl p-6">
-            <h3 className="text-lg">Prime</h3>
-            <p className="text-sm text-white/70 mt-1">Ongoing operations at scale.</p>
-            <p className="mt-4 text-3xl">Custom</p>
-            <ul className="mt-4 space-y-2 text-sm text-white/70">
-              <li>• Dedicated PM & on-site QC</li>
-              <li>• Multi-factory orchestration</li>
-              <li>• Full compliance stack</li>
-            </ul>
-            <a href="#contact" className="btn mt-6 w-full">Talk to Us</a>
-          </div>
-        </div>
+      {/* Pricing Section */}
+      <section id="pricing" className="py-20 px-6 max-w-5xl w-full text-center bg-gray-50">
+        <h2 className="text-3xl font-bold mb-6">Pricing</h2>
+        <p className="text-gray-700">
+          Transparent and flexible pricing options designed to match your project’s scale.
+        </p>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mt-16">
-        <div className="glass rounded-2xl p-8">
-          <h2 className="text-xl mb-2">Start the Conversation</h2>
-          <p className="text-white/70 mb-6">
-            Tell us about your vision — we’ll reply within 24 hours.
-          </p>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <a className="btn w-full" href="mailto:welcome@maisongp.com">welcome@maisongp.com</a>
-            <a className="btn-outline w-full" href="mailto:partners@maisongp.com">partners@maisongp.com</a>
-            <a className="btn-outline w-full" href="mailto:careers@maisongp.com">careers@maisongp.com</a>
-          </div>
-
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a className="btn" href="#pricing">View Pricing</a>
-            <a className="btn-outline" href="#solutions">See Solutions</a>
-          </div>
-        </div>
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-6 max-w-5xl w-full text-center">
+        <h2 className="text-3xl font-bold mb-6">Contact Us</h2>
+        <p className="text-gray-700 mb-6">
+          Reach out to us for inquiries, partnerships, or project discussions.
+        </p>
+        <a
+          href="mailto:welcome@maisongp.com"
+          className="rounded-xl bg-black px-6 py-3 text-lg text-white 
+                     shadow-md hover:bg-gray-800 transition-all"
+        >
+          Email Us →
+        </a>
       </section>
-
-      {/* Spacer before footer */}
-      <div className="h-16" />
     </main>
   );
 }
