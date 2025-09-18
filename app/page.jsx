@@ -1,266 +1,167 @@
-// app/page.jsx
 "use client";
-
-import { useEffect, useRef, useState } from "react";
-
-/** мягкий reveal без библиотек */
-function Reveal({ children, delay = 0 }) {
-  const ref = useRef(null);
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setShow(true),
-      { threshold: 0.12 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-[900ms] ease-out will-change-transform
-        ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-    >
-      {children}
-    </div>
-  );
-}
-
-/** один источник правды для «стекла» */
-const glass = {
-  background: "rgba(255,255,255,0.52)",
-  border: "1px solid rgba(255,255,255,0.38)",
-  backdropFilter: "blur(16px) saturate(160%)",
-  WebkitBackdropFilter: "blur(16px) saturate(160%)", // iOS/Safari
-  boxShadow: "0 10px 25px rgba(17,17,17,0.06)",
-};
-const glassSoft = {
-  ...glass,
-  background: "rgba(255,255,255,0.42)",
-};
+import GlassCard from "./components/GlassCard";
+import Button from "./components/Button";
 
 export default function Home() {
   return (
-    <main className="relative">
-      {/* ================= HERO ================= */}
-      <section className="relative overflow-hidden pt-28 pb-20 sm:pt-32 sm:pb-24">
-        {/* даём контент позади стекла (градиент + дымка) */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_-120px,rgba(0,0,0,0.55),transparent)]" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-stone-900/35 via-stone-900/15 to-transparent" />
+    <main className="relative isolate">
+      {/* мягкий атмосферный фон */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(1100px 540px at 50% -8%, rgba(255,255,255,0.88), rgba(255,255,255,0.66) 45%, rgba(255,255,255,0.22) 70%, transparent 100%), linear-gradient(180deg, rgba(23,23,23,0.05), rgba(23,23,23,0))",
+        }}
+      />
 
-        <div className="relative mx-auto max-w-6xl px-6 md:px-8 text-stone-900">
-          <Reveal>
-            <p className="tracking-[0.22em] text-xs text-stone-400">
-              THE ARCHITECTURE OF FLOW
+      {/* HERO */}
+      <section className="mx-auto max-w-6xl px-6 pb-12 pt-24 md:px-8 md:pb-20 md:pt-28">
+        <p className="tracking-[0.25em] text-xs text-stone-500">THE ARCHITECTURE OF FLOW</p>
+        <h1 className="mt-3 font-serif text-5xl leading-tight text-stone-900 md:text-6xl">
+          Your vision, <br className="hidden sm:block" />
+          worldwide
+        </h1>
+        <p className="mt-5 max-w-2xl text-stone-600 md:text-lg">
+          Guiding your vision worldwide — from sourcing the right manufacturer to delivering a finished product.
+          Elegant structure. Precise execution.
+        </p>
+
+        <Button
+          href="mailto:welcome@maisongp.com?subject=Start%20a%20Project"
+          className="mt-8"
+        >
+          Start a Project →
+        </Button>
+      </section>
+
+      {/* SOLUTIONS */}
+      <section id="solutions" className="mx-auto max-w-6xl px-6 py-10 md:px-8">
+        <h2 className="font-serif text-4xl text-stone-900 md:text-5xl">Solutions</h2>
+        <p className="mt-3 max-w-3xl text-stone-600 md:text-lg">
+          We provide tailored sourcing, logistics, and supply chain solutions to help your business scale globally
+          with confidence and precision.
+        </p>
+
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <GlassCard>
+            <h3 className="font-serif text-2xl text-stone-900">Sourcing & Vendor Match</h3>
+            <p className="mt-2 text-stone-600">
+              Find the right manufacturer with due diligence, sampling and clear specs.
             </p>
-          </Reveal>
+          </GlassCard>
 
-          <Reveal delay={80}>
-            <h1 className="mt-4 font-serif text-5xl leading-tight sm:text-6xl md:text-7xl">
-              Your vision, <br className="hidden sm:block" />
-              worldwide
-            </h1>
-          </Reveal>
-
-          <Reveal delay={140}>
-            <p className="mt-5 max-w-2xl text-stone-600 leading-relaxed">
-              Guiding your vision worldwide — from sourcing the right
-              manufacturer to delivering a finished product. Elegant structure.
-              Precise execution.
+          <GlassCard>
+            <h3 className="font-serif text-2xl text-stone-900">Production Orchestration</h3>
+            <p className="mt-2 text-stone-600">
+              Timeline, QA, documentation and proactive issue-solving built in.
             </p>
-          </Reveal>
+          </GlassCard>
 
-          <Reveal delay={220}>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              {/* стеклянная primary */}
-              <a
-                href="#contact"
-                style={glass}
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3 transition hover:shadow-xl"
-              >
-                <span className="font-medium">Start a Project</span>
-                <span aria-hidden>→</span>
-              </a>
-
-              {/* вторичная — мягче */}
-              <a
-                href="#solutions"
-                style={glassSoft}
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3 transition hover:shadow-lg"
-              >
-                See solutions
-              </a>
-            </div>
-          </Reveal>
+          <GlassCard className="md:col-span-2">
+            <h3 className="font-serif text-2xl text-stone-900">Logistics & Compliance</h3>
+            <p className="mt-2 text-stone-600">
+              Freight, customs, certificates — a single, visible flow to your door.
+            </p>
+          </GlassCard>
         </div>
       </section>
 
-      {/* ================= SOLUTIONS ================= */}
-      <section id="solutions" className="relative py-16 sm:py-20">
-        {/* фон за карточками, чтобы blur было чему «размывать» */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(800px_400px_at_10%_0%,rgba(0,0,0,0.06),transparent)]" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-white/70 to-stone-100/80" />
-        <div className="relative mx-auto max-w-6xl px-6 md:px-8">
-          <Reveal>
-            <h2 className="font-serif text-3xl sm:text-4xl text-stone-900">
-              Solutions
-            </h2>
-          </Reveal>
-          <Reveal delay={120}>
-            <p className="mt-3 max-w-2xl text-stone-600">
-              We provide tailored sourcing, logistics, and supply chain
-              solutions to help your business scale globally with confidence and
-              precision.
-            </p>
-          </Reveal>
+      {/* PRICING */}
+      <section id="pricing" className="mx-auto max-w-6xl px-6 py-14 md:px-8">
+        <h2 className="font-serif text-4xl text-stone-900 md:text-5xl">Pricing</h2>
+        <p className="mt-3 max-w-3xl text-stone-600 md:text-lg">
+          Transparent and flexible options tailored to project scale.
+        </p>
 
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                title: "Sourcing & Vendor Match",
-                text:
-                  "Find the right manufacturer with due diligence, sampling and clear specs.",
-              },
-              {
-                title: "Production Orchestration",
-                text:
-                  "Timeline, QA, documentation and proactive issue-solving built in.",
-              },
-              {
-                title: "Logistics & Compliance",
-                text:
-                  "Freight, customs, certificates — a single, visible flow to your door.",
-              },
-            ].map((card, i) => (
-              <Reveal key={card.title} delay={100 + i * 80}>
-                <div
-                  style={glass}
-                  className="rounded-2xl p-5 transition hover:shadow-xl"
-                >
-                  <div className="text-lg font-medium text-stone-900">
-                    {card.title}
-                  </div>
-                  <p className="mt-2 text-sm leading-relaxed text-stone-600">
-                    {card.text}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ================= PRICING ================= */}
-      <section id="pricing" className="relative py-18 sm:py-24">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_350px_at_90%_0%,rgba(0,0,0,0.06),transparent)]" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-stone-100/60 via-white/60 to-transparent" />
-        <div className="relative mx-auto max-w-6xl px-6 md:px-8">
-          <Reveal>
-            <h2 className="font-serif text-3xl sm:text-4xl text-stone-900">
-              Pricing
-            </h2>
-          </Reveal>
-          <Reveal delay={110}>
-            <p className="mt-3 max-w-2xl text-stone-600">
-              Transparent and flexible options tailored to project scale.
-            </p>
-          </Reveal>
-
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                name: "Starter",
-                price: "On request",
-                bullets: [
-                  "Lightweight sourcing",
-                  "Basic compliance check",
-                  "Email support",
-                ],
-              },
-              {
-                name: "Core",
-                price: "On request",
-                bullets: [
-                  "Full vendor search & sampling",
-                  "Production oversight",
-                  "Logistics coordination",
-                ],
-                featured: true,
-              },
-              {
-                name: "Prime",
-                price: "For clients",
-                bullets: [
-                  "End-to-end orchestration",
-                  "Priority lanes & reporting",
-                  "Dedicated channel",
-                ],
-              },
-            ].map((p, i) => (
-              <Reveal key={p.name} delay={120 + i * 90}>
-                <div
-                  style={p.featured ? glass : glassSoft}
-                  className="group relative rounded-3xl p-6 transition hover:shadow-2xl"
-                >
-                  <div className="relative">
-                    <div className="text-stone-900 text-lg font-medium">
-                      {p.name}
-                    </div>
-                    <div className="mt-1 text-stone-500 text-sm">{p.price}</div>
-
-                    <ul className="mt-4 space-y-2 text-sm text-stone-700">
-                      {p.bullets.map((b) => (
-                        <li key={b} className="flex gap-2">
-                          <span aria-hidden>—</span>
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <a
-                      href="#contact"
-                      style={glass}
-                      className="mt-5 inline-flex items-center gap-2 rounded-full px-4 py-2 transition hover:shadow-xl"
-                    >
-                      Contact us →
-                    </a>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ================= CONTACT ================= */}
-      <section id="contact" className="relative py-20">
-        <div className="relative mx-auto max-w-4xl px-6 md:px-8 text-center">
-          <Reveal>
-            <h2 className="font-serif text-3xl sm:text-4xl text-stone-900">
-              Contact Us
-            </h2>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="mt-3 text-stone-600">
-              Reach out for inquiries, partnerships, or project discussions.
-            </p>
-          </Reveal>
-          <Reveal delay={160}>
-            <a
-              href="mailto:welcome@maisongp.com"
-              style={glass}
-              className="mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 transition hover:shadow-xl"
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <GlassCard>
+            <h3 className="font-serif text-2xl text-stone-900">Starter</h3>
+            <p className="mt-1 text-stone-500">On request</p>
+            <ul className="mt-4 space-y-2 text-stone-700">
+              <li>— Lightweight sourcing</li>
+              <li>— Basic compliance check</li>
+              <li>— Email support</li>
+            </ul>
+            <Button
+              href="mailto:welcome@maisongp.com?subject=Starter%20Plan"
+              className="mt-6"
             >
-              Email Us →
-            </a>
-          </Reveal>
+              Contact us →
+            </Button>
+          </GlassCard>
+
+          <GlassCard>
+            <h3 className="font-serif text-2xl text-stone-900">Core</h3>
+            <p className="mt-1 text-stone-500">On request</p>
+            <ul className="mt-4 space-y-2 text-stone-700">
+              <li>— Full vendor search & sampling</li>
+              <li>— Production oversight</li>
+              <li>— Logistics coordination</li>
+            </ul>
+            <Button
+              href="mailto:welcome@maisongp.com?subject=Core%20Plan"
+              className="mt-6"
+            >
+              Contact us →
+            </Button>
+          </GlassCard>
         </div>
       </section>
+
+      {/* CONTACT */}
+      <section id="contact" className="mx-auto max-w-6xl px-6 pb-20 md:px-8">
+        <GlassCard className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h3 className="font-serif text-2xl text-stone-900">Start the Conversation</h3>
+            <p className="mt-1 text-stone-600">
+              A quick line is all it takes — we’ll reply within 1 business day.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <div className="glass-chip">welcome@maisongp.com</div>
+              <div className="glass-chip">partners@maisongp.com</div>
+              <div className="glass-chip">careers@maisongp.com</div>
+            </div>
+          </div>
+          <Button href="mailto:welcome@maisongp.com?subject=Hello">Email Us →</Button>
+        </GlassCard>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="mx-auto max-w-6xl px-6 pb-16 md:px-8">
+        <div className="glass-footer">
+          <div className="grid gap-8 md:grid-cols-3">
+            <div>
+              <h4 className="font-serif text-xl text-stone-900">Maison Global Partners</h4>
+              <p className="mt-2 text-stone-600">
+                Architecture of Flow — guiding your vision worldwide with elegant structure and precise execution.
+              </p>
+            </div>
+
+            <nav className="text-stone-700">
+              <h5 className="mb-2 font-medium tracking-wide text-stone-500">Explore</h5>
+              <ul className="space-y-2">
+                <li><a href="#solutions" className="underline-offset-4 hover:underline">Solutions</a></li>
+                <li><a href="#pricing" className="underline-offset-4 hover:underline">Pricing</a></li>
+                <li><a href="#contact" className="underline-offset-4 hover:underline">Contact</a></li>
+              </ul>
+            </nav>
+
+            <div className="text-stone-700">
+              <h5 className="mb-2 font-medium tracking-wide text-stone-500">Contact</h5>
+              <ul className="space-y-2">
+                <li className="glass-chip w-max">welcome@maisongp.com</li>
+                <li className="glass-chip w-max">partners@maisongp.com</li>
+                <li className="glass-chip w-max">careers@maisongp.com</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-8 border-t border-white/30 pt-4 text-sm text-stone-500">
+            © {new Date().getFullYear()} Maison Global Partners. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
