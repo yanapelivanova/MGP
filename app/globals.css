@@ -3,54 +3,45 @@
 @tailwind utilities;
 
 /* типографика via next/font */
-.font-sans {
-  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-    Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
-    "Segoe UI Emoji";
-}
+.font-sans { font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
 
 /* плавный скролл */
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
-/* лёгкий «атмосферный» фон + стекло-сатурация */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  background:
-    radial-gradient(1200px 800px at 80% -10%, rgba(0,0,0,0.06), transparent 60%),
-    radial-gradient(800px 600px at -10% 20%, rgba(0,0,0,0.04), transparent 50%),
-    linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,0.8));
-  backdrop-filter: saturate(1.02);
-}
+/* ====== FROSTED GLASS DESIGN SYSTEM ====== */
+@layer components {
+  /* базовое стекло */
+  .glass {
+    @apply bg-white/45 supports-[backdrop-filter]:bg-white/40 backdrop-blur-xl border border-white/30 shadow-[0_10px_30px_rgba(17,17,17,0.08)] rounded-3xl;
+  }
+  /* более выраженное (для CTA, ховеров) */
+  .glass-strong {
+    @apply bg-white/55 supports-[backdrop-filter]:bg-white/50 border-white/40 shadow-[0_12px_36px_rgba(17,17,17,0.12)];
+  }
 
-/* универсальный класс для «стеклянных» блоков */
-.glass {
-  @apply bg-white/60 border border-neutral-200/60 backdrop-blur-md;
-}
-/* ——— UI helpers ——— */
-.link {
-  @apply text-white/80 hover:text-white transition-colors;
-}
-.btn {
-  @apply inline-flex items-center justify-center rounded-full px-5 py-2.5
-         bg-white/90 text-black font-medium shadow-sm
-         hover:bg-white transition-colors;
-}
-.btn-outline {
-  @apply inline-flex items-center justify-center rounded-full px-5 py-2.5
-         border border-white/30 text-white hover:bg-white/10 transition-colors;
-}
-.icon-badge {
-  @apply inline-flex h-8 w-8 items-center justify-center rounded-full
-         bg-white/10 text-white/80 backdrop-blur-md border border-white/10;
-}
+  /* карточка по умолчанию */
+  .glass-card {
+    @apply glass p-6 md:p-8;
+  }
 
-/* «стеклянный» блок */
-.glass {
-  @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  /* кнопка */
+  .glass-btn {
+    @apply glass rounded-full px-6 py-3 text-stone-900 font-medium inline-flex items-center gap-2 transition duration-200;
+  }
+  .glass-btn:hover {
+    @apply glass-strong shadow-xl;
+  }
+  .glass-btn:focus-visible {
+    @apply outline-none ring-2 ring-stone-900/10;
+  }
+
+  /* маленькая «чип»-кнопка */
+  .glass-chip {
+    @apply glass rounded-full px-4 py-2 text-sm;
+  }
+
+  /* контейнер футера */
+  .glass-footer {
+    @apply glass p-6 md:p-10 rounded-[28px];
+  }
 }
