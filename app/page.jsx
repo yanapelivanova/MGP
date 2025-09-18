@@ -3,7 +3,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/** небольшой реюзабельный reveal без библиотек */
+/** мягкий reveal без библиотек */
 function Reveal({ children, delay = 0 }) {
   const ref = useRef(null);
   const [show, setShow] = useState(false);
@@ -31,16 +31,26 @@ function Reveal({ children, delay = 0 }) {
   );
 }
 
+/** один источник правды для «стекла» */
+const glass = {
+  background: "rgba(255,255,255,0.52)",
+  border: "1px solid rgba(255,255,255,0.38)",
+  backdropFilter: "blur(16px) saturate(160%)",
+  WebkitBackdropFilter: "blur(16px) saturate(160%)", // iOS/Safari
+  boxShadow: "0 10px 25px rgba(17,17,17,0.06)",
+};
+const glassSoft = {
+  ...glass,
+  background: "rgba(255,255,255,0.42)",
+};
+
 export default function Home() {
   return (
     <main className="relative">
-      {/* HERO */}
-      <section
-        className="relative overflow-hidden pt-28 pb-20 sm:pt-32 sm:pb-24"
-        aria-labelledby="hero-title"
-      >
-        {/* ласковая дымка + градиент */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_-100px,rgba(0,0,0,0.55),transparent)]" />
+      {/* ================= HERO ================= */}
+      <section className="relative overflow-hidden pt-28 pb-20 sm:pt-32 sm:pb-24">
+        {/* даём контент позади стекла (градиент + дымка) */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_-120px,rgba(0,0,0,0.55),transparent)]" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-stone-900/35 via-stone-900/15 to-transparent" />
 
         <div className="relative mx-auto max-w-6xl px-6 md:px-8 text-stone-900">
@@ -51,10 +61,7 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={80}>
-            <h1
-              id="hero-title"
-              className="mt-4 font-serif text-5xl leading-tight sm:text-6xl md:text-7xl text-stone-900 drop-shadow-[0_1px_0_rgba(255,255,255,0.2)]"
-            >
+            <h1 className="mt-4 font-serif text-5xl leading-tight sm:text-6xl md:text-7xl">
               Your vision, <br className="hidden sm:block" />
               worldwide
             </h1>
@@ -62,33 +69,29 @@ export default function Home() {
 
           <Reveal delay={140}>
             <p className="mt-5 max-w-2xl text-stone-600 leading-relaxed">
-              Guiding your vision worldwide — from sourcing the right manufacturer
-              to delivering a finished product. Elegant structure. Precise
-              execution.
+              Guiding your vision worldwide — from sourcing the right
+              manufacturer to delivering a finished product. Elegant structure.
+              Precise execution.
             </p>
           </Reveal>
 
           <Reveal delay={220}>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              {/* основная кнопка — «стекло» */}
+              {/* стеклянная primary */}
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3
-                           bg-white/40 border border-white/25 backdrop-blur-md
-                           shadow-sm hover:bg-white/70 hover:shadow-lg
-                           transition"
+                style={glass}
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3 transition hover:shadow-xl"
               >
                 <span className="font-medium">Start a Project</span>
                 <span aria-hidden>→</span>
               </a>
 
-              {/* вторичная — контур со стеклянным бликом */}
+              {/* вторичная — мягче */}
               <a
                 href="#solutions"
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3
-                           border border-white/50/60 bg-white/10 backdrop-blur
-                           text-stone-800 hover:bg-white/30 hover:shadow
-                           transition"
+                style={glassSoft}
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3 transition hover:shadow-lg"
               >
                 See solutions
               </a>
@@ -97,8 +100,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SOLUTIONS */}
+      {/* ================= SOLUTIONS ================= */}
       <section id="solutions" className="relative py-16 sm:py-20">
+        {/* фон за карточками, чтобы blur было чему «размывать» */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(800px_400px_at_10%_0%,rgba(0,0,0,0.06),transparent)]" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-white/70 to-stone-100/80" />
         <div className="relative mx-auto max-w-6xl px-6 md:px-8">
           <Reveal>
@@ -108,8 +113,9 @@ export default function Home() {
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-3 max-w-2xl text-stone-600">
-              We provide tailored sourcing, logistics, and supply chain solutions
-              to help your business scale globally with confidence and precision.
+              We provide tailored sourcing, logistics, and supply chain
+              solutions to help your business scale globally with confidence and
+              precision.
             </p>
           </Reveal>
 
@@ -132,7 +138,10 @@ export default function Home() {
               },
             ].map((card, i) => (
               <Reveal key={card.title} delay={100 + i * 80}>
-                <div className="rounded-2xl bg-white/55 border border-white/30 backdrop-blur-md p-5 shadow-sm hover:shadow-md transition">
+                <div
+                  style={glass}
+                  className="rounded-2xl p-5 transition hover:shadow-xl"
+                >
                   <div className="text-lg font-medium text-stone-900">
                     {card.title}
                   </div>
@@ -146,8 +155,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PRICING — стеклянные карточки с ховером */}
+      {/* ================= PRICING ================= */}
       <section id="pricing" className="relative py-18 sm:py-24">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_350px_at_90%_0%,rgba(0,0,0,0.06),transparent)]" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-stone-100/60 via-white/60 to-transparent" />
         <div className="relative mx-auto max-w-6xl px-6 md:px-8">
           <Reveal>
@@ -157,8 +167,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={110}>
             <p className="mt-3 max-w-2xl text-stone-600">
-              Transparent and flexible options tailored to project scale. No
-              hidden fees — ever.
+              Transparent and flexible options tailored to project scale.
             </p>
           </Reveal>
 
@@ -195,16 +204,9 @@ export default function Home() {
             ].map((p, i) => (
               <Reveal key={p.name} delay={120 + i * 90}>
                 <div
-                  className={`group relative rounded-3xl p-6 backdrop-blur-md border shadow-sm
-                    transition hover:shadow-xl
-                    ${p.featured
-                      ? "bg-white/70 border-white/40"
-                      : "bg-white/50 border-white/30"}`}
+                  style={p.featured ? glass : glassSoft}
+                  className="group relative rounded-3xl p-6 transition hover:shadow-2xl"
                 >
-                  {/* легкий блик при hover */}
-                  <div className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition
-                                  bg-gradient-to-br from-white/40 via-transparent to-white/10" />
-
                   <div className="relative">
                     <div className="text-stone-900 text-lg font-medium">
                       {p.name}
@@ -222,9 +224,8 @@ export default function Home() {
 
                     <a
                       href="#contact"
-                      className="mt-5 inline-flex items-center gap-2 rounded-full px-4 py-2
-                                 bg-white/40 border border-white/25
-                                 hover:bg-white/70 transition"
+                      style={glass}
+                      className="mt-5 inline-flex items-center gap-2 rounded-full px-4 py-2 transition hover:shadow-xl"
                     >
                       Contact us →
                     </a>
@@ -236,7 +237,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTACT */}
+      {/* ================= CONTACT ================= */}
       <section id="contact" className="relative py-20">
         <div className="relative mx-auto max-w-4xl px-6 md:px-8 text-center">
           <Reveal>
@@ -252,9 +253,8 @@ export default function Home() {
           <Reveal delay={160}>
             <a
               href="mailto:welcome@maisongp.com"
-              className="mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3
-                         bg-white/40 border border-white/25 backdrop-blur-md
-                         shadow-sm hover:bg-white/70 hover:shadow-lg transition"
+              style={glass}
+              className="mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 transition hover:shadow-xl"
             >
               Email Us →
             </a>
