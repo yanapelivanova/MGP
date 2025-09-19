@@ -72,3 +72,24 @@ body {
   position: fixed; right: 4vw; bottom: 4vh; pointer-events: none;
   opacity: .18; filter: drop-shadow(0 2px 2px rgba(0,0,0,.2));
 }
+body {
+  margin: 0;
+  padding: 0;
+  background: url("/10000301486.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.parallax {
+  background: url("/10000301486.jpg") no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  }
