@@ -121,3 +121,10 @@ html {
 .pill.secondary {
   background: rgba(0, 0, 0, 0.4);
 }
+body {
+  margin: 0;
+  padding: 0;
+  background: url("/1000030486.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+}
