@@ -1,148 +1,23 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* базовая типографика */
-:root {
-  --glass-bg: rgba(255, 255, 255, 0.16);
-  --glass-bg-strong: rgba(255, 255, 255, 0.22);
-  --glass-brd: rgba(255, 255, 255, 0.35);
-  --glass-inner: rgba(255, 255, 255, 0.25);
-  --ink: #101010;
-}
-
-html { scroll-behavior: smooth; }
-body {
-  color: var(--ink);
-  background-color: #b9c0c5;
-  background-image: url("/bg-midnight.svg");
-  background-size: cover;
-  background-position: center top;
-  background-attachment: fixed;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* стекло-компоненты */
-.glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-brd);
+/* Neumorphism buttons on white */
+.neumorphic-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px 32px;
+  border-radius:50px;
+  background:#fff;
+  color:#555;                /* серый текст */
+  text-decoration:none;
+  font-weight:500;
+  border:none;
   box-shadow:
-    0 10px 30px rgba(0,0,0,.18),
-    inset 0 1px 0 var(--glass-inner);
+    8px 8px 16px #d1d1d1,   /* тёмная мягкая тень */
+    -8px -8px 16px #ffffff; /* светлая тень */
+  transition:transform .15s ease, box-shadow .15s ease;
 }
-
-.glass-strong {
-  background: var(--glass-bg-strong);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-brd);
+.neumorphic-btn:active{
   box-shadow:
-    0 14px 40px rgba(0,0,0,.22),
-    inset 0 1px 0 var(--glass-inner);
-}
-
-.glass-btn {
-  @apply inline-flex items-center justify-center rounded-full px-6 py-3 font-medium transition-all;
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--glass-brd);
-  box-shadow: 0 8px 24px rgba(0,0,0,.18), inset 0 1px 0 var(--glass-inner);
-}
-.glass-btn:hover { transform: translateY(-1px); background: var(--glass-bg-strong); }
-.glass-btn:active { transform: translateY(0); filter: saturate(1.05); }
-
-.glass-pill { @apply rounded-[40px]; }
-.glass-card { @apply rounded-3xl p-6 md:p-8 glass; }
-.glass-heavy { @apply rounded-3xl p-6 md:p-8 glass-strong; }
-
-/* легкий контурный тайтл */
-.haze-title {
-  text-shadow: 0 1px 0 rgba(255,255,255,0.55);
-}
-
-/* тонкие разделители */
-.divider { height:1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); }
-
-/* водяной знак логотипа */
-.watermark {
-  position: fixed; right: 4vw; bottom: 4vh; pointer-events: none;
-  opacity: .18; filter: drop-shadow(0 2px 2px rgba(0,0,0,.2));
-}
-body {
-  margin: 0;
-  padding: 0;
-  background: url("/10000301486.jpg") no-repeat center center fixed;
-  background-size: cover;
-  font-family: Arial, sans-serif;
-}
-html {
-  scroll-behavior: smooth;
-}
-
-.parallax {
-  background: url("/10000301486.jpg") no-repeat center center fixed;
-  background-size: cover;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
-  }
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 999px;
-  padding: 10px 20px;
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-}
-
-.pill:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.pill .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: white;
-}
-
-.pill.secondary {
-  background: rgba(0, 0, 0, 0.4);
-}
-body {
-  margin: 0;
-  padding: 0;
-  background: url("/1000030486.jpg") no-repeat center center fixed;
-  background-size: cover;
-  font-family: Arial, sans-serif;
-}
-.neumorphic-btn {
-  background: #ffffff;
-  border-radius: 50px;
-  border: none;
-  padding: 14px 32px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #555; /* серый текст */
-  box-shadow: 8px 8px 16px #d1d1d1,
-              -8px -8px 16px #ffffff;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-.neumorphic-btn:active {
-  box-shadow: inset 6px 6px 12px #d1d1d1,
-              inset -6px -6px 12px #ffffff;
+    inset 6px 6px 12px #d1d1d1,
+    inset -6px -6px 12px #ffffff;
+  transform: translateY(1px);
 }
