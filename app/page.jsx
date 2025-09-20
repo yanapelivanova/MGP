@@ -2,9 +2,10 @@
 export default function Home() {
   return (
     <main className="page">
-
       {/* HERO */}
       <section className="hero">
+        {/* ЛОГО */}
+        <img src="/logo.png" alt="MGP logo" className="logo-hero" />
         <h1>Maison Global Partners</h1>
 
         <div className="btnbar">
@@ -21,7 +22,7 @@ export default function Home() {
       </section>
 
       {/* CONTENT */}
-      <section className="section" id="about">
+      <section className="section">
         <h2>Maison Global Partners</h2>
         <p className="lead">
           Architecture of Flow — guiding your vision worldwide with elegant
@@ -38,27 +39,43 @@ export default function Home() {
             </div>
           </div>
 
-          <div id="contact">
+          {/* EMAIL CONTAINER с минимальными иконками */}
+          <div>
             <h3>Contact</h3>
-            <div className="chips">
-              <a className="neumorphic-btn" href="mailto:welcome@maisongp.com">
-                welcome@maisongp.com
+            <div className="mailbox">
+              <a className="mail" href="mailto:welcome@maisongp.com">
+                {/* минималистичный конверт */}
+                <svg className="mail-ico" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" fill="none" stroke="#777" strokeWidth="1.4" />
+                  <path d="M4 7.5l8 6 8-6" fill="none" stroke="#777" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
+                <span>welcome@maisongp.com</span>
               </a>
-              <a className="neumorphic-btn" href="mailto:partners@maisongp.com">
-                partners@maisongp.com
+
+              <a className="mail" href="mailto:partners@maisongp.com">
+                <svg className="mail-ico" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" fill="none" stroke="#777" strokeWidth="1.4" />
+                  <path d="M4 7.5l8 6 8-6" fill="none" stroke="#777" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
+                <span>partners@maisongp.com</span>
               </a>
-              <a className="neumorphic-btn" href="mailto:careers@maisongp.com">
-                careers@maisongp.com
+
+              <a className="mail" href="mailto:careers@maisongp.com">
+                <svg className="mail-ico" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" fill="none" stroke="#777" strokeWidth="1.4" />
+                  <path d="M4 7.5l8 6 8-6" fill="none" stroke="#777" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
+                <span>careers@maisongp.com</span>
               </a>
             </div>
           </div>
         </div>
 
+        {/* один-единственный футер */}
         <footer className="foot">
           © {new Date().getFullYear()} Maison Global Partners. All rights reserved.
         </footer>
       </section>
-
     </main>
   );
 }
