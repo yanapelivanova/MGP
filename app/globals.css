@@ -128,3 +128,21 @@ body {
   background-size: cover;
   font-family: Arial, sans-serif;
 }
+.neumorphic-btn {
+  background: #ffffff;
+  border-radius: 50px;
+  border: none;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #555; /* серый текст */
+  box-shadow: 8px 8px 16px #d1d1d1,
+              -8px -8px 16px #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.neumorphic-btn:active {
+  box-shadow: inset 6px 6px 12px #d1d1d1,
+              inset -6px -6px 12px #ffffff;
+}
