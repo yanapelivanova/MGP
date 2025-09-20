@@ -111,3 +111,26 @@ export default function Home() {
     </main>
   );
 }
+export default function Home() {
+  return (
+    <main
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "#ffffff", // белый фон
+      }}
+    >
+      <h1 style={{ fontSize: "2rem", color: "#333", marginBottom: "40px" }}>
+        Maison Global Partners
+      </h1>
+
+      <div style={{ display: "flex", gap: "20px" }}>
+        <button className="neumorphic-btn">Contact</button>
+        <button className="neumorphic-btn">LinkedIn</button>
+      </div>
+    </main>
+  );
+}
