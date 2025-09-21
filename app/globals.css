@@ -1,4 +1,4 @@
-/* ---------- Базовые настройки ---------- */
+/* ---------- Общие стили ---------- */
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
@@ -7,7 +7,7 @@ body {
   font: 16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* ---------- Макет ---------- */
+/* Макет */
 .page { min-height:100vh; display:grid; gap:40px; }
 .hero {
   min-height: 42vh;
@@ -22,28 +22,22 @@ body {
 @media (min-width: 820px){ .grid{ grid-template-columns:1fr 1fr; gap:40px;} }
 .foot { margin-top: 36px; color:#777; font-size:14px; }
 
-/* ---------- Неоморфные кнопки ---------- */
+/* ---------- Кнопки (неоморфизм) ---------- */
 .btnbar { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
-
-.neumorphic-btn {
+.neumorphic-btn{
   display:inline-flex; align-items:center; justify-content:center;
-  padding:14px 28px; border-radius:50px;
-  background:#fff; color:#555;
+  padding:14px 28px; border-radius:50px; background:#fff; color:#555;
   font-weight:500; border:none;
-  box-shadow:
-    8px 8px 16px #d1d1d1,       /* тёмная мягкая тень */
-    -8px -8px 16px #ffffff;     /* светлая тень */
+  box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
   transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
 }
-.neumorphic-btn:hover { opacity: .95; }
-.neumorphic-btn:active {
-  box-shadow:
-    inset 6px 6px 12px #d1d1d1,
-    inset -6px -6px 12px #ffffff;
+.neumorphic-btn:hover{ opacity:.95; }
+.neumorphic-btn:active{
+  box-shadow: inset 6px 6px 12px #d1d1d1, inset -6px -6px 12px #ffffff;
   transform: translateY(1px);
 }
 
-/* ---------- Chips (малые ссылки в Explore) ---------- */
+/* ---------- Chips ---------- */
 .chips { display: flex; gap: 10px; flex-wrap: wrap; }
 .chip {
   display: inline-flex;
@@ -57,8 +51,10 @@ body {
 }
 .chip:hover { background: #efefef; transform: translateY(-1px); }
 
-/* ---------- Контейнер e-mail с минималистичными иконками ---------- */
-.mailbox { display:flex; flex-direction:column; gap:10px; }
+/* ---------- Контейнер e-mail ---------- */
+.mailbox{
+  display:flex; flex-direction:column; gap:10px;
+}
 @media (min-width: 560px){
   .mailbox{ flex-direction:column; gap:12px; }
 }
@@ -71,24 +67,25 @@ body {
 .mail:hover{ transform: translateY(-1px); box-shadow: 8px 8px 16px #ddd, -8px -8px 16px #fff; }
 .mail-ico{ width:20px; height:20px; flex:0 0 20px; }
 
-/* ---------- Логотип в белом «контейнере» (как кнопки) ---------- */
-/* ВАЖНО: используем обёртку .brand-card (белая, с тенью),
-   внутри — сам PNG логотип с прозрачным фоном. */
-.brand-card{
-  display:block;
-  margin: 24px auto 8px;
+/* ---------- Логотип (чёрный контейнер + белый логотип) ---------- */
+.brand-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 32px auto 12px;
   width: min(280px, 70vw);
+  height: auto;
   border-radius: 24px;
-  background:#fff;                 /* делает контейнер НЕ прозрачным */
-  padding: 22px;                   /* чтобы логотип не прилипал к краям */
+  background: #111; /* Чёрный контейнер */
+  padding: 20px;
   box-shadow:
-    8px 8px 16px #d1d1d1,
-    -8px -8px 16px #ffffff;        /* тот же эффект, что у кнопок */
+    8px 8px 16px #0a0a0a,
+    -8px -8px 16px #1c1c1c;
 }
-.brand-card img{
-  display:block;
-  width:100%;
-  height:auto;
-  border-radius: 16px;             /* лёгкое скругление внутреннего изображения */
-  filter: drop-shadow(0 6px 14px rgba(0,0,0,.10)); /* мягкий объём логотипу */
+
+.brand-card img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* превращает логотип в белый */
 }
