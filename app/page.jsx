@@ -5,7 +5,10 @@ export default function Home() {
       {/* HERO */}
       <section className="hero">
         {/* ЛОГО */}
-        <img src="/logo.png" alt="MGP logo" className="logo-hero" />
+        {/* ЛОГО (контейнер + изображение) */}
+<div className="brand-card">
+  <img src="/logo.png" alt="MGP logo" />
+</div>
         <h1>Maison Global Partners</h1>
 
         <div className="btnbar">
