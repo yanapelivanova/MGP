@@ -1,212 +1,153 @@
-// app/page.jsx
-'use client';
-
-import { useState, useEffect } from 'react';
-
-export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  // блокируем прокрутку, когда открыт drawer
-  useEffect(() => {
-    if (menuOpen) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = '';
-  }, [menuOpen]);
-
-  const scrollTo = (id) => {
-    setMenuOpen(false);
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
-  return (
-    <main className="page">
-
-      {/* HEADER */}
-      <header className="topbar">
-        {/* left: contact jump */}
-        <button
-          className="icon-pill"
-          aria-label="Contact"
-          onClick={() => scrollTo('contact')}
-        >
-          {/* простой минималистичный конверт */}
-          <span className="ico-mail" />
-        </button>
-
-        {/* center: logo */}
-        <div className="brand-mark" onClick={() => scrollTo('top')}>
-          <img src="/logo.png" alt="Maison Global Partners" />
-        </div>
-
-        {/* right: burger */}
-        <button
-          className="icon-pill"
-          aria-label="Menu"
-          onClick={() => setMenuOpen(true)}
-        >
-          <span className="ico-burger" />
-        </button>
-
-        {/* Drawer + Overlay */}
-        {menuOpen && (
-          <>
-            <div className="overlay" onClick={() => setMenuOpen(false)} />
-            <nav className="drawer">
-              <button
-                className="drawer-close"
-                aria-label="Close"
-                onClick={() => setMenuOpen(false)}
-              >
-                ×
-              </button>
-
-              <ul className="drawer-list">
-                <li><button onClick={() => scrollTo('services')}>Services</button></li>
-                <li><button onClick={() => scrollTo('about')}>About</button></li>
-                <li><button onClick={() => scrollTo('contact')}>Contact</button></li>
-                <li>
-                  <a
-                    href="https://www.linkedin.com/company/maison-global-partners/"
-                    target="_blank" rel="noopener"
-                  >LinkedIn</a>
-                </li>
-              </ul>
-            </nav>
-          </>
-        )}
-      </header>
-
-      {/* HERO */}
-      <section id="top" className="hero">
-        <h1 className="hero-title">Maison Global Partners</h1>
-        <p className="hero-tagline">
-          <span>Global sourcing</span><br />
-          <span>and supply-chain solutions</span>
-        </p>
-
-        <div className="btnbar">
-          <a className="neumorphic-btn" onClick={() => scrollTo('contact')}>Contact</a>
-          <a className="neumorphic-btn" onClick={() => scrollTo('services')}>Services</a>
-          <a
-            className="neumorphic-btn"
-            href="https://www.linkedin.com/company/maison-global-partners/"
-            target="_blank" rel="noopener"
-          >
-            LinkedIn
-          </a>
-        </div>
-      </section>
-
-      {/* SERVICES */}
-      <section id="services" className="section">
-        <h2>How we deliver value</h2>
-
-        <div className="cards">
-          <article className="card">
-            <img className="card-img" src="/images/service1.png" alt="" />
-            <h3>Global Sourcing</h3>
-            <p>
-              Supplier scouting across the Americas, Europe and Asia: due-diligence, audits and
-              sample runs to secure the best quality-to-cost ratio.
-            </p>
-          </article>
-
-          <article className="card">
-            <img className="card-img" src="/images/service2.png" alt="" />
-            <h3>Supply-Chain Optimisation</h3>
-            <p>
-              From demand planning to logistics flows and inventory health — we streamline, digitise
-              and cut bottlenecks end-to-end.
-            </p>
-          </article>
-
-          <article className="card">
-            <img className="card-img" src="/images/service3.png" alt="" />
-            <h3>Turnkey Solutions</h3>
-            <p>
-              From idea to shelf: product design, BOM, specification, QA, packaging and
-              compliant documentation — delivered on time.
-            </p>
-          </article>
-
-          <article className="card">
-            <img className="card-img" src="/images/service4.png" alt="" />
-            <h3>Branding</h3>
-            <p>
-              Naming, identity and packaging that scale: consistent across markets and channels,
-              engineered to convert.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      {/* ABOUT */}
-      <section id="about" className="section">
-        <h2>Maison Global Partners</h2>
-        <p className="lead">
-          Architecture of Flow — guiding your vision worldwide with elegant structure
-          and precise execution.
-        </p>
-      </section>
-
-      {/* CONTACTS */}
-      <section id="contact" className="section">
-        <h2>Contact</h2>
-
-        {/* Small neat form */}
-        <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
-          <div className="form-row">
-            <input type="text" name="name" placeholder="Your name" aria-label="Your name" />
-            <input type="email" name="email" placeholder="Email" aria-label="Email" />
-          </div>
-          <textarea name="message" placeholder="Message" rows={4} aria-label="Message" />
-          <button className="neumorphic-btn" type="submit">Send</button>
-        </form>
-
-        {/* Contact list */}
-        <div className="mailbox">
-          <a className="mail" href="tel:+14388091901">
-            <span className="mail-ico ico-phone" />
-            +1 (438) 809-1901
-          </a>
-
-          <a className="mail" href="mailto:welcome@maisongp.com">
-            <span className="mail-ico ico-mail" />
-            welcome@maisongp.com <em>— for general inquiries</em>
-          </a>
-
-          <a className="mail" href="mailto:partners@maisongp.com">
-            <span className="mail-ico ico-mail" />
-            partners@maisongp.com <em>— for partners</em>
-          </a>
-
-          <a className="mail" href="mailto:careers@maisongp.com">
-            <span className="mail-ico ico-mail" />
-            careers@maisongp.com <em>— for careers</em>
-          </a>
-
-          <a
-            className="mail"
-            href="https://www.linkedin.com/company/maison-global-partners/"
-            target="_blank" rel="noopener"
-          >
-            <span className="mail-ico ico-linkedin" />
-            LinkedIn
-          </a>
-
-          <div className="based">Based in Montreal, Quebec, Canada</div>
-        </div>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="foot">
-        <div className="foot-links">
-          <a href="#!">Legal</a>
-          <span>·</span>
-          <a href="#!">Français</a>
-        </div>
-        <div>© 2025 Maison Global Partners. All rights reserved.</div>
-      </footer>
-    </main>
-  );
+/* ---------- Base ---------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: #fff;
+  color: #333;
+  font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 }
+
+/* ---------- Layout ---------- */
+.page { display: grid; gap: 48px; }
+.section { padding: 16px 16px 56px; max-width: 1100px; margin: 0 auto; }
+h1,h2,h3 { margin: 0 0 16px; color: #222; }
+.lead { color:#555; }
+
+/* ---------- Topbar (compact) ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 40;
+  display: grid; grid-template-columns: 56px 1fr 56px;
+  align-items: center;
+  height: 64px;
+  padding: 8px 10px;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(0,0,0,.06);
+}
+.brand-mark { display:flex; justify-content:center; align-items:center; cursor: pointer; }
+.brand-mark img { height: 26px; width: auto; display:block; }
+
+/* circles */
+.icon-pill {
+  -webkit-tap-highlight-color: transparent;
+  width: 56px; height: 48px; border: 0; background: #fff; border-radius: 28px;
+  box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
+  display: grid; place-items: center;
+}
+.icon-pill:active { box-shadow: inset 6px 6px 12px #d1d1d1, inset -6px -6px 12px #ffffff; }
+
+/* minimal icons */
+.ico-mail, .ico-burger, .ico-phone, .ico-linkedin {
+  display:block;
+  width: 22px; height: 22px; position: relative;
+}
+.ico-burger::before, .ico-burger::after {
+  content:""; position:absolute; left:0; right:0; height:2px; top:8px; background:#444; border-radius:2px;
+}
+.ico-burger::after { top:14px; }
+.ico-mail::before, .ico-mail::after {
+  content:""; position:absolute; left:1px; right:1px; height:2px; background:#444; border-radius:2px;
+}
+.ico-mail::before { top:15px; }
+.ico-mail::after { top:7px; transform: skewY(-18deg); transform-origin:left; }
+.ico-phone::before {
+  content:""; position:absolute; inset:0; border:2px solid #444; border-radius:4px 4px 8px 8px;
+}
+.ico-linkedin::before {
+  content:"in"; position:absolute; inset:0; color:#444; font-weight:700; font-size:14px; display:grid; place-items:center;
+}
+
+/* ---------- Drawer + overlay ---------- */
+.overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.22); z-index: 49;
+  animation: fadeIn .2s ease;
+}
+.drawer {
+  position: fixed; top:0; right:0; bottom:0; width: 78vw; max-width: 380px;
+  background:#fff; z-index: 50; padding: 18px 20px;
+  border-radius: 16px 0 0 16px;
+  box-shadow: -12px 0 30px rgba(0,0,0,.12);
+  transform: translateX(100%);
+  animation: slideIn .28s ease forwards;
+}
+.drawer-close {
+  position:absolute; top:8px; right:12px;
+  background:#fff; border:0; font-size:28px; line-height:1; cursor:pointer;
+}
+.drawer-list { list-style:none; padding: 48px 4px 0; margin:0; display:grid; gap:14px; }
+.drawer-list a, .drawer-list button {
+  text-decoration:none; color:#333; background:#fff; border:0; text-align:left;
+  padding:12px 14px; border-radius:12px;
+  box-shadow: 6px 6px 12px #e2e2e2, -6px -6px 12px #ffffff;
+}
+.drawer-list a:active, .drawer-list button:active {
+  box-shadow: inset 6px 6px 12px #d1d1d1, inset -6px -6px 12px #ffffff;
+}
+
+@keyframes slideIn { to { transform: translateX(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+/* ---------- Hero ---------- */
+.hero { padding: 12px 16px 16px; text-align:center; max-width: 1100px; margin: 0 auto; }
+.hero-title { font-size: clamp(26px, 5.2vw, 44px); letter-spacing:.2px; }
+.hero-tagline { margin:6px 0 10px; color:#4a4a4a; font-size: clamp(16px, 3.6vw, 20px); }
+.btnbar { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+
+/* neumorphic buttons */
+.neumorphic-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:12px 22px; border-radius:50px; background:#fff; color:#555;
+  font-weight:500; border:none; cursor:pointer;
+  box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+.neumorphic-btn:hover{ opacity:.95; }
+.neumorphic-btn:active{
+  box-shadow: inset 6px 6px 12px #d1d1d1, inset -6px -6px 12px #ffffff;
+  transform: translateY(1px);
+}
+
+/* ---------- Services ---------- */
+.cards { display:grid; gap:18px; }
+@media (min-width: 860px){ .cards { grid-template-columns: repeat(2, 1fr); } }
+.card{
+  background:#fff; border-radius:18px; padding:18px;
+  box-shadow: 8px 8px 16px #e2e2e2, -8px -8px 16px #ffffff;
+}
+.card h3{ margin:10px 0 6px; }
+.card p{ margin:0; color:#555; }
+.card-img{ width:100%; height:160px; object-fit:contain; display:block; }
+
+/* ---------- Contact form ---------- */
+.contact-form{
+  background:#fff; border-radius:16px; padding:12px;
+  box-shadow: 6px 6px 12px #e2e2e2, -6px -6px 12px #ffffff;
+  margin: 8px 0 18px;
+}
+.form-row{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+@media (max-width: 560px){ .form-row{ grid-template-columns: 1fr; } }
+.contact-form input, .contact-form textarea{
+  width:100%; border:0; padding:12px 14px; border-radius:12px; background:#fff; color:#333;
+  box-shadow: inset 6px 6px 12px #e5e5e5, inset -6px -6px 12px #ffffff;
+}
+.contact-form input::placeholder, .contact-form textarea::placeholder{ color:#9aa; }
+
+/* ---------- Contact list ---------- */
+.mailbox{ display:flex; flex-direction:column; gap:10px; }
+.mail{
+  display:flex; align-items:center; gap:10px;
+  padding:12px 16px; border-radius:14px; background:#fff; color:#555; text-decoration:none;
+  box-shadow: 6px 6px 12px #e2e2e2, -6px -6px 12px #ffffff;
+}
+.mail em{ font-style: normal; color:#8a8a8a; margin-left:6px; }
+.mail-ico{ width:20px; height:20px; flex:0 0 20px; }
+.based{ color:#777; margin:4px 0 0 6px; }
+
+/* ---------- Footer ---------- */
+.foot{
+  padding: 24px 16px 42px;
+  text-align:center; color:#777; font-size:14px;
+  border-top: 1px solid #f0f0f0;
+}
+.foot-links{ display:flex; gap:10px; justify-content:center; margin-bottom:6px; }
+.foot a{ color:#666; text-decoration:none; }
