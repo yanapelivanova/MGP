@@ -1,258 +1,221 @@
-"use client";
+'use client';
 
-import { useState, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 export default function Home() {
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [langOpen, setLangOpen] = useState(false);
+  const lastY = useRef(0);
+  const topbarRef = useRef(null);
+  const toTopRef = useRef(null);
 
-  const aboutRef = useRef(null);
-  const servicesRef = useRef(null);
-  const contactRef = useRef(null);
-  const legalRef = useRef(null);
+  // Scroll-reveal + smart header + back-to-top
+  useEffect(() => {
+    // reveal
+    const els = document.querySelectorAll('[data-reveal]');
+    let io;
+    if ('IntersectionObserver' in window) {
+      io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+      els.forEach(el => io.observe(el));
+    } else {
+      els.forEach(el => el.classList.add('is-visible'));
+    }
 
-  const scrollTo = (ref) => {
-    setDrawerOpen(false);
-    setLangOpen(false);
-    if (!ref?.current) return;
-    const y = ref.current.getBoundingClientRect().top + window.scrollY - 108;
-    window.scrollTo({ top: y, behavior: "smooth" });
+    // smart header + back to top
+    const onScroll = () => {
+      const y = window.scrollY || 0;
+      const topbar = topbarRef.current;
+      const toTop = toTopRef.current;
+
+      if (topbar) {
+        const goingDown = y > lastY.current && y > 60;
+        topbar.classList.toggle('topbar--hidden', goingDown);
+      }
+      if (toTop) {
+        if (y > 300) toTop.classList.add('to-top--visible');
+        else toTop.classList.remove('to-top--visible');
+      }
+      lastY.current = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (io) io.disconnect();
+    };
+  }, []);
+
+  const openDrawer = () => {
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    overlay.addEventListener('click', closeDrawer);
+
+    const drawer = document.createElement('div');
+    drawer.className = 'drawer';
+
+    const close = document.createElement('button');
+    close.className = 'drawer-close';
+    close.setAttribute('aria-label', 'Close menu');
+    close.innerText = '×';
+    close.addEventListener('click', closeDrawer);
+
+    const list = document.createElement('ul');
+    list.className = 'drawer-list';
+
+    const makeItem = (href, label) => {
+      const li = document.createElement('li');
+      const a  = document.createElement('a');
+      a.href = href; a.className = 'drawer-item'; a.innerHTML = `<span>${label}</span><span class="arrow">›</span>`;
+      li.appendChild(a); return li;
+    };
+
+    list.appendChild(makeItem('#about', 'About'));
+    list.appendChild(makeItem('#services', 'Services'));
+    list.appendChild(makeItem('#contact', 'Contact'));
+    list.appendChild(makeItem('/legal', 'Legal'));
+    list.appendChild(makeItem('/fr', 'Français'));
+
+    drawer.append(close, list);
+    document.body.append(overlay, drawer);
+
+    function closeDrawer() {
+      drawer.remove(); overlay.remove();
+    }
   };
 
   return (
     <main className="page">
-      {/* ---------- TOPBAR ---------- */}
-      <header className="topbar">
-        {/* слева — изящные мини-ярлыки */}
-        <div className="top-actions">
-          {/* phone */}
-          <a className="mini-btn" href="tel:+14388091901" aria-label="Call">
-            <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </a>
+      {/* Topbar */}
+      <header className="topbar" ref={topbarRef}>
+        <a className="icon-pill" href="tel:+14388091901" aria-label="Call">
+          <i className="ico phone" />
+        </a>
 
-          {/* email -> скролл к контактам */}
-          <button className="mini-btn" onClick={() => scrollTo(contactRef)} aria-label="Email">
-            <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
-              <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-            </svg>
-          </button>
-
-          {/* language */}
-          <div className="lang-wrap">
-            <button className="mini-btn" onClick={() => setLangOpen((v) => !v)} aria-label="Language">
-              <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                <path d="M3.5 12h17M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" fill="none" stroke="currentColor" strokeWidth="1.6" />
-              </svg>
-            </button>
-            {langOpen && (
-              <div className="lang-menu">
-                <a href="#" onClick={() => setLangOpen(false)}>English</a>
-                <a href="#fr" onClick={() => setLangOpen(false)}>Français</a>
-              </div>
-            )}
-          </div>
+        <div className="brand-mark" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <img src="/logo-mark.svg" alt="Maison Global Partners" />
         </div>
 
-        {/* центр — логотип (крупнее) */}
-        <button
-          className="brand-mark"
-          aria-label="Scroll to top"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        >
-          <img src="/logo.png" alt="Maison Global Partners" />
-        </button>
-
-        {/* справа — бургер */}
-        <button className="icon-pill" onClick={() => setDrawerOpen(true)} aria-label="Open menu">
-          <span className="ico-burger" />
+        <button className="icon-pill" aria-label="Menu" onClick={openDrawer}>
+          <i className="ico menu" />
         </button>
       </header>
 
-      {/* ---------- DRAWER ---------- */}
-      {drawerOpen && (
-        <>
-          <div className="overlay" onClick={() => setDrawerOpen(false)} />
-          <aside className="drawer" role="dialog" aria-label="Menu">
-            <button className="drawer-close" onClick={() => setDrawerOpen(false)} aria-label="Close">×</button>
-            <ul className="drawer-list">
-              <li>
-                <button className="nav-item" onClick={() => scrollTo(aboutRef)}>
-                  <span>About</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </button>
-              </li>
-              <li>
-                <button className="nav-item" onClick={() => scrollTo(servicesRef)}>
-                  <span>Services</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </button>
-              </li>
-              <li>
-                <button className="nav-item" onClick={() => scrollTo(contactRef)}>
-                  <span>Contact</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </button>
-              </li>
-              <li>
-                <button className="nav-item" onClick={() => scrollTo(legalRef)}>
-                  <span>Legal</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </button>
-              </li>
-              <li className="drawer-fr">
-                <a className="nav-item" href="#fr">
-                  <span>Français</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </a>
-              </li>
-            </ul>
-          </aside>
-        </>
-      )}
-
-      {/* ---------- HERO ---------- */}
-      <section ref={aboutRef} className="hero section" id="about">
+      {/* Hero */}
+      <section className="hero" id="about" data-reveal>
         <h1 className="hero-title">Maison Global Partners</h1>
-        <p className="hero-tagline">
-          Global sourcing<br />and supply-chain solutions
-        </p>
-
+        <p className="hero-tagline">Global sourcing<br />and supply-chain solutions</p>
         <div className="btnbar">
-          <button className="neumorphic-btn" onClick={() => scrollTo(contactRef)}>Contact</button>
-          <button className="neumorphic-btn" onClick={() => scrollTo(servicesRef)}>Services</button>
+          <a className="neumorphic-btn" href="#contact">Contact</a>
+          <a className="neumorphic-btn" href="#services">Services</a>
         </div>
       </section>
 
-      {/* ---------- SERVICES ---------- */}
-      <section ref={servicesRef} className="section" id="services">
-        <h2>How we deliver value</h2>
+      {/* Services */}
+      <section className="section" id="services">
+        <h2 data-reveal>How we deliver value</h2>
 
         <div className="cards">
-          <article className="card">
-            <img className="card-img" src="/svc-global.png" alt="Global Sourcing" />
+          <article className="card" data-reveal data-delay="1">
+            <img className="card-img" src="/svc-sourcing.png" alt="" loading="lazy" />
             <h3>Global Sourcing</h3>
-            <p>Supplier scouting across the Americas, Europe and Asia; due diligence, audits and sample runs to secure the best quality–cost ratio.</p>
+            <p>Supplier scouting across the Americas, Europe and Asia: due-diligence, audits and negotiations to secure the best quality-to-cost ratio.</p>
           </article>
 
-          <article className="card">
-            <img className="card-img" src="/svc-optim.png" alt="Supply-Chain Optimisation" />
+          <article className="card" data-reveal data-delay="2">
+            <img className="card-img" src="/svc-supply.png" alt="" loading="lazy" />
             <h3>Supply-Chain Optimisation</h3>
-            <p>Network design, planning and logistics flows with measurable KPI improvements and OTD/OTIF reliability.</p>
+            <p>Flow design, planning, logistics, RFPs with measurable savings and risk reduction. DDP/EXW scenarios with data-driven decisions.</p>
           </article>
 
-          <article className="card">
-            <img className="card-img" src="/svc-turnkey.png" alt="Turnkey Solutions" />
+          <article className="card" data-reveal data-delay="3">
+            <img className="card-img" src="/svc-turnkey.png" alt="" loading="lazy" />
             <h3>Turnkey Solutions</h3>
-            <p>From idea to market: BOM, specification, QA, packaging and complete documentation — end-to-end.</p>
+            <p>From idea to market: product BOM, specification, QA, packaging and complete documentation — end-to-end.</p>
           </article>
 
-          <article className="card">
-            <img className="card-img" src="/svc-branding.png" alt="Branding" />
+          <article className="card" data-reveal data-delay="3">
+            <img className="card-img" src="/svc-branding.png" alt="" loading="lazy" />
             <h3>Branding</h3>
-            <p>Naming, identity and packaging that build trust across channels and markets.</p>
+            <p>Naming, identity and packaging that work together: clear value props, assets and channels aligned to unlock growth.</p>
           </article>
         </div>
       </section>
 
-      {/* ---------- ABOUT SHORT ---------- */}
-      <section className="section">
-        <h2>Maison Global Partners</h2>
-        <p className="lead">
-          Architecture of Flow — guiding your vision worldwide with elegant structure and precise execution.
-        </p>
-      </section>
+      {/* Contact */}
+      <section className="section" id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title" data-reveal>Contact</h2>
 
-      {/* ---------- CONTACT ---------- */}
-      <section ref={contactRef} className="section" id="contact">
-        <h3>Contact</h3>
-
-        <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+        {/* Form */}
+        <form className="contact-form" action="https://formspree.io/f/your-id" method="POST" data-reveal>
           <div className="form-row">
-            <input name="name" placeholder="Your name" required />
-            <input type="email" name="email" placeholder="Email" required />
+            <input name="name" type="text" placeholder="Your name" required />
+            <input name="email" type="email" placeholder="Email" required />
           </div>
-          <textarea name="message" rows={3} placeholder="Message" />
-          <div className="form-actions">
+          <textarea name="message" rows="4" placeholder="Message" required />
+          <div style={{ marginTop: 10 }}>
             <button className="neumorphic-btn" type="submit">Send</button>
           </div>
         </form>
 
-        {/* phone */}
-        <a className="mail" href="tel:+14388091901">
-          <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
-              fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          +1 (438) 809-1901
-        </a>
+        {/* Contacts list */}
+        <div className="mailbox" data-reveal data-delay="1">
+          <a className="mail" href="tel:+14388091901">
+            <img className="mail-ico" src="/ico-phone.svg" alt="" />
+            +1 (438) 809-1901
+          </a>
 
-        {/* три почты одним блоком */}
-        <div className="mail mail-stack">
-          <div className="stack-row">
-            <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
-              <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-            </svg>
-            <div>
-              <div className="stack-label">for inquiries</div>
-              <a className="stack-link" href="mailto:welcome@maisongp.com">welcome@maisongp.com</a>
-            </div>
+          <div className="mail" style={{ cursor:'default' }}>
+            <img className="mail-ico" src="/ico-section.svg" alt="" />
+            <strong>for inquiries</strong>
           </div>
+          <a className="mail" href="mailto:welcome@maisongp.com">
+            <img className="mail-ico" src="/ico-mail.svg" alt="" />
+            welcome@maisongp.com
+          </a>
 
-          <div className="stack-row">
-            <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
-              <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-            </svg>
-            <div>
-              <div className="stack-label">for partners</div>
-              <a className="stack-link" href="mailto:partners@maisongp.com">partners@maisongp.com</a>
-            </div>
+          <div className="mail" style={{ cursor:'default' }}>
+            <img className="mail-ico" src="/ico-section.svg" alt="" />
+            <strong>for partners</strong>
           </div>
+          <a className="mail" href="mailto:partners@maisongp.com">
+            <img className="mail-ico" src="/ico-mail.svg" alt="" />
+            partners@maisongp.com
+          </a>
 
-          <div className="stack-row">
-            <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
-              <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-            </svg>
-            <div>
-              <div className="stack-label">for careers</div>
-              <a className="stack-link" href="mailto:careers@maisongp.com">careers@maisongp.com</a>
-            </div>
+          <div className="mail" style={{ cursor:'default' }}>
+            <img className="mail-ico" src="/ico-section.svg" alt="" />
+            <strong>for careers</strong>
           </div>
+          <a className="mail" href="mailto:careers@maisongp.com">
+            <img className="mail-ico" src="/ico-mail.svg" alt="" />
+            careers@maisongp.com
+          </a>
+
+          <a className="mail" href="https://www.linkedin.com/company/maison-global-partners/" target="_blank" rel="noopener">
+            <img className="mail-ico" src="/ico-in.svg" alt="" />
+            LinkedIn
+          </a>
+
+          <p className="based">Based in Montreal, Quebec, Canada.</p>
         </div>
-
-        {/* LinkedIn — монохромный, в одном стиле */}
-        <a
-          className="mail"
-          href="https://www.linkedin.com/company/maison-global-partners/"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" strokeWidth="1.6" />
-            <path d="M8 17V10M8 7.5h.01M11 17v-4.2c0-1.7 2.2-1.8 2.2 0V17M13.2 12.8c0-1.9 2.6-2 2.6.1V17"
-              fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-          </svg>
-          LinkedIn
-        </a>
-
-        <p className="based">Based in Montreal, Quebec, Canada.</p>
       </section>
 
-      {/* якорь для Legal */}
-      <div ref={legalRef} aria-hidden="true" />
+      {/* Back to top */}
+      <button
+        ref={toTopRef}
+        className="to-top"
+        aria-label="Back to top"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        title="Back to top"
+      >
+        <i />
+      </button>
     </main>
   );
 }
