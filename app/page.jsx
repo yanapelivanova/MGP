@@ -4,10 +4,12 @@ export default function Home() {
     <main className="page">
       {/* HERO */}
       <section className="hero" id="top">
-        {/* Лого в неоморфном контейнере */}
-        <div className="brand-card">
-          <img src="/logo.png" alt="MGP logo" />
-        </div>
+        {/* ЛОГО */}
+        <img
+          className="logo-badge"
+          src="/logo-badge.png"
+          alt="Maison Global Partners logo"
+        />
 
         <h1>Maison Global Partners</h1>
 
@@ -47,6 +49,10 @@ export default function Home() {
       <section className="section" id="contact">
         <h3>Contact</h3>
         <div className="mailbox">
+          <a className="mail" href="tel:+15145551234">
+            <img className="mail-ico" src="/phone.svg" alt="" aria-hidden="true" />
+            +1 (514) 555-1234
+          </a>
           <a className="mail" href="mailto:welcome@maisongp.com">
             <img className="mail-ico" src="/mail.svg" alt="" aria-hidden="true" />
             welcome@maisongp.com
@@ -59,10 +65,19 @@ export default function Home() {
             <img className="mail-ico" src="/mail.svg" alt="" aria-hidden="true" />
             careers@maisongp.com
           </a>
+          <a
+            className="mail"
+            href="https://www.linkedin.com/company/maison-global-partners"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="mail-ico" src="/linkedin.svg" alt="" aria-hidden="true" />
+            LinkedIn
+          </a>
         </div>
       </section>
 
-      {/* FOOTER (без дублей) */}
+      {/* FOOTER */}
       <footer className="foot">
         © 2025 Maison Global Partners. All rights reserved.
       </footer>
