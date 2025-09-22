@@ -1,105 +1,212 @@
-/* ---------- Общие ---------- */
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0; background:#fff; color:#333;
-  font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-}
-.page{min-height:100vh}
+// app/page.jsx
+'use client';
 
-/* ---------- Узкий header ---------- */
-.topbar{
-  position:sticky; top:0; z-index:50;
-  display:grid; grid-template-columns:56px 1fr 56px; align-items:center;
-  padding:10px 12px; background:#fff; border-bottom:1px solid #eee;
-  backdrop-filter:saturate(180%) blur(6px);
-}
-.top-chip{
-  display:inline-grid; place-items:center; height:40px; width:56px;
-  border-radius:24px; background:#fff; color:#333; border:none;
-  box-shadow:8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
-}
-.top-logo{ height:28px; justify-self:center; }
-.burger, .burger::before, .burger::after{
-  content:""; display:block; width:18px; height:2px; background:#333; border-radius:2px; transition:.25s;
-}
-.burger{position:relative}
-.burger::before{position:absolute; top:-6px}
-.burger::after{position:absolute; top:6px}
-.burger.open{background:transparent}
-.burger.open::before{transform:translateY(6px) rotate(45deg)}
-.burger.open::after{transform:translateY(-6px) rotate(-45deg)}
-.drawer{
-  position:fixed; inset:auto 0 0 auto; top:56px; right:-260px; width:240px;
-  display:flex; flex-direction:column; gap:14px; padding:18px;
-  background:#fff; box-shadow:-10px 0 30px rgba(0,0,0,.12); border-left:1px solid #eee;
-  transition:right .28s ease; z-index:40;
-}
-.drawer.show{right:0}
-.drawer a{color:#333; text-decoration:none}
+import { useState, useEffect } from 'react';
 
-/* ---------- Hero ---------- */
-.hero{padding:36px 16px 12px; text-align:center}
-.hero h1{margin:0 0 8px; font-weight:700; font-size:clamp(26px,6vw,38px)}
-.tagline{margin:6px 0 18px; color:#555; font-size:18px}
+export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
-/* Кнопки (неоморфизм) */
-.btnbar{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
-.neumorphic-btn{
-  display:inline-flex; align-items:center; justify-content:center; gap:8px;
-  padding:12px 22px; border-radius:999px; background:#fff; color:#555; border:none;
-  box-shadow:8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
-  transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+  // блокируем прокрутку, когда открыт drawer
+  useEffect(() => {
+    if (menuOpen) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = '';
+  }, [menuOpen]);
+
+  const scrollTo = (id) => {
+    setMenuOpen(false);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  return (
+    <main className="page">
+
+      {/* HEADER */}
+      <header className="topbar">
+        {/* left: contact jump */}
+        <button
+          className="icon-pill"
+          aria-label="Contact"
+          onClick={() => scrollTo('contact')}
+        >
+          {/* простой минималистичный конверт */}
+          <span className="ico-mail" />
+        </button>
+
+        {/* center: logo */}
+        <div className="brand-mark" onClick={() => scrollTo('top')}>
+          <img src="/logo.png" alt="Maison Global Partners" />
+        </div>
+
+        {/* right: burger */}
+        <button
+          className="icon-pill"
+          aria-label="Menu"
+          onClick={() => setMenuOpen(true)}
+        >
+          <span className="ico-burger" />
+        </button>
+
+        {/* Drawer + Overlay */}
+        {menuOpen && (
+          <>
+            <div className="overlay" onClick={() => setMenuOpen(false)} />
+            <nav className="drawer">
+              <button
+                className="drawer-close"
+                aria-label="Close"
+                onClick={() => setMenuOpen(false)}
+              >
+                ×
+              </button>
+
+              <ul className="drawer-list">
+                <li><button onClick={() => scrollTo('services')}>Services</button></li>
+                <li><button onClick={() => scrollTo('about')}>About</button></li>
+                <li><button onClick={() => scrollTo('contact')}>Contact</button></li>
+                <li>
+                  <a
+                    href="https://www.linkedin.com/company/maison-global-partners/"
+                    target="_blank" rel="noopener"
+                  >LinkedIn</a>
+                </li>
+              </ul>
+            </nav>
+          </>
+        )}
+      </header>
+
+      {/* HERO */}
+      <section id="top" className="hero">
+        <h1 className="hero-title">Maison Global Partners</h1>
+        <p className="hero-tagline">
+          <span>Global sourcing</span><br />
+          <span>and supply-chain solutions</span>
+        </p>
+
+        <div className="btnbar">
+          <a className="neumorphic-btn" onClick={() => scrollTo('contact')}>Contact</a>
+          <a className="neumorphic-btn" onClick={() => scrollTo('services')}>Services</a>
+          <a
+            className="neumorphic-btn"
+            href="https://www.linkedin.com/company/maison-global-partners/"
+            target="_blank" rel="noopener"
+          >
+            LinkedIn
+          </a>
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section id="services" className="section">
+        <h2>How we deliver value</h2>
+
+        <div className="cards">
+          <article className="card">
+            <img className="card-img" src="/images/service1.png" alt="" />
+            <h3>Global Sourcing</h3>
+            <p>
+              Supplier scouting across the Americas, Europe and Asia: due-diligence, audits and
+              sample runs to secure the best quality-to-cost ratio.
+            </p>
+          </article>
+
+          <article className="card">
+            <img className="card-img" src="/images/service2.png" alt="" />
+            <h3>Supply-Chain Optimisation</h3>
+            <p>
+              From demand planning to logistics flows and inventory health — we streamline, digitise
+              and cut bottlenecks end-to-end.
+            </p>
+          </article>
+
+          <article className="card">
+            <img className="card-img" src="/images/service3.png" alt="" />
+            <h3>Turnkey Solutions</h3>
+            <p>
+              From idea to shelf: product design, BOM, specification, QA, packaging and
+              compliant documentation — delivered on time.
+            </p>
+          </article>
+
+          <article className="card">
+            <img className="card-img" src="/images/service4.png" alt="" />
+            <h3>Branding</h3>
+            <p>
+              Naming, identity and packaging that scale: consistent across markets and channels,
+              engineered to convert.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section id="about" className="section">
+        <h2>Maison Global Partners</h2>
+        <p className="lead">
+          Architecture of Flow — guiding your vision worldwide with elegant structure
+          and precise execution.
+        </p>
+      </section>
+
+      {/* CONTACTS */}
+      <section id="contact" className="section">
+        <h2>Contact</h2>
+
+        {/* Small neat form */}
+        <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+          <div className="form-row">
+            <input type="text" name="name" placeholder="Your name" aria-label="Your name" />
+            <input type="email" name="email" placeholder="Email" aria-label="Email" />
+          </div>
+          <textarea name="message" placeholder="Message" rows={4} aria-label="Message" />
+          <button className="neumorphic-btn" type="submit">Send</button>
+        </form>
+
+        {/* Contact list */}
+        <div className="mailbox">
+          <a className="mail" href="tel:+14388091901">
+            <span className="mail-ico ico-phone" />
+            +1 (438) 809-1901
+          </a>
+
+          <a className="mail" href="mailto:welcome@maisongp.com">
+            <span className="mail-ico ico-mail" />
+            welcome@maisongp.com <em>— for general inquiries</em>
+          </a>
+
+          <a className="mail" href="mailto:partners@maisongp.com">
+            <span className="mail-ico ico-mail" />
+            partners@maisongp.com <em>— for partners</em>
+          </a>
+
+          <a className="mail" href="mailto:careers@maisongp.com">
+            <span className="mail-ico ico-mail" />
+            careers@maisongp.com <em>— for careers</em>
+          </a>
+
+          <a
+            className="mail"
+            href="https://www.linkedin.com/company/maison-global-partners/"
+            target="_blank" rel="noopener"
+          >
+            <span className="mail-ico ico-linkedin" />
+            LinkedIn
+          </a>
+
+          <div className="based">Based in Montreal, Quebec, Canada</div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="foot">
+        <div className="foot-links">
+          <a href="#!">Legal</a>
+          <span>·</span>
+          <a href="#!">Français</a>
+        </div>
+        <div>© 2025 Maison Global Partners. All rights reserved.</div>
+      </footer>
+    </main>
+  );
 }
-.neumorphic-btn.small{padding:10px 18px}
-.neumorphic-btn:hover{opacity:.95}
-.neumorphic-btn:active{
-  box-shadow:inset 6px 6px 12px #d1d1d1, inset -6px -6px 12px #ffffff;
-  transform:translateY(1px);
-}
-
-/* ---------- Секции ---------- */
-.section{padding:28px 16px; max-width:1000px; margin:0 auto}
-.section h2{margin:0 0 14px; font-size:clamp(22px,4.8vw,28px)}
-.mb16{margin-bottom:16px}
-
-/* Services */
-.cards{display:grid; gap:16px}
-@media(min-width:820px){.cards{grid-template-columns:repeat(4,1fr)}}
-.card{
-  background:#fff; border-radius:14px; padding:14px; box-shadow:6px 6px 12px #e2e2e2, -6px -6px 12px #ffffff;
-}
-.card-media{height:120px; display:grid; place-items:center; margin-bottom:10px}
-.card-media img{max-height:100%; width:auto}
-.card h3{margin:0 0 8px; font-size:18px}
-.card p{margin:0; color:#555; font-size:14.5px}
-
-/* About */
-.lead{color:#555; font-size:17px; margin:6px 0 0}
-
-/* ---------- Контакты ---------- */
-.contact-form{
-  background:#fff; border-radius:14px; padding:14px; margin-bottom:16px;
-  box-shadow:6px 6px 12px #e2e2e2, -6px -6px 12px #ffffff;
-}
-.contact-form .row{display:grid; gap:10px; grid-template-columns:1fr 1fr; margin-bottom:10px}
-.contact-form input, .contact-form textarea{
-  width:100%; border:1px solid #eee; border-radius:10px; padding:10px 12px; font:inherit; color:#333;
-  background:#fdfdfd;
-}
-.contact-form textarea{resize:vertical}
-
-.mailbox{display:flex; flex-direction:column; gap:10px}
-.mail{
-  display:flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; background:#fff; color:#555; text-decoration:none;
-  box-shadow:6px 6px 12px #e2e2e2, -6px -6px 12px #ffffff; transition:transform .12s ease, box-shadow .12s ease;
-}
-.mail:hover{transform:translateY(-1px); box-shadow:8px 8px 16px #ddd, -8px -8px 16px #fff}
-.mail .hint{color:#8a8a8a}
-.based{margin:12px 2px 0; color:#777; font-size:14px}
-
-/* ---------- Footer ---------- */
-.foot{padding:24px 16px 36px; text-align:center; color:#777; font-size:14px}
-.foot-link{color:#555; text-decoration:none}
-.sep{margin:0 8px}
-.copy{margin-top:6px}
