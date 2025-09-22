@@ -6,9 +6,15 @@ export default function Home() {
       {/* HERO */}
       <section className="hero">
         {/* ЛОГО */}
-        <div className="brand-card">
-          <img src="/logo.png" alt="MGP logo" />
-        </div>
+        <img
+          className="logo-hero"
+          src="/logo/mgp-badge.png"
+          alt="Maison Global Partners logo"
+          width={560}
+          height={560}
+          loading="eager"
+          decoding="async"
+        />
 
         <h1>Maison Global Partners</h1>
 
@@ -69,4 +75,4 @@ export default function Home() {
       </footer>
     </main>
   );
-}
+  }
