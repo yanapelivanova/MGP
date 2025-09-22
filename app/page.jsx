@@ -1,21 +1,30 @@
 // app/page.jsx
+import Footer from "./components/Footer";
+
 export default function Home() {
   return (
     <main className="page">
       {/* HERO */}
       <section className="hero">
         {/* ЛОГО */}
-        {/* ЛОГО (контейнер + изображение) */}
-<div className="brand-card">
-  <img src="/logo.png" alt="MGP logo" />
-</div>
+        <img
+          className="logo-hero"
+          src="/logo/mgp-badge.png"
+          alt="Maison Global Partners — logo"
+          width={560}
+          height={560}
+          loading="eager"
+          decoding="async"
+        />
+
         <h1>Maison Global Partners</h1>
 
+        {/* КНОПКИ */}
         <div className="btnbar">
-          <a className="neumorphic-btn" href="/contact">Contact</a>
+          <a className="neumorphic-btn" href="#contact">Contact</a>
           <a
             className="neumorphic-btn"
-            href="https://www.linkedin.com/company/maison-global-partners/"
+            href="https://www.linkedin.com/company/maison-global-partners"
             target="_blank"
             rel="noopener"
           >
@@ -24,7 +33,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTENT */}
+      {/* ОСНОВНОЙ КОНТЕНТ */}
       <section className="section">
         <h2>Maison Global Partners</h2>
         <p className="lead">
@@ -35,50 +44,41 @@ export default function Home() {
         <div className="grid">
           <div>
             <h3>Explore</h3>
-            <div className="chips">
-              <a className="chip" href="/#solutions">Solutions</a>
-              <a className="chip" href="/#pricing">Pricing</a>
-              <a className="chip" href="/contact">Contact</a>
+            <div className="chips" aria-label="Explore">
+              <a className="chip" href="/solutions">Solutions</a>
+              <a className="chip" href="/pricing">Pricing</a>
+              <a className="chip" href="#contact">Contact</a>
             </div>
           </div>
 
-          {/* EMAIL CONTAINER с минимальными иконками */}
-          <div>
+          <div id="contact">
             <h3>Contact</h3>
             <div className="mailbox">
               <a className="mail" href="mailto:welcome@maisongp.com">
-                {/* минималистичный конверт */}
                 <svg className="mail-ico" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" fill="none" stroke="#777" strokeWidth="1.4" />
-                  <path d="M4 7.5l8 6 8-6" fill="none" stroke="#777" strokeWidth="1.4" strokeLinecap="round" />
+                  <path d="M2 6h20v12H2z" fill="none"/><path d="M2 6l10 7L22 6" />
                 </svg>
-                <span>welcome@maisongp.com</span>
+                welcome@maisongp.com
               </a>
-
               <a className="mail" href="mailto:partners@maisongp.com">
                 <svg className="mail-ico" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" fill="none" stroke="#777" strokeWidth="1.4" />
-                  <path d="M4 7.5l8 6 8-6" fill="none" stroke="#777" strokeWidth="1.4" strokeLinecap="round" />
+                  <path d="M2 6h20v12H2z" fill="none"/><path d="M2 6l10 7L22 6" />
                 </svg>
-                <span>partners@maisongp.com</span>
+                partners@maisongp.com
               </a>
-
               <a className="mail" href="mailto:careers@maisongp.com">
                 <svg className="mail-ico" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5v9A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9Z" fill="none" stroke="#777" strokeWidth="1.4" />
-                  <path d="M4 7.5l8 6 8-6" fill="none" stroke="#777" strokeWidth="1.4" strokeLinecap="round" />
+                  <path d="M2 6h20v12H2z" fill="none"/><path d="M2 6l10 7L22 6" />
                 </svg>
-                <span>careers@maisongp.com</span>
+                careers@maisongp.com
               </a>
             </div>
           </div>
         </div>
-
-        {/* один-единственный футер */}
-        <footer className="foot">
-          © {new Date().getFullYear()} Maison Global Partners. All rights reserved.
-        </footer>
       </section>
+
+      {/* ЕДИНСТВЕННЫЙ ФУТЕР */}
+      <Footer />
     </main>
   );
 }
