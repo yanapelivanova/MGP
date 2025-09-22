@@ -183,16 +183,3 @@ export default function Home() {
           <p className="based">Based in Montreal, Quebec, Canada.</p>
         </div>
       </section>
-
-      {/* ---------- FOOTER ---------- */}
-      <footer className="foot">
-        <div className="foot-links">
-          <a href="#legal">Legal</a>
-          <span>·</span>
-          <a id="fr" href="#top">Français</a>
-        </div>
-        <div>© 2025 Maison Global Partners. All rights reserved.</div>
-      </footer>
-    </main>
-  );
-}
