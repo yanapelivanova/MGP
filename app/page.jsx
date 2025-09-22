@@ -1,187 +1,149 @@
 // app/page.jsx
 "use client";
+import { useState } from "react";
+
+/* inline иконки — чтобы ничего не ломалось из-за отсутствующих файлов */
+const MailIcon = (props) => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" {...props}>
+    <path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h15A1.5 1.5 0 0 1 21 7.5v9A1.5 1.5 0 0 1 19.5 18h-15A1.5 1.5 0 0 1 3 16.5v-9Z" stroke="#666" strokeWidth="1.5" />
+    <path d="m4 7 8 6 8-6" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+const PhoneIcon = (props) => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" {...props}>
+    <path d="M4.5 3.5 8 5a1 1 0 0 1 .6 1l-.4 2a1 1 0 0 0 .3.9l2.6 2.6a1 1 0 0 0 .9.3l2-.4a1 1 0 0 1 1 .6l1.5 3.5a1 1 0 0 1-.6 1.3c-2.3.9-6.5.8-10.8-3.6C1.3 8.8 1.4 4.6 2.3 2.3a1 1 0 0 1 1.3-.6Z" stroke="#666" strokeWidth="1.5" />
+  </svg>
+);
+const LinkedInIcon = (props) => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" {...props}>
+    <path d="M4 3.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM4.75 8h-1.5v12h1.5V8Zm4.5 0h-1.5v12h1.5v-6.6c0-2.6 3-2.8 3 0V20h1.5v-7.2c0-4.4-4.8-4.3-6  -2.1V8Z" fill="#666"/>
+  </svg>
+);
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const name = fd.get("name")?.trim() || "";
+    const email = fd.get("email")?.trim() || "";
+    const message = fd.get("message")?.trim() || "";
+    const subject = `Website inquiry from ${name || "visitor"}`;
+    const body = `${message}\n\nFrom: ${name} <${email}>`;
+    window.location.href =
+      `mailto:welcome@maisongp.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
   return (
     <main className="page">
-      {/* ===== Header (“потолок”) ===== */}
-      <header className="site-header">
-        {/* Слева: якорь в Contact */}
-        <a href="#contact" className="hdr-btn" aria-label="Jump to Contact">
-          {/* minimal mail/phone mix icon */}
-          <svg viewBox="0 0 24 24" className="hdr-ico" aria-hidden="true">
-            <path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" fill="none" stroke="currentColor" strokeWidth="1.4"/>
-            <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-          </svg>
-          <span className="hdr-label">Contact</span>
-        </a>
-
-        {/* Центр: небольшой логотип */}
-        <a href="/" className="brand-mini" aria-label="Maison Global Partners">
-          <img src="/logo.png" alt="Maison Global Partners" />
-        </a>
-
-        {/* Справа: иконка-меню (две полоски) */}
-        <button className="hdr-btn" aria-label="Open menu" type="button">
-          <svg viewBox="0 0 24 24" className="hdr-ico" aria-hidden="true">
-            <path d="M4 8.5h16M4 15.5h16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-          </svg>
-          <span className="hdr-label">Menu</span>
+      {/* HEADER (узкий) */}
+      <header className="topbar">
+        <a href="#contact" className="top-chip" aria-label="Jump to contacts">✉️</a>
+        <img src="/logo.png" alt="Maison Global Partners logo" className="top-logo" />
+        <button className="top-chip" aria-label="Open menu" onClick={() => setMenuOpen(s => !s)}>
+          <span className={`burger ${menuOpen ? "open" : ""}`}></span>
         </button>
+        <nav className={`drawer ${menuOpen ? "show" : ""}`} onClick={() => setMenuOpen(false)}>
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a href="https://www.linkedin.com/company/maison-global-partners/" target="_blank" rel="noopener">LinkedIn</a>
+        </nav>
       </header>
 
-      {/* ===== HERO ===== */}
+      {/* HERO */}
       <section className="hero">
-        <h1 className="title">Maison Global Partners</h1>
-
-        {/* Элегантный сабтайтл в две строки */}
-        <p className="subtitle">
-          Global sourcing and <br className="br-sm"/> supply chain solutions.
+        <h1>Maison Global Partners</h1>
+        <p className="tagline">
+          Global sourcing<br />and supply-chain solutions
         </p>
 
         <div className="btnbar">
-          <a className="neumorphic-btn" href="#services">Services</a>
           <a className="neumorphic-btn" href="#contact">Contact</a>
-          <a
-            className="neumorphic-btn"
-            href="https://www.linkedin.com/company/maison-global-partners"
-            target="_blank"
-            rel="noopener"
-          >
-            LinkedIn
-          </a>
+          <a className="neumorphic-btn" href="#services">Services</a>
+          <a className="neumorphic-btn" href="https://www.linkedin.com/company/maison-global-partners/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </section>
 
-      {/* ===== HOW WE DELIVER VALUE ===== */}
+      {/* SERVICES */}
       <section id="services" className="section">
-        <h2 className="h2">How we deliver value</h2>
-
+        <h2>How we deliver value</h2>
         <div className="cards">
-          {/* Service 1 */}
           <article className="card">
-            <h3 className="card-title">Global Sourcing</h3>
-            <p className="card-text">
-              We map the best-fit manufacturers worldwide, run structured RFQs,
-              and secure reliable capacity, quality and terms — so your product
-              reaches the right factory line, on time.
-            </p>
+            <div className="card-media"><img src="/svc-global-sourcing.png" alt="" /></div>
+            <h3>Global Sourcing</h3>
+            <p>Supplier scouting across the Americas, Europe and Asia; due-diligence, audits, and sample runs to secure the best quality-to-cost ratio.</p>
           </article>
-
-          {/* Service 2 */}
           <article className="card">
-            <h3 className="card-title">Supply Chain Optimisation</h3>
-            <p className="card-text">
-              From demand planning to logistics lanes, we streamline the chain:
-              lower landed cost, reduce lead time volatility, and increase OTIF
-              delivery through data-led process design.
-            </p>
+            <div className="card-media"><img src="/svc-supply-optim.png" alt="" /></div>
+            <h3>Supply-Chain Optimisation</h3>
+            <p>Inventory, lead times and logistics tuned with data—so cash isn’t stuck in transit and OTIF becomes your default.</p>
           </article>
-
-          {/* Service 3 */}
           <article className="card">
-            <h3 className="card-title">Turnkey Solutions</h3>
-            <p className="card-text">
-              A single accountable partner from concept to shipment: vendor
-              onboarding, compliance, QA/QC, packaging, documentation and
-              freight — all orchestrated end-to-end.
-            </p>
+            <div className="card-media"><img src="/svc-turnkey.png" alt="" /></div>
+            <h3>Turnkey Solutions</h3>
+            <p>From concept to delivered product: BOM, industrialisation, QA, packaging and compliant documentation—end-to-end.</p>
           </article>
-
-          {/* Service 4 */}
           <article className="card">
-            <h3 className="card-title">Branding</h3>
-            <p className="card-text">
-              Visual systems and packaging that echo your architecture of flow:
-              refined identity, product storytelling and market-ready assets that
-              travel well across regions.
-            </p>
+            <div className="card-media"><img src="/svc-branding.png" alt="" /></div>
+            <h3>Branding</h3>
+            <p>Naming, identity and packaging that travel well—consistent across markets and channels, engineered for unit economics.</p>
           </article>
         </div>
       </section>
 
-      {/* ===== ABOUT (короткий блок, можно оставить как есть) ===== */}
-      <section className="section">
-        <h2 className="h2">Maison Global Partners</h2>
+      {/* ABOUT (короткий абзац) */}
+      <section id="about" className="section">
+        <h2>Maison Global Partners</h2>
         <p className="lead">
-          Architecture of Flow — guiding your vision worldwide with elegant
-          structure and precise execution.
+          Architecture of Flow — guiding your vision worldwide with elegant structure and precise execution.
         </p>
       </section>
 
-      {/* ===== CONTACT ===== */}
+      {/* CONTACT — сначала мини-форма, затем список контактов */}
       <section id="contact" className="section">
-        <h2 className="h2">Contact</h2>
+        <h2 className="mb16">Contact</h2>
+
+        <form className="contact-form" onSubmit={handleFormSubmit}>
+          <div className="row">
+            <input name="name" type="text" placeholder="Your name" aria-label="Your name" required />
+            <input name="email" type="email" placeholder="Email" aria-label="Email" required />
+          </div>
+          <textarea name="message" rows={4} placeholder="Message" aria-label="Message" required />
+          <button className="neumorphic-btn small" type="submit">Send</button>
+        </form>
 
         <div className="mailbox">
-          {/* Phone */}
-          <a className="mail" href="tel:+15145551234">
-            <span className="mail-ico" aria-hidden="true">
-              {/* phone icon */}
-              <svg viewBox="0 0 24 24">
-                <path d="M5 4c1.5 0 3 1.2 3.4 2.7l.4 1.5c.2.7-.1 1.5-.7 1.9l-1 .7c1.4 2.7 3.6 4.9 6.3 6.3l.7-1c.4-.6 1.2-.9 1.9-.7l1.5.4C20.8 16 22 17.5 22 19v1a2 2 0 0 1-2 2h-1C9.2 22 2 14.8 2 6V5a2 2 0 0 1 2-2h1Z" fill="currentColor"/>
-              </svg>
-            </span>
-            +1 (514) 555-1234
+          <a className="mail" href="tel:+14388091901">
+            <PhoneIcon /> +1 (438) 809-1901
           </a>
 
-          {/* Emails */}
           <a className="mail" href="mailto:welcome@maisongp.com">
-            <span className="mail-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" fill="none" stroke="currentColor" strokeWidth="1.4"/>
-                <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-              </svg>
-            </span>
-            welcome@maisongp.com
+            <MailIcon /> welcome@maisongp.com <span className="hint">— for general inquiries</span>
           </a>
 
           <a className="mail" href="mailto:partners@maisongp.com">
-            <span className="mail-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" fill="none" stroke="currentColor" strokeWidth="1.4"/>
-                <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-              </svg>
-            </span>
-            partners@maisongp.com
+            <MailIcon /> partners@maisongp.com <span className="hint">— for partners</span>
           </a>
 
           <a className="mail" href="mailto:careers@maisongp.com">
-            <span className="mail-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" fill="none" stroke="currentColor" strokeWidth="1.4"/>
-                <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-              </svg>
-            </span>
-            careers@maisongp.com
+            <MailIcon /> careers@maisongp.com <span className="hint">— for careers</span>
           </a>
 
-          {/* LinkedIn */}
-          <a
-            className="mail"
-            href="https://www.linkedin.com/company/maison-global-partners"
-            target="_blank"
-            rel="noopener"
-          >
-            <span className="mail-ico" aria-hidden="true">
-              {/* LinkedIn icon */}
-              <svg viewBox="0 0 24 24">
-                <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5ZM0 8h5v15H0V8Zm7.5 0h4.8v2.05h.07c.67-1.27 2.3-2.6 4.73-2.6 5.06 0 5.99 3.33 5.99 7.66V23H18v-6.67c0-1.59-.03-3.63-2.21-3.63-2.22 0-2.56 1.73-2.56 3.52V23H7.5V8Z" fill="currentColor"/>
-              </svg>
-            </span>
-            LinkedIn
+          <a className="mail" href="https://www.linkedin.com/company/maison-global-partners/" target="_blank" rel="noopener">
+            <LinkedInIcon /> LinkedIn
           </a>
         </div>
+
+        <p className="based">Based in Montreal, Quebec, Canada</p>
       </section>
 
-      {/* ===== FOOTER (Legal перед Français) ===== */}
       <footer className="foot">
-        <nav className="foot-nav">
-          <a href="/legal" className="foot-link">Legal</a>
-          <span className="dot">·</span>
-          <a href="/fr" className="foot-link">Français</a>
-        </nav>
-        <div>© 2025 Maison Global Partners. All rights reserved.</div>
+        <a className="foot-link" href="#legal">Legal</a>
+        <span className="sep">·</span>
+        <a className="foot-link" href="#fr">Français</a>
+        <div className="copy">© 2025 Maison Global Partners. All rights reserved.</div>
       </footer>
     </main>
   );
