@@ -165,12 +165,100 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- ABOUT SHORT ---------- */}
-      <section className="section">
-        <h2>Maison Global Partners</h2>
-        <p className="lead">
-          Architecture of Flow — guiding your vision worldwide with elegant structure and precise execution.
-        </p>
+      {/* ---------- ABOUT (Company + Founder) ---------- */}
+      <section className="section" id="about-company">
+        <h2>About Us</h2>
+        <div
+          className="about-company"
+          style={{ maxWidth: 900, margin: "0 auto" }}
+        >
+          <p>
+            <strong>Maison Global Partners</strong> is a boutique consultancy specializing in international
+            procurement and supply chain management. We help companies find reliable vendors worldwide,
+            optimize their sourcing strategies, and build transparent processes that reduce risk and increase
+            efficiency.
+          </p>
+          <p>
+            Our approach combines global expertise with a refined sense of detail. We believe that every
+            partnership should be built on trust, clarity, and precision. With MGP, businesses gain not only a
+            purchasing partner, but also a strategic ally who safeguards ambitions and turns complexity into flow.
+          </p>
+        </div>
+      </section>
+
+      {/* ---------- FOUNDER’S MESSAGE (magazine style) ---------- */}
+      <section className="section" id="founder">
+        <h3 style={{ marginBottom: 16 }}>Message from the Founder</h3>
+
+        <div
+          className="founder-block"
+          style={{
+            maxWidth: 760,      // немного уже полей, «журнальная» колонка
+            margin: "0 auto",
+            position: "relative"
+          }}
+        >
+          {/* левая кавычка */}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            style={{ position: "absolute", left: -24, top: -24, width: 28, height: 28, opacity: 0.18 }}
+          >
+            <path d="M7.17 6C4.88 6 3 7.88 3 10.17V21h7v-8H6.5c0-1.38 1.12-2.5 2.5-2.5V6zm9.66 0C14.54 6 12.67 7.88 12.67 10.17V21h7v-8H16.17c0-1.38 1.12-2.5 2.5-2.5V6z" fill="currentColor" />
+          </svg>
+
+          <blockquote
+            className="founder-quote"
+            style={{
+              fontStyle: "italic",
+              borderTop: "1px solid var(--line, #ddd)",
+              borderBottom: "1px solid var(--line, #ddd)",
+              padding: "20px 24px",
+              lineHeight: 1.7
+            }}
+          >
+            <p style={{ fontStyle: "normal", fontWeight: 600 }}>
+              “Guiding your vision worldwide, with strength and grace.”
+            </p>
+            <p>
+              <em>
+                At Maison Global Partners, we believe that true strength lies in clarity, resilience, and trust.
+              </em>
+            </p>
+            <p>
+              <em>
+                For more than a decade, I have navigated the complexities of global procurement and supply chains —
+                negotiating with vendors across continents, building transparent processes, and turning uncertainty
+                into reliability. My journey has been more than a career; it has been a discipline in endurance,
+                precision, and vision.
+              </em>
+            </p>
+            <p>
+              <em>
+                Founding Maison Global Partners was not just a professional decision, but a personal mission. I have
+                seen how chaos consumes resources, how poor choices erode potential, and how companies — like people —
+                thrive only when they feel safe and supported. This is why we stand for integrity, beauty in execution,
+                and the architecture of flow.
+              </em>
+            </p>
+            <p>
+              <em>
+                Our mission is to guide businesses with the same care, resilience, and strategy that once helped me turn
+                uncertainty into stability. At MGP, we don’t just manage supply chains — we protect ambitions, create
+                order, and turn trust into results.
+              </em>
+            </p>
+          </blockquote>
+
+          {/* правая кавычка */}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            style={{ position: "absolute", right: -24, bottom: -24, width: 28, height: 28, opacity: 0.18 }}
+          >
+            <path d="M16.83 18c2.29 0 4.17-1.88 4.17-4.17V3h-7v8h3.5c0 1.38-1.12 2.5-2.5 2.5V18zM7.17 18C9.46 18 11.33 16.12 11.33 13.83V3h-7v8H7.83c0 1.38 1.12 2.5 2.5 2.5V18z" fill="currentColor" />
+          </svg>
+        </div>
       </section>
 
       {/* ---------- CONTACT ---------- */}
