@@ -453,3 +453,20 @@ h1,h2,h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 .breadcrumbs span {
   color: #999;
 }
+.breadcrumbs {
+  position: sticky;
+  top: 72px; /* чуть ниже хедера */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  color: #666;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 6px 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
