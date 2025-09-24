@@ -198,3 +198,22 @@ h1,h2,h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 
 /* Полностью убираем любые «крошки», если где-то остались */
 .breadcrumbs { display: none !important; visibility: hidden !important; }
+/* ==== Topbar adjustments (compact left buttons + centered logo) ==== */
+.top-actions { gap: 6px !important; }
+
+.mini-btn {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  margin-right: 4px !important;
+}
+
+.ci {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.brand-mark img {
+  height: 72px !important;    /* крупный логотип */
+  margin-left: -12px !important; /* подвинуть ближе к центру */
+}
