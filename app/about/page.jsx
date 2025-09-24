@@ -3,69 +3,89 @@
 export default function AboutPage() {
   return (
     <main className="page">
-      {/* ---------- HERO / TITLE ---------- */}
-      <section className="section glass-block">
-        <h1 className="hero-title">About Us</h1>
-        <p className="hero-tagline">
-          Guiding your vision worldwide<br />with clarity and flow.
-        </p>
-      </section>
-
-      {/* ---------- COMPANY BLOCK ---------- */}
-      <section className="section glass-block">
-        <h2>Maison Global Partners</h2>
-        <p>
-          <strong>Maison Global Partners</strong> is a boutique consultancy specializing in 
-          international procurement and supply chain solutions.  
-          We help companies find reliable vendors worldwide, optimize 
-          their sourcing strategies, and build transparent processes 
-          that reduce risk and increase efficiency.
-        </p>
-        <p>
-          Our approach combines global expertise with refined detail. 
-          Every partnership is built on trust, clarity, and precision.  
-          With MGP, businesses gain not only a purchasing partner, but 
-          also a strategic ally who safeguards ambitions and transforms 
-          complexity into flow.
-        </p>
-      </section>
-
-      {/* ---------- BELIEFS ---------- */}
-      <section className="section glass-block">
-        <h2>What We Believe</h2>
-        <p>
-          We believe that resilience, transparency, and design-thinking 
-          form the foundation of sustainable growth.  
-          Our work is guided by three principles:
-        </p>
-        <ul>
-          <li><strong>Integrity</strong> — clarity and honesty in all partnerships.</li>
-          <li><strong>Precision</strong> — beauty in execution and detail.</li>
-          <li><strong>Flow</strong> — turning complexity into elegant solutions.</li>
-        </ul>
-      </section>
-
-      {/* ---------- FOUNDER’S MESSAGE ---------- */}
-      <section className="section glass-block founder-block">
-        <h2>Message from the Founder</h2>
-        <blockquote>
-          <p style={{ fontWeight: 600 }}>
-            “Guiding your vision worldwide, with strength and grace.”
-          </p>
+      {/* ---------- ABOUT US ---------- */}
+      <section className="section">
+        <div
+          className="card"
+          style={{ maxWidth: 900, margin: "0 auto", padding: "28px 32px" }}
+        >
+          <h2>About Us</h2>
           <p>
-            For more than a decade, I have navigated the complexities of 
-            global procurement and supply chains — negotiating with vendors 
-            across continents, building transparent processes, and turning 
-            uncertainty into reliability.
+            <strong>Maison Global Partners</strong> is a boutique consultancy
+            specializing in international procurement and supply chain
+            management. We help companies find reliable vendors worldwide,
+            optimize their sourcing strategies, and build transparent processes
+            that reduce risk and increase efficiency.
           </p>
+        </div>
+      </section>
+
+      {/* ---------- WHAT WE BELIEVE ---------- */}
+      <section className="section">
+        <div
+          className="card"
+          style={{ maxWidth: 900, margin: "0 auto", padding: "28px 32px" }}
+        >
+          <h2>What we believe</h2>
           <p>
-            Founding <strong>Maison Global Partners</strong> was not just a 
-            professional decision, but a personal mission: to help companies 
-            feel safe, supported, and empowered to grow.  
-            We don’t just manage supply chains — we protect ambitions, 
-            create order, and transform trust into results.
+            Our approach combines global expertise with a refined sense of
+            detail. We believe that every partnership should be built on trust,
+            clarity, and precision. With MGP, businesses gain not only a
+            purchasing partner, but also a strategic ally who safeguards
+            ambitions and turns complexity into flow.
           </p>
-        </blockquote>
+        </div>
+      </section>
+
+      {/* ---------- MESSAGE FROM THE FOUNDER ---------- */}
+      <section className="section">
+        <div
+          className="glass-block"
+          style={{
+            maxWidth: 860,
+            margin: "0 auto",
+            padding: "36px 40px",
+            borderRadius: "20px",
+            background: "rgba(255,255,255,0.35)",
+            boxShadow: "0 8px 28px rgba(0,0,0,0.12)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+          }}
+        >
+          <h2 style={{ marginBottom: 16 }}>Message from the Founder</h2>
+
+          <blockquote style={{ margin: 0, lineHeight: 1.7 }}>
+            <p style={{ fontStyle: "normal", fontWeight: 600, fontSize: "18px" }}>
+              “Guiding your vision worldwide, with strength and grace.”
+            </p>
+            <p>
+              At Maison Global Partners, we believe that true strength lies in
+              clarity, resilience, and trust.
+            </p>
+            <p>
+              For more than a decade, I have navigated the complexities of
+              global procurement and supply chains — negotiating with vendors
+              across continents, building transparent processes, and turning
+              uncertainty into reliability. My journey has been more than a
+              career; it has been a discipline in endurance, precision, and
+              vision.
+            </p>
+            <p>
+              Founding Maison Global Partners was not just a professional
+              decision, but a personal mission. I have seen how chaos consumes
+              resources, how poor choices erode potential, and how companies —
+              like people — thrive only when they feel safe and supported. This
+              is why we stand for integrity, beauty in execution, and the
+              architecture of flow.
+            </p>
+            <p>
+              Our mission is to guide businesses with the same care, resilience,
+              and strategy that once helped me turn uncertainty into stability.
+              At MGP, we don’t just manage supply chains — we protect ambitions,
+              create order, and turn trust into results.
+            </p>
+          </blockquote>
+        </div>
       </section>
     </main>
   );
