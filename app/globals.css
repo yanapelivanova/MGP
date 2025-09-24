@@ -217,3 +217,8 @@ h1,h2,h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   height: 72px !important;    /* крупный логотип */
   margin-left: -12px !important; /* подвинуть ближе к центру */
 }
+/* ==== Fine-tune logo position and size ==== */
+.brand-mark img {
+  height: 80px !important;   /* увеличен чуть сильнее */
+  margin-left: -20px !important; /* сдвиг влево */
+}
