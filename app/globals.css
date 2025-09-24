@@ -168,3 +168,80 @@ h1,h2,h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   background: #fff;
   border-radius: 8px;
 }
+/* ---------- About page: glass + flowing ribbons ---------- */
+.about-wrap {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* фоновые ленты — прокручиваются вместе со страницей */
+.flow-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ribbon {
+  position: absolute;
+  width: 120%;
+  height: 60vmin;
+  left: -10%;
+  filter: blur(8px) saturate(130%);
+  opacity: 0.55;
+  /* мягкий свет по краям */
+  background:
+    radial-gradient(120% 60% at 50% 50%, rgba(255,255,255,.85) 35%, rgba(255,255,255,.35) 55%, rgba(255,255,255,0) 70%)
+    no-repeat;
+  mask: radial-gradient(120% 60% at 50% 50%, #000 45%, transparent 65%);
+  mix-blend-mode: normal;
+}
+
+/* разные кривизны/углы для разнообразия */
+.ribbon.r1 { top: 5vmin; transform: rotate(-12deg) translateZ(0); }
+.ribbon.r2 { top: 32vmin; transform: rotate(8deg) translateZ(0); opacity:.45; }
+.ribbon.r3 { top: 58vmin; transform: rotate(-18deg) translateZ(0); opacity:.35; }
+.ribbon.r4 { top: 84vmin; transform: rotate(14deg) translateZ(0); opacity:.30; }
+
+/* стеклянные контейнеры */
+.glass {
+  position: relative;
+  z-index: 1;
+  padding: 24px 22px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.42);                 /* прозрачность */
+  border: 1px solid rgba(255,255,255,0.5);
+  backdrop-filter: blur(14px) saturate(140%);          /* сам «блер» */
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.55);
+}
+
+/* чуть “более стеклянный” для блока основателя */
+.glass-strong {
+  background: rgba(255,255,255,0.36);
+  border: 1px solid rgba(255,255,255,0.62);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+
+.page-title { font-size: clamp(28px, 5.2vw, 42px); }
+
+.founder-glass { margin: 0; }
+.lead-quote {
+  font-weight: 600;
+  font-style: italic;
+  margin: 0 0 8px;
+}
+
+/* секции About немного плотнее друг к другу */
+.about-wrap .section { padding: 16px 16px 40px; }
+
+/* футер страницы About */
+.about-foot {
+  text-align: center;
+  color: #777;
+  padding: 24px 0 56px;
+}
