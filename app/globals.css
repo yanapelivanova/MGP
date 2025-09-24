@@ -245,3 +245,75 @@ h1,h2,h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   color: #777;
   padding: 24px 0 56px;
 }
+/* ---------- About page layout ---------- */
+.about-page {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 16px 72px;
+}
+
+/* Стеклянные контейнеры */
+.glass{
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 24px;
+  margin: 28px 0;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.06);
+}
+.glass-bright{
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  border-radius: 22px;
+  padding: 28px;
+  margin: 32px 0;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+}
+
+/* Блок цитаты */
+.founder-quote{
+  margin: 0;
+  font-style: normal;
+  line-height: 1.7;
+}
+.founder-quote p:first-child{
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* ---------- Flow background ribbons ---------- */
+.flow-canvas{
+  position: fixed; /* чтобы фон «плавал» за контентом при прокрутке */
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: linear-gradient(180deg,#ffffff, #fafafa);
+}
+.ribbon{
+  position: absolute;
+  filter: blur(8px);
+  opacity: .55;
+  border-radius: 999px;
+  background:
+    radial-gradient(80% 120% at 20% 50%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 60%),
+    linear-gradient(90deg, rgba(0,0,0,.06), rgba(0,0,0,.02));
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.8) inset,
+    0 10px 30px rgba(0,0,0,.07);
+}
+/* Варианты лент (размер, позиция, поворот) */
+.ribbon.r1{ width:120vw; height:22vw; left:-10vw; top:8vh; transform:rotate(-8deg); }
+.ribbon.r2{ width:140vw; height:18vw; left:-20vw; top:38vh; transform:rotate(6deg); opacity:.45; }
+.ribbon.r3{ width:110vw; height:20vw; right:-10vw; top:64vh; transform:rotate(-12deg); }
+.ribbon.r4{ width:150vw; height:16vw; left:-15vw; bottom:-6vh; transform:rotate(9deg); opacity:.4; }
+
+/* Адаптация на телефонах */
+@media (max-width: 640px){
+  .glass{ padding:18px; border-radius:16px; }
+  .glass-bright{ padding:22px; border-radius:18px; }
+  .ribbon{ filter: blur(10px); }
+}
