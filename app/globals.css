@@ -222,3 +222,91 @@ h1,h2,h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   height: 80px !important;   /* увеличен чуть сильнее */
   margin-left: -20px !important; /* сдвиг влево */
 }
+/* ---------- Solutions island background ---------- */
+.solutions{
+  position: relative;
+  isolation: isolate;              /* фон — ниже контента только в этой секции */
+  padding-top: 28px;               /* чуть компактнее, чем обычные секции */
+  padding-bottom: 52px;
+}
+
+/* «Островной» фон — мягкие свечения + тонкая сетка + едва заметный шум */
+.solutions::before{
+  content:"";
+  position:absolute; inset: -24px -24px -24px -24px;  /* фон чуть шире секции */
+  z-index: -1;
+  border-radius: 28px;
+  background:
+    /* мягкие пятна-свечения */
+    radial-gradient(1200px 500px at 15% 10%, rgba(0,0,0,0.06), transparent 60%),
+    radial-gradient(900px 420px at 85% 30%, rgba(0,0,0,0.05), transparent 62%),
+    radial-gradient(800px 460px at 50% 110%, rgba(0,0,0,0.04), transparent 65%),
+    /* тонкая сетка для объёма стекла */
+    linear-gradient(transparent 23px, rgba(0,0,0,0.04) 24px),
+    linear-gradient(90deg, transparent 23px, rgba(0,0,0,0.04) 24px),
+    /* базовый белый */
+    #fff;
+  background-size:
+    auto, auto, auto,
+    24px 24px, 24px 24px, auto;
+  background-blend-mode: normal, normal, normal, multiply, multiply, normal;
+  box-shadow:
+    0 24px 60px rgba(0,0,0,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+/* лёгкий шум — чтобы стекло выглядело натурально */
+.solutions::after{
+  content:"";
+  position:absolute; inset:-24px; z-index:-1; border-radius:28px;
+  opacity:.07; pointer-events:none;
+  background-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>\
+  <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0.5'/></feComponentTransfer></filter>\
+  <rect width='120' height='120' filter='url(#n)' />\
+  </svg>");
+}
+
+/* Заголовки/подзаголовок */
+.solutions-title{ margin: 0 0 6px; font-size: clamp(24px, 4.6vw, 36px); }
+.solutions-sub{ margin: 0 0 18px; color:#555; }
+
+/* Сетка карточек */
+.solutions-grid{
+  display:grid; gap:14px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 760px){
+  .solutions-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Стеклянные карточки */
+.glass-card{
+  position: relative;
+  border-radius: 18px;
+  padding: 18px 18px 16px;
+  background: rgba(255,255,255,0.60);
+  backdrop-filter: blur(12px) saturate(130%);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+  border: 1px solid rgba(255,255,255,0.65);
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.07),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.glass-card .ic{
+  font-size: 22px; line-height:1; margin-bottom: 8px;
+  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.1));
+}
+.glass-card h3{ margin: 0 0 6px; font-size: 18px; color:#222; }
+.glass-card p{ margin: 0; color:#555; }
+
+/* CTA внизу секции */
+.solutions-cta{ display:flex; justify-content:center; margin-top:16px; }
+.solutions-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding: 12px 18px; border-radius: 999px; text-decoration:none;
+  color:#444; background:#fff; box-shadow: 8px 8px 16px #dedede, -8px -8px 16px #ffffff;
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+.solutions-btn:hover{ opacity:.95; }
+.solutions-btn:active{ transform: translateY(1px); box-shadow: inset 6px 6px 12px #dcdcdc, inset -6px -6px 12px #ffffff; }
