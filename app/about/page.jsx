@@ -3,14 +3,22 @@
 export default function About() {
   return (
     <main className="about-page">
-      {/* фоновые плавные линии */}
-      <div className="flow-canvas">
-        <div className="ribbon r1"></div>
-        <div className="ribbon r2"></div>
-        <div className="ribbon r3"></div>
-        <div className="ribbon r4"></div>
+      {/* Фон: неоморфные ленты со свечением */}
+      <div className="flow-canvas" aria-hidden="true">
+        <div className="ribbon r1" />
+        <div className="ribbon r2" />
+        <div className="ribbon r3" />
+        <div className="ribbon r4" />
       </div>
 
+      {/* Хлебные крошки */}
+      <nav className="breadcrumbs">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span>About</span>
+      </nav>
+
+      {/* About Us */}
       <section className="section glass">
         <h2>About Us</h2>
         <p>
@@ -27,6 +35,7 @@ export default function About() {
         </p>
       </section>
 
+      {/* What we believe */}
       <section className="section glass">
         <h2>What we believe</h2>
         <p>
@@ -37,12 +46,11 @@ export default function About() {
         </p>
       </section>
 
-      <section className="section glass-bright">
+      {/* Message from the Founder — ярко выраженное стекло + шире колонка */}
+      <section className="section glass-bright founder-wrap">
         <h2>Message from the Founder</h2>
-        <blockquote>
-          <p>
-            “Guiding your vision worldwide, with strength and grace.”
-          </p>
+        <blockquote className="founder-quote">
+          <p>“Guiding your vision worldwide, with strength and grace.”</p>
           <p>
             At Maison Global Partners, we believe true strength lies in clarity,
             resilience and trust. Over the past decade we have navigated complex
