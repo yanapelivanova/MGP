@@ -131,40 +131,49 @@ export default function Home() {
           <button className="neumorphic-btn" onClick={() => scrollTo(contactRef)}>Contact</button>
           <button className="neumorphic-btn" onClick={() => scrollTo(servicesRef)}>Services</button>
         </div>
-        {/* ---------- SOLUTIONS ---------- */}
-<section id="solutions" className="section solutions">
-  <h2 className="solutions-title">Solutions</h2>
-  <p className="solutions-sub">From idea to scale — clear, measurable, on time.</p>
+{/* ---------- SOLUTIONS ---------- */}
+<section className="section" id="solutions">
+  <h2 className="sol-title">Solutions</h2>
+  <p className="sol-sub">From idea to scale — clear, measurable, on time.</p>
 
-  <div className="solutions-grid">
-    <article className="glass-card">
-      <div className="ic">📦</div>
+  <div className="sol-grid">
+    <article className="sol-card">
+      <span className="sol-ico" aria-hidden>
+        {/* box */}
+        <svg viewBox="0 0 24 24"><path d="M4 7l8-4 8 4v10l-8 4-8-4V7z" fill="none" stroke="currentColor" strokeWidth="1.4"/><path d="M12 3v18M4 7l8 4 8-4" fill="none" stroke="currentColor" strokeWidth="1.4"/></svg>
+      </span>
       <h3>Vendor Discovery</h3>
       <p>Scouting + due diligence across the Americas, Europe, Asia.</p>
     </article>
 
-    <article className="glass-card">
-      <div className="ic">⚙️</div>
-      <h3>Process Engineering</h3>
-      <p>Playbooks, SOPs, QC loops, documentation — no chaos, just flow.</p>
+    <article className="sol-card">
+      <span className="sol-ico" aria-hidden>
+        {/* sliders */}
+        <svg viewBox="0 0 24 24"><path d="M4 6h10M14 6a2 2 0 104 0 2 2 0 10-4 0zM4 12h6M10 12a2 2 0 104 0 2 2 0 10-4 0zM4 18h14M18 18a2 2 0 104 0 2 2 0 10-4 0z" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>
+      </span>
+      <h3>Process Optimization</h3>
+      <p>KPI-driven redesign: lead times, cost-to-serve, OTD/OTIF.</p>
     </article>
 
-    <article className="glass-card">
-      <div className="ic">🚚</div>
-      <h3>Logistics Design</h3>
-      <p>Network &amp; inventory models that lift OTIF and cut risk.</p>
+    <article className="sol-card">
+      <span className="sol-ico" aria-hidden>
+        {/* clipboard/checks */}
+        <svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="2" fill="none" stroke="currentColor" strokeWidth="1.4"/><path d="M9 3h6M8 9h8M8 12h8M8 15h6" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>
+      </span>
+      <h3>Turnkey Build</h3>
+      <p>From spec &amp; BOM to QA, documentation, packaging, shipment.</p>
     </article>
 
-    <article className="glass-card">
-      <div className="ic">📈</div>
-      <h3>Launch &amp; Scale</h3>
-      <p>BOM, packaging, compliance, suppliers aligned to growth.</p>
+    <article className="sol-card">
+      <span className="sol-ico" aria-hidden>
+        {/* arrow + check */}
+        <svg viewBox="0 0 24 24"><path d="M4 16l6-6 4 4 6-8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/><path d="M4 10v6h6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>
+      </span>
+      <h3>Market Readiness</h3>
+      <p>Compliance, identity, and launch assets that build trust.</p>
     </article>
   </div>
-
-  <div className="solutions-cta">
-    <a className="solutions-btn" href="#contact">Let’s map your solution</a>
-  </div>
+</section>
 </section>
       </section>
 
