@@ -122,3 +122,20 @@ h1,h2,h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 /* ---------- Footer styles (компонент) ---------- */
 .foot{ padding:24px 16px 42px; text-align:center; color:#777; font-size:14px; border-top:1px solid #f0f0f0; }
 .foot a{ color:#666; text-decoration:none; }
+/* ---------- About page ---------- */
+.about .lead { color:#555; }
+
+/* Выравнивание по ширине и «на 3 буквы шире» для блока Message from the Founder */
+#founder-message .founder-text {
+  max-width: 72ch;
+  margin: 0 auto;
+}
+#founder-message .founder-text p {
+  text-align: justify;
+  margin-left: -3ch;
+  margin-right: -3ch;
+}
+@media (max-width: 560px){
+  #founder-message .founder-text { max-width: 64ch; }
+  #founder-message .founder-text p { margin-left: -2ch; margin-right: -2ch; }
+}
