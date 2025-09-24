@@ -1,20 +1,25 @@
 // app/page.jsx
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [isFr, setIsFr] = useState(false);
 
-  // Якоря для секций
+  // определяем текущий язык по адресу
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsFr(window.location.pathname.startsWith("/fr"));
+    }
+  }, []);
+
+  // секции на главной
   const homeRef = useRef(null);
-  const aboutRef = useRef(null);
   const solutionsRef = useRef(null);
   const servicesRef = useRef(null);
   const contactRef = useRef(null);
-  const legalRef = useRef(null);
-  const frRef = useRef(null);
 
   const scrollTo = (ref) => {
     setDrawerOpen(false);
@@ -24,12 +29,18 @@ export default function Home() {
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
+  const switchLang = () => {
+    // простой свитч между / и /fr
+    window.location.href = isFr ? "/" : "/fr";
+  };
+
   return (
     <main className="page" ref={homeRef}>
       {/* ---------- TOPBAR ---------- */}
       <header className="topbar">
-        {/* слева — три мини-кнопки (телефон, e-mail, язык) */}
+        {/* слева — мини-кнопки */}
         <div className="top-actions">
+          {/* phone */}
           <a className="mini-btn" href="tel:+14388091901" aria-label="Call">
             <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
               <path
@@ -43,23 +54,17 @@ export default function Home() {
             </svg>
           </a>
 
-          <button
-            className="mini-btn"
-            onClick={() => scrollTo(contactRef)}
-            aria-label="Email"
-          >
+          {/* email -> к контактам */}
+          <button className="mini-btn" onClick={() => scrollTo(contactRef)} aria-label="Email">
             <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
               <rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
               <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
             </svg>
           </button>
 
+          {/* language dropdown: переключение между / и /fr */}
           <div className="lang-wrap">
-            <button
-              className="mini-btn"
-              onClick={() => setLangOpen((v) => !v)}
-              aria-label="Language"
-            >
+            <button className="mini-btn" onClick={() => setLangOpen((v) => !v)} aria-label="Language">
               <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.6" />
                 <path d="M3.5 12h17M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" fill="none" stroke="currentColor" strokeWidth="1.6" />
@@ -67,8 +72,16 @@ export default function Home() {
             </button>
             {langOpen && (
               <div className="lang-menu">
-                <a href="#" onClick={() => setLangOpen(false)}>English</a>
-                <a href="#fr" onClick={() => { setLangOpen(false); scrollTo(frRef); }}>Français</a>
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setLangOpen(false);
+                    switchLang();
+                  }}
+                >
+                  {isFr ? "English" : "Français"}
+                </a>
               </div>
             )}
           </div>
@@ -99,43 +112,56 @@ export default function Home() {
               <li>
                 <button className="nav-item" onClick={() => scrollTo(homeRef)}>
                   <span>Home</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  <svg className="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
               </li>
+
+              {/* About Us — ссылка на отдельную страницу */}
               <li>
-                <button className="nav-item" onClick={() => scrollTo(aboutRef)}>
+                <a className="nav-item" href="/about">
                   <span>About Us</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </button>
+                  <svg className="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </a>
               </li>
+
               <li>
                 <button className="nav-item" onClick={() => scrollTo(solutionsRef)}>
                   <span>Solutions</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  <svg className="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
               </li>
               <li>
                 <button className="nav-item" onClick={() => scrollTo(servicesRef)}>
                   <span>Services</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  <svg className="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
               </li>
               <li>
                 <button className="nav-item" onClick={() => scrollTo(contactRef)}>
                   <span>Contact</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  <svg className="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
               </li>
+
+              {/* Legal — ссылка на отдельную страницу */}
               <li>
-                <button className="nav-item" onClick={() => scrollTo(legalRef)}>
+                <a className="nav-item" href="/legal">
                   <span>Legal</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </button>
+                  <svg className="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </a>
               </li>
+
+              {/* Переключатель языка */}
               <li className="drawer-fr">
-                <button className="nav-item" onClick={() => scrollTo(frRef)}>
-                  <span>Français</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                <button
+                  className="nav-item"
+                  onClick={() => {
+                    setDrawerOpen(false);
+                    switchLang();
+                  }}
+                >
+                  <span>{isFr ? "English" : "Français"}</span>
+                  <svg className="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
               </li>
             </ul>
@@ -155,20 +181,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- ABOUT US (тизер с ссылкой на /about) ---------- */}
-      <section ref={aboutRef} className="section" id="about">
-        <div className="card" style={{ maxWidth: 900, margin: "0 auto", padding: "28px 32px" }}>
-          <h2>About Us</h2>
-          <p className="lead" style={{ marginBottom: 10 }}>
-            Maison Global Partners — global agency for procurement and supply-chain excellence.
-            We combine clarity, precision and trust to turn complexity into flow.
-          </p>
-          <a href="/about" className="neumorphic-btn" style={{ padding: "10px 18px", fontSize: 14 }}>
-            Read more
-          </a>
-        </div>
-      </section>
-
       {/* ---------- SOLUTIONS (2×2) ---------- */}
       <section ref={solutionsRef} className="section" id="solutions">
         <h2>Solutions</h2>
@@ -177,18 +189,14 @@ export default function Home() {
         </p>
 
         <div className="sol-grid">
-          {/* 1 */}
           <article className="sol-card">
             <div className="sol-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M3 7.5l9-4 9 4-9 4-9-4Z M3 7.5v9l9 4 9-4v-9" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              <svg viewBox="0 0 24 24"><path d="M3 7.5l9-4 9 4-9 4-9-4Z M3 7.5v9l9 4 9-4v-9" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </div>
             <h3 className="sol-title">Vendor Discovery</h3>
             <p className="sol-text">Scouting + due diligence across the Americas, Europe, Asia.</p>
           </article>
 
-          {/* 2 */}
           <article className="sol-card">
             <div className="sol-ico" aria-hidden="true">
               <svg viewBox="0 0 24 24">
@@ -200,18 +208,14 @@ export default function Home() {
             <p className="sol-text">Terms, QA, audits, documentation — clean, enforceable, traceable.</p>
           </article>
 
-          {/* 3 */}
           <article className="sol-card">
             <div className="sol-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M4 19h16M6 16l4-4 3 3 5-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              <svg viewBox="0 0 24 24"><path d="M4 19h16M6 16l4-4 3 3 5-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </div>
             <h3 className="sol-title">Process Optimisation</h3>
             <p className="sol-text">Network design, planning, logistics — measurable KPI uplift.</p>
           </article>
 
-          {/* 4 */}
           <article className="sol-card">
             <div className="sol-ico" aria-hidden="true">
               <svg viewBox="0 0 24 24">
@@ -242,7 +246,7 @@ export default function Home() {
             <p>Network design, planning and logistics flows with measurable KPI improvements and OTD/OTIF reliability.</p>
           </article>
 
-        <article className="card">
+          <article className="card">
             <img className="card-img" src="/svc-turnkey.png" alt="Turnkey Solutions" />
             <h3>Turnkey Solutions</h3>
             <p>From idea to market: BOM, specification, QA, packaging and complete documentation — end-to-end.</p>
@@ -256,7 +260,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- CONTACTS ---------- */}
+      {/* ---------- CONTACT ---------- */}
       <section ref={contactRef} className="section" id="contact">
         <h3>Contact</h3>
 
@@ -271,18 +275,14 @@ export default function Home() {
           </div>
         </form>
 
-        {/* phone */}
         <a className="mail" href="tel:+14388091901">
           <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
-              fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
-            />
+            <path d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
+              fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           +1 (438) 809-1901
         </a>
 
-        {/* три почты одним блоком */}
         <div className="mail mail-stack">
           <div className="stack-row">
             <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
@@ -318,7 +318,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* LinkedIn */}
         <a
           className="mail"
           href="https://www.linkedin.com/company/maison-global-partners/"
@@ -334,24 +333,6 @@ export default function Home() {
         </a>
 
         <p className="based">Based in Montreal, Quebec, Canada.</p>
-      </section>
-
-      {/* ---------- LEGAL ---------- */}
-      <section ref={legalRef} className="section" id="legal">
-        <h3>Legal</h3>
-        <p className="lead" style={{ maxWidth: 900 }}>
-          © {new Date().getFullYear()} Maison Global Partners. All rights reserved.
-          Information on this website is provided “as is” and may change without notice.
-        </p>
-      </section>
-
-      {/* ---------- FRANÇAIS ---------- */}
-      <section ref={frRef} className="section" id="fr">
-        <h3>Français</h3>
-        <p className="lead" style={{ maxWidth: 900 }}>
-          Version française à venir. Pour toute question, écrivez-nous :{" "}
-          <a href="mailto:welcome@maisongp.com">welcome@maisongp.com</a>.
-        </p>
       </section>
     </main>
   );
