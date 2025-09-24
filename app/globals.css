@@ -198,3 +198,18 @@ h1,h2,h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 .about-page .section:last-of-type { padding-bottom: 28px; }  /* меньше дыры внизу */
 .glass-block { margin-bottom: 28px; }                         /* между карточками меньше */
 .founder-block { margin-top: 20px; margin-bottom: 20px; }     /* стеклянный блок компактнее */
+/* ==== ABOUT: компактные отступы (жёсткий оверрайд) ==== */
+.about-page .section{
+  padding: 8px 16px 20px !important;     /* был большой нижний паддинг */
+}
+
+.about-page .glass-block,
+.about-page .founder-block{
+  margin: 10px auto 14px !important;     /* меньше внешних отступов между блоками */
+  padding: 22px 22px !important;         /* компактнее внутри */
+}
+
+.about-page h2{ margin-bottom: 8px !important; }  /* тайтл ближе к тексту */
+
+/* самый нижний блок — ещё ближе к футеру */
+.about-page .section:last-of-type{ padding-bottom: 16px !important; }
