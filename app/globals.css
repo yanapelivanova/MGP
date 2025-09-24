@@ -470,3 +470,30 @@ h1,h2,h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
+/* ---------- Breadcrumbs (fixed under topbar) ---------- */
+.page--with-crumbs { padding-top: 56px; } /* резерв под крошки, чтобы не перекрывали заголовок */
+
+.breadcrumbs{
+  position: fixed;
+  top: 88px;                 /* высота твоей шапки .topbar = 88px */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+
+  display: flex; gap: 8px; align-items: center;
+  font-size: 14px; color:#666;
+
+  background: rgba(255,255,255,.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 6px 14px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+}
+.breadcrumbs a{ color:#555; text-decoration:none; }
+.breadcrumbs a:hover{ text-decoration:underline; }
+.breadcrumbs span{ opacity:.8; }
+
+/* ---------- tighter vertical rhythm for About page ---------- */
+.section-tight{ padding-top: 8px; padding-bottom: 40px; }
+.section-tight + .section-tight{ margin-top: -8px; } /* уменьшает “дыру” между карточками */
