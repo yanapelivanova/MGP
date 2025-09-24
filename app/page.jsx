@@ -131,6 +131,41 @@ export default function Home() {
           <button className="neumorphic-btn" onClick={() => scrollTo(contactRef)}>Contact</button>
           <button className="neumorphic-btn" onClick={() => scrollTo(servicesRef)}>Services</button>
         </div>
+        {/* ---------- SOLUTIONS ---------- */}
+<section id="solutions" className="section solutions">
+  <h2 className="solutions-title">Solutions</h2>
+  <p className="solutions-sub">From idea to scale — clear, measurable, on time.</p>
+
+  <div className="solutions-grid">
+    <article className="glass-card">
+      <div className="ic">📦</div>
+      <h3>Vendor Discovery</h3>
+      <p>Scouting + due diligence across the Americas, Europe, Asia.</p>
+    </article>
+
+    <article className="glass-card">
+      <div className="ic">⚙️</div>
+      <h3>Process Engineering</h3>
+      <p>Playbooks, SOPs, QC loops, documentation — no chaos, just flow.</p>
+    </article>
+
+    <article className="glass-card">
+      <div className="ic">🚚</div>
+      <h3>Logistics Design</h3>
+      <p>Network &amp; inventory models that lift OTIF and cut risk.</p>
+    </article>
+
+    <article className="glass-card">
+      <div className="ic">📈</div>
+      <h3>Launch &amp; Scale</h3>
+      <p>BOM, packaging, compliance, suppliers aligned to growth.</p>
+    </article>
+  </div>
+
+  <div className="solutions-cta">
+    <a className="solutions-btn" href="#contact">Let’s map your solution</a>
+  </div>
+</section>
       </section>
 
       {/* ---------- SERVICES ---------- */}
