@@ -22,14 +22,23 @@ export default function Home() {
     <main className="page">
       {/* ---------- TOPBAR ---------- */}
       <header className="topbar">
+        {/* слева — мини-ярлыки */}
         <div className="top-actions">
+          {/* phone */}
           <a className="mini-btn" href="tel:+14388091901" aria-label="Call">
             <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
-                fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </a>
 
+          {/* email -> скролл к контактам */}
           <button className="mini-btn" onClick={() => scrollTo(contactRef)} aria-label="Email">
             <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
               <rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
@@ -37,6 +46,7 @@ export default function Home() {
             </svg>
           </button>
 
+          {/* language */}
           <div className="lang-wrap">
             <button className="mini-btn" onClick={() => setLangOpen((v) => !v)} aria-label="Language">
               <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
@@ -53,6 +63,7 @@ export default function Home() {
           </div>
         </div>
 
+        {/* центр — логотип */}
         <button
           className="brand-mark"
           aria-label="Scroll to top"
@@ -61,6 +72,7 @@ export default function Home() {
           <img src="/logo.png" alt="Maison Global Partners" />
         </button>
 
+        {/* справа — бургер */}
         <button className="icon-pill" onClick={() => setDrawerOpen(true)} aria-label="Open menu">
           <span className="ico-burger" />
         </button>
@@ -76,9 +88,7 @@ export default function Home() {
               <li>
                 <a className="nav-item" href="/about" onClick={() => setDrawerOpen(false)}>
                   <span>About</span>
-                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  <svg className="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </a>
               </li>
               <li>
@@ -169,6 +179,7 @@ export default function Home() {
           </div>
         </form>
 
+        {/* phone */}
         <a className="mail" href="tel:+14388091901">
           <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
@@ -177,6 +188,7 @@ export default function Home() {
           +1 (438) 809-1901
         </a>
 
+        {/* три почты одним блоком */}
         <div className="mail mail-stack">
           <div className="stack-row">
             <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
@@ -212,6 +224,7 @@ export default function Home() {
           </div>
         </div>
 
+        {/* LinkedIn */}
         <a
           className="mail"
           href="https://www.linkedin.com/company/maison-global-partners/"
@@ -229,6 +242,7 @@ export default function Home() {
         <p className="based">Based in Montreal, Quebec, Canada.</p>
       </section>
 
+      {/* якорь для Legal */}
       <div ref={legalRef} aria-hidden="true" />
     </main>
   );
