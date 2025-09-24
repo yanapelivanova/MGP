@@ -1,32 +1,15 @@
 "use client";
 
-import Link from "next/link";
-
 export default function AboutPage() {
   return (
     <main className="page">
       {/* ---------- BREADCRUMBS ---------- */}
-      <nav
-        className="breadcrumbs"
-        style={{
-          position: "sticky",
-          top: 88,
-          zIndex: 30,
-          background: "#fff",
-          padding: "10px 16px",
-          textAlign: "center",
-          fontSize: "14px",
-          color: "#666",
-        }}
-      >
-        <Link href="/" style={{ color: "#444", textDecoration: "none" }}>
-          Home
-        </Link>{" "}
-        / <span style={{ color: "#999" }}>About</span>
+      <nav className="breadcrumbs">
+        <a href="/">Home</a> <span>/</span> <span>About</span>
       </nav>
 
       {/* ---------- ABOUT US ---------- */}
-      <section className="section" style={{ paddingBottom: "32px" }}>
+      <section className="section">
         <div
           className="card"
           style={{ maxWidth: 900, margin: "0 auto", padding: "28px 32px" }}
@@ -43,7 +26,7 @@ export default function AboutPage() {
       </section>
 
       {/* ---------- WHAT WE BELIEVE ---------- */}
-      <section className="section" style={{ paddingTop: 0, paddingBottom: "32px" }}>
+      <section className="section">
         <div
           className="card"
           style={{ maxWidth: 900, margin: "0 auto", padding: "28px 32px" }}
@@ -60,7 +43,7 @@ export default function AboutPage() {
       </section>
 
       {/* ---------- MESSAGE FROM THE FOUNDER ---------- */}
-      <section className="section" style={{ paddingTop: 0 }}>
+      <section className="section" style={{ marginBottom: "40px" }}>
         <div
           className="glass-block"
           style={{
@@ -95,9 +78,7 @@ export default function AboutPage() {
               For more than a decade, I have navigated the complexities of
               global procurement and supply chains — negotiating with vendors
               across continents, building transparent processes, and turning
-              uncertainty into reliability. My journey has been more than a
-              career; it has been a discipline in endurance, precision, and
-              vision.
+              uncertainty into reliability.
             </p>
             <p>
               Founding Maison Global Partners was not just a professional
