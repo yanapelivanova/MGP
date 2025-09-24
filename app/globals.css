@@ -402,3 +402,21 @@ h1,h2,h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   .glass-bright{ padding:24px; border-radius:18px; }
   .founder-quote{ max-width: 96%; }
   }
+/* ---------- Glass blocks (about page) ---------- */
+.glass-block {
+  background: rgba(255, 255, 255, 0.55); /* полупрозрачное стекло */
+  border-radius: 20px;
+  padding: 32px 28px;
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  margin-bottom: 48px;
+}
+
+/* чуть выделим founder */
+.founder-block {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(22px) saturate(200%);
+  -webkit-backdrop-filter: blur(22px) saturate(200%);
+  }
