@@ -310,3 +310,33 @@ h1,h2,h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 }
 .solutions-btn:hover{ opacity:.95; }
 .solutions-btn:active{ transform: translateY(1px); box-shadow: inset 6px 6px 12px #dcdcdc, inset -6px -6px 12px #ffffff; }
+/* --- Solutions --- */
+.sol-title{ margin:0 0 6px; font-size: clamp(22px,4.6vw,32px); }
+.sol-sub{ margin:0 0 16px; color:#666; }
+
+.sol-grid{
+  display:grid; gap:14px;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width:680px){
+  .sol-grid{ grid-template-columns:1fr; }
+}
+
+.sol-card{
+  background:#fff; border-radius:16px; padding:16px 16px 18px;
+  box-shadow: 8px 8px 16px #e9e9e9, -8px -8px 16px #ffffff;
+  display:grid; gap:8px; align-content:start;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.sol-card:hover{ transform: translateY(-2px);
+  box-shadow: 10px 10px 20px #e5e5e5, -10px -10px 20px #ffffff;
+}
+.sol-card h3{ margin:0; font-size: clamp(16px,3.8vw,18px); }
+.sol-card p{ margin:0; color:#555; }
+
+.sol-ico{
+  width:28px; height:28px; color:#333; display:grid; place-items:center;
+  border-radius:10px; background:#fff;
+  box-shadow: inset 6px 6px 12px #efefef, inset -6px -6px 12px #ffffff;
+}
+.sol-ico svg{ width:20px; height:20px; display:block; }
