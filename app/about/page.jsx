@@ -1,17 +1,39 @@
 "use client";
 
+import Link from "next/link";
+
 export default function AboutPage() {
   return (
     <main className="page">
+      {/* ---------- BREADCRUMBS ---------- */}
+      <nav
+        className="breadcrumbs"
+        style={{
+          position: "sticky",
+          top: 88,
+          zIndex: 30,
+          background: "#fff",
+          padding: "10px 16px",
+          textAlign: "center",
+          fontSize: "14px",
+          color: "#666",
+        }}
+      >
+        <Link href="/" style={{ color: "#444", textDecoration: "none" }}>
+          Home
+        </Link>{" "}
+        / <span style={{ color: "#999" }}>About</span>
+      </nav>
+
       {/* ---------- ABOUT US ---------- */}
-      <section className="section">
+      <section className="section" style={{ paddingBottom: "32px" }}>
         <div
           className="card"
           style={{ maxWidth: 900, margin: "0 auto", padding: "28px 32px" }}
         >
           <h2>About Us</h2>
           <p>
-            <strong>Maison Global Partners</strong> is a boutique consultancy
+            <strong>Maison Global Partners</strong> is a global agency
             specializing in international procurement and supply chain
             management. We help companies find reliable vendors worldwide,
             optimize their sourcing strategies, and build transparent processes
@@ -21,7 +43,7 @@ export default function AboutPage() {
       </section>
 
       {/* ---------- WHAT WE BELIEVE ---------- */}
-      <section className="section">
+      <section className="section" style={{ paddingTop: 0, paddingBottom: "32px" }}>
         <div
           className="card"
           style={{ maxWidth: 900, margin: "0 auto", padding: "28px 32px" }}
@@ -38,7 +60,7 @@ export default function AboutPage() {
       </section>
 
       {/* ---------- MESSAGE FROM THE FOUNDER ---------- */}
-      <section className="section">
+      <section className="section" style={{ paddingTop: 0 }}>
         <div
           className="glass-block"
           style={{
@@ -55,7 +77,14 @@ export default function AboutPage() {
           <h2 style={{ marginBottom: 16 }}>Message from the Founder</h2>
 
           <blockquote style={{ margin: 0, lineHeight: 1.7 }}>
-            <p style={{ fontStyle: "normal", fontWeight: 600, fontSize: "18px" }}>
+            <p
+              style={{
+                fontStyle: "italic",
+                fontWeight: 500,
+                fontSize: "16px",
+                marginBottom: "16px",
+              }}
+            >
               “Guiding your vision worldwide, with strength and grace.”
             </p>
             <p>
