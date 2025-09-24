@@ -420,3 +420,36 @@ h1,h2,h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   backdrop-filter: blur(22px) saturate(200%);
   -webkit-backdrop-filter: blur(22px) saturate(200%);
   }
+/* ---------- Breadcrumbs ---------- */
+.breadcrumbs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #666;
+  margin: 12px 0 24px;
+  position: sticky;
+  top: 88px; /* высота топбара */
+  z-index: 35;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 6px 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbs span {
+  color: #999;
+}
