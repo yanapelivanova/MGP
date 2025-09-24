@@ -2,12 +2,7 @@
 
 export default function AboutPage() {
   return (
-    <main className="page page--with-crumbs">
-      {/* ---------- BREADCRUMBS (fixed) ---------- */}
-      <nav className="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a> <span>/</span> <span>About</span>
-      </nav>
-
+    <main className="page about-page">
       {/* ---------- ABOUT US ---------- */}
       <section className="section section-tight">
         <div className="card" style={{ maxWidth: 900, margin: "0 auto", padding: "28px 32px" }}>
@@ -37,24 +32,24 @@ export default function AboutPage() {
       </section>
 
       {/* ---------- MESSAGE FROM THE FOUNDER ---------- */}
-      <section className="section" style={{ marginBottom: 24 }}>
+      <section className="section section-tight" style={{ marginBottom: 16 }}>
         <div
           className="glass-block"
           style={{
             maxWidth: 860,
             margin: "0 auto",
-            padding: "36px 40px",
-            borderRadius: "20px",
-            background: "rgba(255,255,255,0.35)",
-            boxShadow: "0 8px 28px rgba(0,0,0,0.12)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
+            padding: "32px 36px",
+            borderRadius: 20,
+            background: "rgba(255,255,255,0.38)",
+            boxShadow: "0 8px 24px rgba(0,0,0,0.10)",
+            backdropFilter: "blur(14px)",
+            WebkitBackdropFilter: "blur(14px)",
           }}
         >
-          <h2 style={{ marginBottom: 16 }}>Message from the Founder</h2>
+          <h2 style={{ marginBottom: 14 }}>Message from the Founder</h2>
 
-          <blockquote style={{ margin: 0, lineHeight: 1.7 }}>
-            <p style={{ fontStyle: "italic", fontWeight: 500, fontSize: 16, marginBottom: 16 }}>
+          <blockquote className="founder-quote">
+            <p style={{ fontStyle: "italic", fontWeight: 500, fontSize: 16, marginBottom: 14 }}>
               “Guiding your vision worldwide, with strength and grace.”
             </p>
             <p>
