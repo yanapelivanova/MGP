@@ -317,3 +317,88 @@ h1,h2,h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   .glass-bright{ padding:22px; border-radius:18px; }
   .ribbon{ filter: blur(10px); }
 }
+/* ---------- About page ---------- */
+.about-page{
+  position: relative;
+  isolation: isolate;        /* свой стек контекст, чтобы фон был позади */
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 16px 80px;
+  z-index: 1;
+}
+
+/* Хлебные крошки */
+.breadcrumbs{
+  position: sticky; top: 88px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 14px; margin: 6px 0 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  font-size: 14px; color:#666;
+}
+.breadcrumbs a{ color:#555; text-decoration:none; }
+.breadcrumbs a:hover{ text-decoration:underline; }
+
+/* Стеклянные контейнеры */
+.glass{
+  background: rgba(255,255,255,0.62);
+  backdrop-filter: blur(14px) saturate(115%);
+  -webkit-backdrop-filter: blur(14px) saturate(115%);
+  border-radius: 20px;
+  padding: 24px;
+  margin: 28px 0;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.06);
+}
+.glass-bright{
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(22px) saturate(135%);
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  border-radius: 22px;
+  padding: 32px;
+  margin: 32px 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Шире и «ровнее» блок Founder */
+.founder-wrap{ padding: 36px; }
+.founder-quote{
+  max-width: 920px;             /* шире — «ещё на пару букв» */
+  margin: 0 auto;
+  line-height: 1.75;
+  text-align: justify;          /* выравнивание по ширине */
+}
+.founder-quote p:first-child{ font-weight:600; margin-bottom: 12px; }
+
+/* Светящиеся ленты */
+.flow-canvas{
+  position: fixed;              /* остаются при прокрутке */
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg,#fff,#fafafa);
+}
+.ribbon{
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(10px);
+  opacity: .55;
+  background:
+    radial-gradient(80% 120% at 20% 50%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 60%),
+    linear-gradient(90deg, rgba(0,0,0,.08), rgba(0,0,0,.02));
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.8) inset,
+    0 10px 30px rgba(0,0,0,.07);
+}
+.ribbon.r1{ width:120vw; height:22vw; left:-10vw; top:10vh; transform:rotate(-8deg); }
+.ribbon.r2{ width:140vw; height:18vw; left:-20vw; top:40vh; transform:rotate(6deg); opacity:.45; }
+.ribbon.r3{ width:110vw; height:20vw; right:-10vw; top:68vh; transform:rotate(-12deg); }
+.ribbon.r4{ width:150vw; height:16vw; left:-15vw; bottom:-6vh; transform:rotate(9deg); opacity:.4; }
+
+@media (max-width: 640px){
+  .glass{ padding:18px; border-radius:16px; }
+  .glass-bright{ padding:24px; border-radius:18px; }
+  .founder-quote{ max-width: 96%; }
+  }
