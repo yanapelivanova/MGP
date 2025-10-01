@@ -260,3 +260,54 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   opacity: 0.55;
   pointer-events: none;
 }
+/* Контейнер для тени, чтобы можно было позиционировать относительно hero */
+.hero {
+  position: relative;
+  overflow: visible;
+}
+
+/* Сбрасываем любые старые «пятна» */
+.hero::before,
+.hero::after {
+  content: none !important;
+}
+
+/* Обёртка тени (нужна для центрирования) */
+.shelf-wrap {
+  position: relative;
+  height: 0;              /* не занимает места по высоте */
+}
+
+/* Сама PNG-тень — ровная «полка» над заголовком */
+.shelf-img {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -22px;             /* расстояние от верхней границы секции до тени */
+  width: 520px;           /* ширина тени (подгони под макет) */
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  display: block;
+  z-index: 0;
+}
+
+/* Заголовок всегда выше тени */
+.hero-title {
+  position: relative;
+  z-index: 1;
+  margin-top: 56px;       /* чтобы тень была именно НАД текстом */
+  color: #1f1f1f;
+  text-shadow: none;
+}
+
+/* Адаптив: на мобилке тень чуть уже и ближе */
+@media (max-width: 640px) {
+  .shelf-img {
+    top: -18px;
+    width: 380px;
+  }
+  .hero-title {
+    margin-top: 48px;
+  }
+}
