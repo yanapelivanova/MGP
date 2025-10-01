@@ -2,60 +2,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-
-/* --- Объёмная тень как у «разреза бумаги» --- */
-function HeroShadow() {
-  return (
-    <svg
-      className="hero-shadow"
-      viewBox="0 0 800 80"
-      width="800"
-      height="80"
-      aria-hidden="true"
-    >
-      <defs>
-        {/* вертикальный градиент: тёмная кромка -> в ноль */}
-        <linearGradient id="shelfGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#000" stopOpacity="0.42" />
-          <stop offset="0.35" stopColor="#000" stopOpacity="0.22" />
-          <stop offset="1" stopColor="#000" stopOpacity="0" />
-        </linearGradient>
-
-        {/* лёгкое размытие для мягкой растушёвки */}
-        <filter id="shelfBlur" x="-20%" y="-200%" width="140%" height="500%">
-          <feGaussianBlur stdDeviation="6" />
-        </filter>
-
-        {/* широкая подложка-полутень для объёма */}
-        <filter id="wingsBlur" x="-30%" y="-200%" width="160%" height="500%">
-          <feGaussianBlur stdDeviation="10" />
-        </filter>
-      </defs>
-
-      {/* узкая «кромка» с мягким переходом вниз */}
-      <rect
-        x="40"
-        y="0"
-        width="720"
-        height="26"
-        rx="13"
-        fill="url(#shelfGrad)"
-        filter="url(#shelfBlur)"
-      />
-
-      {/* длинная, очень мягкая растекающаяся тень (даёт ощущение объёма) */}
-      <ellipse
-        cx="400"
-        cy="46"
-        rx="360"
-        ry="10"
-        fill="#000"
-        fillOpacity="0.15"
-        filter="url(#wingsBlur)"
-      />
-    </svg>
-  );
-}
+import ShelfShadow from "./components/ShelfShadow"; // тонкая «надрез»-тень над H1
 
 export default function Home() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -68,6 +15,7 @@ export default function Home() {
     }
   }, []);
 
+  // refs секций
   const homeRef = useRef(null);
   const solutionsRef = useRef(null);
   const servicesRef = useRef(null);
@@ -90,19 +38,17 @@ export default function Home() {
       {/* ---------- TOPBAR ---------- */}
       <header className="topbar">
         <div className="top-actions">
+          {/* phone */}
           <a className="mini-btn" href="tel:+14388091901" aria-label="Call">
             <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
               <path
                 d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
               />
             </svg>
           </a>
 
+          {/* email -> к контактам */}
           <button className="mini-btn" onClick={() => scrollTo(contactRef)} aria-label="Email">
             <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
               <rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
@@ -110,6 +56,7 @@ export default function Home() {
             </svg>
           </button>
 
+          {/* language */}
           <div className="lang-wrap">
             <button className="mini-btn" onClick={() => setLangOpen((v) => !v)} aria-label="Language">
               <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
@@ -134,10 +81,12 @@ export default function Home() {
           </div>
         </div>
 
+        {/* бренд */}
         <button className="brand-mark" aria-label="Scroll to top" onClick={() => scrollTo(homeRef)}>
           <img src="/logo.png" alt="Maison Global Partners" />
         </button>
 
+        {/* бургер */}
         <button className="icon-pill" onClick={() => setDrawerOpen(true)} aria-label="Open menu">
           <span className="ico-burger" />
         </button>
@@ -145,10 +94,8 @@ export default function Home() {
 
       {/* ---------- HERO ---------- */}
       <section className="hero section" id="home">
-        {/* РЕАЛИСТИЧНАЯ ОБЪЁМНАЯ ТЕНЬ — почти под верхней линией */}
-        <div className="hero-shadow-wrap">
-          <HeroShadow />
-        </div>
+        {/* тень-«надрез» почти у верхней кромки, прямо над H1 */}
+        <ShelfShadow />
 
         <h1 className="hero-title">Maison Global Partners</h1>
         <p className="hero-tagline">
@@ -257,14 +204,45 @@ export default function Home() {
 
         <a className="mail" href="tel:+14388091901">
           <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6.8 10.7a14.5 14.5 0 006.5 6.5л2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5л-2.3 2.2z"
+            <path d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
               fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           +1 (438) 809-1901
         </a>
 
         <div className="mail mail-stack">
-          {/* ... оставила без изменений ... */}
+          <div className="stack-row">
+            <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+              <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+            <div>
+              <div className="stack-label">for inquiries</div>
+              <a className="stack-link" href="mailto:welcome@maisongp.com">welcome@maisongp.com</a>
+            </div>
+          </div>
+
+          <div className="stack-row">
+            <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+              <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+            <div>
+              <div className="stack-label">for partners</div>
+              <a className="stack-link" href="mailto:partners@maisongp.com">partners@maisongp.com</a>
+            </div>
+          </div>
+
+          <div className="stack-row">
+            <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+              <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+            <div>
+              <div className="stack-label">for careers</div>
+              <a className="stack-link" href="mailto:careers@maisongp.com">careers@maisongp.com</a>
+            </div>
+          </div>
         </div>
 
         <a
