@@ -2,7 +2,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import ShelfShadow from "./components/ShelfShadow"; // единственная тень-полка
 
 export default function Home() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -99,8 +98,10 @@ export default function Home() {
 
       {/* ---------- HERO ---------- */}
       <section className="hero section" id="home">
-        {/* единственная тень над заголовком */}
-        <ShelfShadow />
+        {/* Ровная PNG-тень над заголовком (файл положи в /public/shadow.png) */}
+        <div className="shelf-wrap">
+          <img src="/shadow.png" alt="" className="shelf-img" />
+        </div>
 
         <h1 className="hero-title">Maison Global Partners</h1>
         <p className="hero-tagline">
@@ -209,7 +210,7 @@ export default function Home() {
 
         <a className="mail" href="tel:+14388091901">
           <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6.8 10.7a14.5 14.5 0 006.5 6.5л2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5л-2.3 2.2z"
+            <path d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
               fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           +1 (438) 809-1901
