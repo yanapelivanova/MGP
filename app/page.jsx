@@ -95,7 +95,18 @@ export default function Home() {
       {/* ---------- HERO ---------- */}
       <section className="hero section" id="home">
         {/* тень-«надрез» почти у верхней кромки, прямо над H1 */}
-        <ShelfShadow />
+        <section className="hero section" id="home">
+  <div className="hero-shadow-wrap">
+    <img className="hero-shadow" src="/shadow.png" alt="shadow effect" />
+  </div>
+
+  <h1 className="hero-title">Maison Global Partners</h1>
+  <p className="hero-tagline">
+    Global sourcing<br />
+    and supply-chain solutions
+  </p>
+  ...
+</section>
 
         <h1 className="hero-title">Maison Global Partners</h1>
         <p className="hero-tagline">
