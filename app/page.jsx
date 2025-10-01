@@ -137,7 +137,7 @@ export default function Home() {
       </header>
 
       {/* <<< ВОТ ЗДЕСЬ ПОЛКА-ТЕНЬ >>> */}
-      <ShelfShadow height={140} intensity={1} className="mb-2" />
+      <<ShelfShadow height={110} intensity={0.8} parallax={14} />
 
       {/* ---------- DRAWER ---------- */}
       {drawerOpen && (
