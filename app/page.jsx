@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import ShelfShadow from "./components/ShelfShadow"; // тень-полка под шапкой
+import ShelfShadow from "./components/ShelfShadow"; // единственная тень-полка
 
 export default function Home() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -15,6 +15,7 @@ export default function Home() {
     }
   }, []);
 
+  // refs секций
   const homeRef = useRef(null);
   const solutionsRef = useRef(null);
   const servicesRef = useRef(null);
@@ -36,14 +37,18 @@ export default function Home() {
     <main className="page" ref={homeRef}>
       {/* ---------- TOPBAR ---------- */}
       <header className="topbar">
+        {/* слева — мини-кнопки */}
         <div className="top-actions">
           {/* phone */}
           <a className="mini-btn" href="tel:+14388091901" aria-label="Call">
             <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
               <path
                 d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
-                fill="none" stroke="currentColor" strokeWidth="1.6"
-                strokeLinecap="round" strokeLinejoin="round"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </a>
@@ -58,7 +63,7 @@ export default function Home() {
 
           {/* language */}
           <div className="lang-wrap">
-            <button className="mini-btn" onClick={() => setLangOpen(v=>!v)} aria-label="Language">
+            <button className="mini-btn" onClick={() => setLangOpen((v) => !v)} aria-label="Language">
               <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.6" />
                 <path d="M3.5 12h17M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" fill="none" stroke="currentColor" strokeWidth="1.6" />
@@ -66,7 +71,14 @@ export default function Home() {
             </button>
             {langOpen && (
               <div className="lang-menu">
-                <a href="#" onClick={(e)=>{e.preventDefault(); setLangOpen(false); switchLang();}}>
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setLangOpen(false);
+                    switchLang();
+                  }}
+                >
                   {isFr ? "English" : "Français"}
                 </a>
               </div>
@@ -85,37 +97,16 @@ export default function Home() {
         </button>
       </header>
 
-      {/* ---------- ТЕНЬ-ПОЛКА ПОД ШАПКОЙ ---------- */}
-      <ShelfShadow height={110} intensity={0.85} parallax={14} />
-
-      {/* ---------- DRAWER ---------- */}
-      {drawerOpen && (
-        <>
-          <div className="overlay" onClick={() => setDrawerOpen(false)} />
-          <aside className="drawer" role="dialog" aria-label="Menu">
-            <button className="drawer-close" onClick={() => setDrawerOpen(false)} aria-label="Close">×</button>
-            <ul className="drawer-list">
-              <li><button className="nav-item" onClick={() => scrollTo(homeRef)}><span>Home</span><svg className="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></button></li>
-              <li><a className="nav-item" href="/about"><span>About Us</span><svg className="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></a></li>
-              <li><button className="nav-item" onClick={() => scrollTo(solutionsRef)}><span>Solutions</span><svg className="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></button></li>
-              <li><button className="nav-item" onClick={() => scrollTo(servicesRef)}><span>Services</span><svg className="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></button></li>
-              <li><button className="nav-item" onClick={() => scrollTo(contactRef)}><span>Contact</span><svg className="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></button></li>
-              <li><a className="nav-item" href="/legal"><span>Legal</span><svg className="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></a></li>
-              <li className="drawer-fr">
-                <button className="nav-item" onClick={()=>{ setDrawerOpen(false); switchLang(); }}>
-                  <span>{isFr ? "English" : "Français"}</span>
-                  <svg className="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </button>
-              </li>
-            </ul>
-          </aside>
-        </>
-      )}
-
       {/* ---------- HERO ---------- */}
       <section className="hero section" id="home">
+        {/* единственная тень над заголовком */}
+        <ShelfShadow />
+
         <h1 className="hero-title">Maison Global Partners</h1>
-        <p className="hero-tagline">Global sourcing<br/>and supply-chain solutions</p>
+        <p className="hero-tagline">
+          Global sourcing<br />
+          and supply-chain solutions
+        </p>
         <div className="btnbar">
           <button className="neumorphic-btn" onClick={() => scrollTo(contactRef)}>Contact</button>
           <button className="neumorphic-btn" onClick={() => scrollTo(servicesRef)}>Services</button>
@@ -218,7 +209,7 @@ export default function Home() {
 
         <a className="mail" href="tel:+14388091901">
           <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
+            <path d="M6.8 10.7a14.5 14.5 0 006.5 6.5л2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5л-2.3 2.2z"
               fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           +1 (438) 809-1901
@@ -259,7 +250,12 @@ export default function Home() {
           </div>
         </div>
 
-        <a className="mail" href="https://www.linkedin.com/company/maison-global-partners/" target="_blank" rel="noopener">
+        <a
+          className="mail"
+          href="https://www.linkedin.com/company/maison-global-partners/"
+          target="_blank"
+          rel="noopener"
+        >
           <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
             <rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" strokeWidth="1.6" />
             <path d="M8 17V10M8 7.5h.01M11 17v-4.2c0-1.7 2.2-1.8 2.2 0V17M13.2 12.8c0-1.9 2.6-2 2.6.1V17"
