@@ -328,3 +328,10 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   display: block;
   opacity: 0.9;       /* мягкость */
 }
+.hero-shadow {
+  display: block;
+  width: 100%;
+  max-width: 500px;   /* ширина тени */
+  margin: 0 auto -40px; /* чтобы тень "поднялась" к тексту */
+  pointer-events: none; /* чтобы тень не мешала кликам */
+}
