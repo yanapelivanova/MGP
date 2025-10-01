@@ -90,8 +90,8 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
 
 /* ========== Hero ========== */
-.hero{ padding: 12px 16px 16px; text-align:center; max-width:1100px; margin:0 auto; position:relative; overflow:visible; }
-.hero-title{ font-size: clamp(26px, 5.2vw, 44px); letter-spacing:.2px; }
+.hero{ padding: 12px 16px 16px; text-align:center; max-width:1100px; margin:0 auto; }
+.hero-title{ font-size: clamp(26px, 5.2vw, 44px); letter-spacing:.2px; margin-top:0; color:#1f1f1f; }
 .hero-tagline{ margin:6px 0 10px; color:#4a4a4a; font-size: clamp(16px, 3.6vw, 20px); }
 
 /* ========== Buttons (neumorphic) ========== */
@@ -188,17 +188,29 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 }
 
 .founder-wrap { max-width: 860px; margin: 0 auto; }
-.founder-quote{ margin: 0; line-height: 1.7; text-align: justify; }
-.founder-line{ font-style: italic; font-weight: 500; font-size: 16px; margin: 0 0 12px; }
+.founder-quote{
+  margin: 0;
+  line-height: 1.7;
+  text-align: justify;
+}
+.founder-line{
+  font-style: italic;
+  font-weight: 500;
+  font-size: 16px;
+  margin: 0 0 12px;
+}
 
+/* На мобилках — компактнее */
 @media (max-width: 640px){
   .glass{ padding: 18px 20px; border-radius: 16px; }
   .glass-strong{ padding: 22px 24px; border-radius: 18px; }
 }
+
+/* Полностью выключаем любые «крошки» */
 .breadcrumbs { display: none !important; visibility: hidden !important; }
 
 /* =========================================================
-   SOLUTIONS (4 плитки)
+   SOLUTIONS (4 плитки, минималистичные иконки)
    ========================================================= */
 .sol-title{ margin:0 0 6px; font-size: clamp(22px,4.6vw,32px); }
 .sol-sub{ margin:0 0 16px; color:#666; }
@@ -207,6 +219,7 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   display:grid; gap:14px;
   grid-template-columns: repeat(2, 1fr);
 }
+
 .sol-card{
   background:#fff; border-radius:16px; padding:16px 16px 18px;
   box-shadow: 8px 8px 16px #e9e9e9, -8px -8px 16px #ffffff;
@@ -226,52 +239,3 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   box-shadow: inset 6px 6px 12px #efefef, inset -6px -6px 12px #ffffff;
 }
 .sol-ico svg{ width:20px; height:20px; display:block; }
-
-/* =========================================================
-   ShelfShadow (надрез-тень над заголовком hero)
-   ========================================================= */
-.hero-shadow-wrap{
-  position: relative;
-  height: 42px;            /* место под тень; регулируй 36–48 */
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin-top: -10px;       /* поджать к верхней линии */
-  margin-bottom: 6px;      /* маленький отступ до H1 */
-}
-.hero-shadow{
-  width: min(620px, 92vw);
-  height: auto;
-  display: block;
-  opacity: .95;
-  pointer-events: none;
-  filter:
-    drop-shadow(0 2px 2px rgba(0,0,0,.42))
-    drop-shadow(0 14px 22px rgba(0,0,0,.28))
-    drop-shadow(0 34px 64px rgba(0,0,0,.16));
-  -webkit-mask-image: radial-gradient(120% 60% at 50% 40%,
-      #000 46%, rgba(0,0,0,.85) 60%, rgba(0,0,0,.55) 72%, transparent 100%);
-  mask-image: radial-gradient(120% 60% at 50% 40%,
-      #000 46%, rgba(0,0,0,.85) 60%, rgba(0,0,0,.55) 72%, transparent 100%);
-}
-.hero-title{ position: relative; z-index: 1; }
-
-@media (max-width: 640px){
-  .hero-shadow-wrap{ height: 38px; margin-top: -8px; margin-bottom: 4px; }
-  .hero-shadow{ width: min(480px, 94vw); }
-}
-.hero-shadow-wrap {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  margin-top: -8px;   /* move closer to the top */
-  margin-bottom: 6px; /* spacing before the title */
-}
-
-.hero-shadow {
-  display: block;
-  width: min(560px, 90vw); /* responsive width */
-  height: auto;
-  opacity: 0.9;            /* adjust darkness */
-  pointer-events: none;    /* avoid blocking clicks */
-}
