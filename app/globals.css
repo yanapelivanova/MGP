@@ -260,3 +260,18 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   .hero-shadow-wrap{ height: 38px; margin-top: -8px; margin-bottom: 4px; }
   .hero-shadow{ width: min(480px, 94vw); }
 }
+.hero-shadow-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: -8px;   /* move closer to the top */
+  margin-bottom: 6px; /* spacing before the title */
+}
+
+.hero-shadow {
+  display: block;
+  width: min(560px, 90vw); /* responsive width */
+  height: auto;
+  opacity: 0.9;            /* adjust darkness */
+  pointer-events: none;    /* avoid blocking clicks */
+}
