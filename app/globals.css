@@ -241,3 +241,38 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   box-shadow: inset 6px 6px 12px #efefef, inset -6px -6px 12px #ffffff;
 }
 .sol-ico svg{ width:20px; height:20px; display:block; }
+/* ==== Futuristic glowing illustration (пульсация + свечение) ==== */
+.glow-img {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(120,180,255,0.35);
+  transition: box-shadow 0.6s ease-in-out, transform 0.6s ease-in-out;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+.glow-img:hover {
+  box-shadow: 0 0 60px rgba(120,180,255,0.6);
+  transform: translateY(-2px) scale(1.02);
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 40px rgba(120,180,255,0.35); }
+  50%      { box-shadow: 0 0 70px rgba(120,180,255,0.55); }
+}
+
+/* ==== DividerShadow (живая тень под блоком) ==== */
+.mgp-divider-shadow {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.26) 0%,
+    rgba(0, 0, 0, 0.18) 35%,
+    rgba(0, 0, 0, 0.08) 65%,
+    rgba(0, 0, 0, 0.0) 100%
+  );
+  filter: blur(10px);
+  opacity: 0.9;
+  transition: transform 300ms ease-out, filter 300ms ease-out, opacity 300ms ease-out;
+  will-change: transform;
+  pointer-events: none;
+    }
