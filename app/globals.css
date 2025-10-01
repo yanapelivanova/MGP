@@ -335,3 +335,38 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   margin: 0 auto -40px; /* чтобы тень "поднялась" к тексту */
   pointer-events: none; /* чтобы тень не мешала кликам */
 }
+/* Чтобы можно было ставить тень близко к верхней белой линии */
+.hero {
+  position: relative;
+  overflow: visible;
+}
+
+/* Обёртка для позиционирования тени почти у верхней кромки */
+.hero-shadow-wrap {
+  position: relative;
+  height: 36px;        /* место под тень; регулируй 28–44 */
+  display: flex;
+  justify-content: center;
+  margin-top: -6px;    /* подтянуть к верхней линии */
+  margin-bottom: 4px;  /* небольшой отступ до заголовка */
+}
+
+/* Размер тени, респонсив */
+.hero-shadow {
+  width: min(560px, 86vw);
+  height: auto;
+  display: block;
+}
+
+/* Заголовок поверх тени */
+.hero-title {
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
+  text-shadow: none;
+}
+
+@media (max-width: 640px) {
+  .hero-shadow-wrap { height: 30px; margin-top: -4px; }
+  .hero-shadow { width: min(460px, 90vw); }
+}
