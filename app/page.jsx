@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import DividerShadow from "./components/DividerShadow";
 
 export default function Home() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -44,7 +45,7 @@ export default function Home() {
           <a className="mini-btn" href="tel:+14388091901" aria-label="Call">
             <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
               <path
-                d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
+                d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5л-2.3 2.2z"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.6"
@@ -181,6 +182,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== ТЕНЬ-РАЗДЕЛИТЕЛЬ ПОД HERO ===== */}
+      <DividerShadow className="mt-6 mb-12" />
+
       {/* ---------- SOLUTIONS (2×2) ---------- */}
       <section ref={solutionsRef} className="section" id="solutions">
         <h2>Solutions</h2>
@@ -191,7 +195,7 @@ export default function Home() {
         <div className="sol-grid">
           <article className="sol-card">
             <div className="sol-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M3 7.5l9-4 9 4-9 4-9-4Z M3 7.5v9l9 4 9-4v-9" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M3 7.5l9-4 9 4-9 4-9-4Z M3 7.5v9л9 4 9-4v-9" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </div>
             <h3 className="sol-title">Vendor Discovery</h3>
             <p className="sol-text">Scouting + due diligence across the Americas, Europe, Asia.</p>
@@ -235,25 +239,25 @@ export default function Home() {
 
         <div className="cards">
           <article className="card">
-            <img className="card-img" src="/svc-global.png" alt="Global Sourcing" />
+            <img className="card-img glow-img" src="/svc-global.png" alt="Global Sourcing" />
             <h3>Global Sourcing</h3>
             <p>Supplier scouting across the Americas, Europe and Asia; due diligence, audits and sample runs to secure the best quality–cost ratio.</p>
           </article>
 
           <article className="card">
-            <img className="card-img" src="/svc-optim.png" alt="Supply-Chain Optimisation" />
+            <img className="card-img glow-img" src="/svc-optim.png" alt="Supply-Chain Optimisation" />
             <h3>Supply-Chain Optimisation</h3>
             <p>Network design, planning and logistics flows with measurable KPI improvements and OTD/OTIF reliability.</p>
           </article>
 
           <article className="card">
-            <img className="card-img" src="/svc-turnkey.png" alt="Turnkey Solutions" />
+            <img className="card-img glow-img" src="/svc-turnkey.png" alt="Turnkey Solutions" />
             <h3>Turnkey Solutions</h3>
             <p>From idea to market: BOM, specification, QA, packaging and complete documentation — end-to-end.</p>
           </article>
 
           <article className="card">
-            <img className="card-img" src="/svc-branding.png" alt="Branding" />
+            <img className="card-img glow-img" src="/svc-branding.png" alt="Branding" />
             <h3>Branding</h3>
             <p>Naming, identity and packaging that build trust across channels and markets.</p>
           </article>
@@ -277,7 +281,7 @@ export default function Home() {
 
         <a className="mail" href="tel:+14388091901">
           <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
+            <path d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5л-2.3 2.2z"
               fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           +1 (438) 809-1901
