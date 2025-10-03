@@ -8,14 +8,12 @@ export default function Home() {
   const [langOpen, setLangOpen] = useState(false);
   const [isFr, setIsFr] = useState(false);
 
-  // определяем текущий язык по адресу
   useEffect(() => {
     if (typeof window !== "undefined") {
       setIsFr(window.location.pathname.startsWith("/fr"));
     }
   }, []);
 
-  // секции на главной
   const homeRef = useRef(null);
   const solutionsRef = useRef(null);
   const servicesRef = useRef(null);
@@ -30,7 +28,6 @@ export default function Home() {
   };
 
   const switchLang = () => {
-    // простой свитч между / и /fr
     window.location.href = isFr ? "/" : "/fr";
   };
 
@@ -81,7 +78,7 @@ export default function Home() {
             </svg>
           </button>
 
-          {/* language dropdown: переключение между / и /fr */}
+          {/* language */}
           <div className="lang-wrap">
             <button
               className="mini-btn"
@@ -128,16 +125,25 @@ export default function Home() {
           aria-label="Scroll to top"
           onClick={() => scrollTo(homeRef)}
         >
-          <img src="/logo.png" alt="Maison Global Partners" />
+          {/* ВАЖНО: src всегда тёмный вариант; белый подменится через CSS в .dark */}
+          <img className="logo" src="/logo-dark.png" alt="Maison Global Partners" />
         </button>
 
-        {/* справа — бургер */}
+        {/* справа — бургер (SVG на currentColor) */}
         <button
           className="icon-pill"
           onClick={() => setDrawerOpen(true)}
           aria-label="Open menu"
         >
-          <span className="ico-burger" />
+          <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M4 7.5h16M4 12h16M4 16.5h16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
         </button>
       </header>
 
@@ -170,7 +176,6 @@ export default function Home() {
                 </button>
               </li>
 
-              {/* About Us — ссылка на отдельную страницу */}
               <li>
                 <a className="nav-item" href="/about">
                   <span>About Us</span>
@@ -242,7 +247,6 @@ export default function Home() {
                 </button>
               </li>
 
-              {/* Legal — ссылка на отдельную страницу */}
               <li>
                 <a className="nav-item" href="/legal">
                   <span>Legal</span>
@@ -259,7 +263,6 @@ export default function Home() {
                 </a>
               </li>
 
-              {/* Переключатель языка */}
               <li className="drawer-fr">
                 <button
                   className="nav-item"
@@ -288,8 +291,6 @@ export default function Home() {
 
       {/* ---------- HERO (HOME) ---------- */}
       <section className="hero section" id="home">
-        {/* мягкая эллиптическая тень над заголовком */}
-
         <h1 className="hero-title">Maison Global Partners</h1>
         <p className="hero-tagline">
           Global sourcing
