@@ -452,4 +452,33 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 
 /* 5) На всякий случай гасим старые высоты в карточках: */
 .card-img { height: auto !important; }
+/* ===== Фикс для картинок услуг ===== */
+.svc-illu,
+.card-img,
+.fx-fade-pulse {
+  width: 100% !important;
+  height: auto !important;       /* сохраняем пропорции */
+  object-fit: contain !important;
+  background: #fff;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  filter: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+/* Цвет текста/иконок в топбаре завязан на тему */
+.topbar { color: #1a1a1a; }       /* светлая */
+.dark .topbar { color: #ffffff; }  /* тёмная */
+
+/* Логотип — PNG, подменяем файл по теме */
+.logo { content: url('/logo-dark.png'); }   /* тёмный логотип для светлой темы */
+.dark .logo { content: url('/logo-light.png'); } /* светлый логотип для тёмной темы */
+
+/* У SVG-иконок внутри топбара используем текущий цвет */
+.topbar .ci [stroke] { stroke: currentColor; }
+.topbar .ci [fill]:not([fill="none"]) { fill: currentColor; }
+
+/* На всякий случай, если где-то бургер рендерится как <img> */
+.topbar img.icon { filter: none; }
+.dark .topbar img.icon { filter: invert(1) brightness(1.2); }
 
