@@ -339,3 +339,54 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   0%,100% { filter: drop-shadow(0 8px 20px rgba(120,180,255,.28)); }
   50%     { filter: drop-shadow(0 10px 32px rgba(120,180,255,.48)); }
 }
+/* ===== FIX: иллюстрации услуг без растяжения ===== */
+.svc-illu-wrap{
+  width: 100%;
+  aspect-ratio: 16 / 9;     /* держим пропорции 1920×1080 */
+  position: relative;
+  overflow: visible;
+}
+
+/* единые правила для всех вариантов изображений в карточках */
+.card-img,
+.svc-illu,
+.fx-fade-pulse {
+  width: 100% !important;
+  height: auto !important;   /* убираем фикс 160px */
+  aspect-ratio: 16 / 9;
+  display: block;
+  object-fit: cover;         /* заполняем блок без искажений */
+}
+
+/* сохраняем твои эффекты/маски, но без влияния на размер */
+.svc-illu {
+  box-shadow: 0 1px 0 rgba(255,255,255,.65) inset;
+  filter: saturate(108%) contrast(104%);
+  transition: transform .35s ease, filter .35s ease, box-shadow .35s ease;
+  -webkit-mask-image: radial-gradient(120% 120% at 50% 50%,
+                      #000 62%, rgba(0,0,0,.85) 75%,
+                      rgba(0,0,0,.45) 88%, transparent 100%);
+          mask-image: radial-gradient(120% 120% at 50% 50%,
+                      #000 62%, rgba(0,0,0,.85) 75%,
+                      rgba(0,0,0,.45) 88%, transparent 100%);
+}
+
+/* если нужна «мягкая» версия */
+.svc-illu--softer{
+  -webkit-mask-image: radial-gradient(130% 130% at 50% 50%,
+                      #000 56%, rgba(0,0,0,.8) 72%,
+                      rgba(0,0,0,.4) 86%, transparent 100%);
+          mask-image: radial-gradient(130% 130% at 50% 50%,
+                      #000 56%, rgba(0,0,0,.8) 72%,
+                      rgba(0,0,0,.4) 86%, transparent 100%);
+}
+
+/* при наведении — как было */
+.svc-illu-wrap:hover .svc-illu,
+.svc-illu-wrap:focus-within .svc-illu{
+  transform: translateY(-2px) scale(1.015);
+  filter: saturate(112%) contrast(106%);
+}
+
+/* если где-то остались «старые» миниатюры — тоже не тянем */
+.cards .card-img { object-fit: cover !important; }
