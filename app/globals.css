@@ -390,3 +390,25 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 
 /* если где-то остались «старые» миниатюры — тоже не тянем */
 .cards .card-img { object-fit: cover !important; }
+/* ===== КАРТИНКИ УСЛУГ — без обрезки и без мыла ===== */
+.svc-illu,
+.card-img,
+.fx-fade-pulse {
+  width: 100% !important;
+  height: auto !important;         /* сохраняем пропорции */
+  object-fit: contain !important;  /* показываем всю картинку целиком */
+  background: #f5f6f7;             /* светлый фон по краям */
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* отключаем старые фильтры/маски, которые размывают */
+.svc-illu,
+.fx-fade-pulse {
+  filter: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
