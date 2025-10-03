@@ -481,4 +481,10 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 /* На всякий случай, если где-то бургер рендерится как <img> */
 .topbar img.icon { filter: none; }
 .dark .topbar img.icon { filter: invert(1) brightness(1.2); }
+.logo {
+  content: url('/logo-dark.png');
+}
+.dark .logo {
+  content: url('/logo-light.png');
+}
 
