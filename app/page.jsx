@@ -119,19 +119,18 @@ export default function Home() {
           </div>
         </div>
 
-        {/* центр — логотип (автопереключение по теме) */}
-        <button
-          className="brand-mark"
-          aria-label="Scroll to top"
-          onClick={() => scrollTo(homeRef)}
-        >
-          <picture>
-            {/* тёмная тема — светлый логотип */}
-            <source srcSet="/logo-light.jpg?v=2" media="(prefers-color-scheme: dark)" />
-            {/* светлая тема — тёмный логотип */}
-            <img className="logo" src="/logo-dark.png?v=2" alt="Maison Global Partners" />
-          </picture>
-        </button>
+       {/* центр — логотип */}
+<button
+  className="brand-mark"
+  aria-label="Scroll to top"
+  onClick={() => scrollTo(homeRef)}
+>
+  {/* тёмный для светлой темы */}
+  <img className="logo logo-dark" src="/logo-dark.png" alt="Maison Global Partners" />
+  {/* светлый для тёмной темы */}
+  <img className="logo logo-light" src="/logo-light.png" alt="Maison Global Partners (inverse)" />
+</button>
+
 
         {/* справа — бургер */}
         <button
