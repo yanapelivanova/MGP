@@ -412,3 +412,44 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
   box-shadow: none !important;
   transition: none !important;
 }
+/* ===== УСЛУГИ: показываем картинку целиком, без обрезки и размытия ===== */
+
+/* 1) Контейнер не навязывает высоту/пропорции: */
+.svc-illu-wrap {
+  position: relative;
+  width: 100%;
+  height: auto !important;     /* убираем фикс высоты */
+  aspect-ratio: auto !important;
+  overflow: visible !important; /* чтобы точно не кромсало края */
+  border-radius: 18px;
+}
+
+/* 2) Гасим «дымку» вокруг (она мылит): */
+.svc-illu-wrap::before { display: none !important; }
+
+/* 3) Сами изображения — без подрезки: */
+.svc-illu,
+.card-img,
+.fx-fade-pulse {
+  width: 100% !important;
+  height: auto !important;           /* сохраняем пропорции оригинала */
+  object-fit: contain !important;    /* НИЧЕГО не режем */
+  display: block;
+  background: #f5f6f7;               /* аккуратные поля слева/справа при других пропорциях */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* 4) Убираем любые маски/фильтры, чтобы вернуть резкость: */
+.svc-illu,
+.fx-fade-pulse {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+/* 5) На всякий случай гасим старые высоты в карточках: */
+.card-img { height: auto !important; }
+
