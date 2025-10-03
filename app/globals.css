@@ -498,4 +498,10 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 /* в тёмной теме — наоборот */
 .dark .logo-dark { display: none; }
 .dark .logo-light { display: block; }
+/* Размер логотипа тут, а не инлайном */
+.logo { height: 48px; width: auto; display: block; }
 
+/* Контраст иконок и бургера по теме — уже есть через currentColor
+   Убедись, что .topbar имеет color, а .dark .topbar переопределяет его */
+.topbar { color: #1a1a1a; }
+.dark .topbar { color: #ffffff; }
