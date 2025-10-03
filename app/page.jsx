@@ -289,7 +289,6 @@ export default function Home() {
       {/* ---------- HERO (HOME) ---------- */}
       <section className="hero section" id="home">
         {/* мягкая эллиптическая тень над заголовком */}
-        <div className="hero-shadow" aria-hidden="true" />
 
         <h1 className="hero-title">Maison Global Partners</h1>
         <p className="hero-tagline">
