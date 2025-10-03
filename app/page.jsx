@@ -35,6 +35,7 @@ export default function Home() {
     <main className="page" ref={homeRef}>
       {/* ---------- TOPBAR ---------- */}
       <header className="topbar">
+        {/* слева — мини-кнопки */}
         <div className="top-actions">
           {/* phone */}
           <a className="mini-btn" href="tel:+14388091901" aria-label="Call">
@@ -50,7 +51,7 @@ export default function Home() {
             </svg>
           </a>
 
-          {/* email */}
+          {/* email -> к контактам */}
           <button
             className="mini-btn"
             onClick={() => scrollTo(contactRef)}
@@ -118,16 +119,21 @@ export default function Home() {
           </div>
         </div>
 
-        {/* logo */}
+        {/* центр — логотип (автопереключение по теме) */}
         <button
           className="brand-mark"
           aria-label="Scroll to top"
           onClick={() => scrollTo(homeRef)}
         >
-          <img className="logo" src="/logo-dark.png" alt="Maison Global Partners" />
+          <picture>
+            {/* тёмная тема — светлый логотип */}
+            <source srcSet="/logo-light.jpg?v=2" media="(prefers-color-scheme: dark)" />
+            {/* светлая тема — тёмный логотип */}
+            <img className="logo" src="/logo-dark.png?v=2" alt="Maison Global Partners" />
+          </picture>
         </button>
 
-        {/* burger */}
+        {/* справа — бургер */}
         <button
           className="icon-pill"
           onClick={() => setDrawerOpen(true)}
@@ -148,140 +154,4 @@ export default function Home() {
       {/* ---------- DRAWER ---------- */}
       {drawerOpen && (
         <>
-          <div className="overlay" onClick={() => setDrawerOpen(false)} />
-          <aside className="drawer" role="dialog" aria-label="Menu">
-            <button
-              className="drawer-close"
-              onClick={() => setDrawerOpen(false)}
-              aria-label="Close"
-            >
-              ×
-            </button>
-            <ul className="drawer-list">
-              <li>
-                <button className="nav-item" onClick={() => scrollTo(homeRef)}>
-                  <span>Home</span>
-                </button>
-              </li>
-              <li>
-                <a className="nav-item" href="/about">
-                  <span>About Us</span>
-                </a>
-              </li>
-              <li>
-                <button className="nav-item" onClick={() => scrollTo(solutionsRef)}>
-                  <span>Solutions</span>
-                </button>
-              </li>
-              <li>
-                <button className="nav-item" onClick={() => scrollTo(servicesRef)}>
-                  <span>Services</span>
-                </button>
-              </li>
-              <li>
-                <button className="nav-item" onClick={() => scrollTo(contactRef)}>
-                  <span>Contact</span>
-                </button>
-              </li>
-              <li>
-                <a className="nav-item" href="/legal">
-                  <span>Legal</span>
-                </a>
-              </li>
-              <li className="drawer-fr">
-                <button
-                  className="nav-item"
-                  onClick={() => {
-                    setDrawerOpen(false);
-                    switchLang();
-                  }}
-                >
-                  <span>{isFr ? "English" : "Français"}</span>
-                </button>
-              </li>
-            </ul>
-          </aside>
-        </>
-      )}
-
-      {/* ---------- HERO ---------- */}
-      <section className="hero section" id="home">
-        <h1 className="hero-title">Maison Global Partners</h1>
-        <p className="hero-tagline">
-          Global sourcing
-          <br />
-          and supply-chain solutions
-        </p>
-        <div className="btnbar">
-          <button className="neumorphic-btn" onClick={() => scrollTo(contactRef)}>
-            Contact
-          </button>
-          <button className="neumorphic-btn" onClick={() => scrollTo(servicesRef)}>
-            Services
-          </button>
-        </div>
-      </section>
-
-      {/* ---------- SOLUTIONS ---------- */}
-      {/* ...твой код SOLUTIONS без изменений... */}
-
-      {/* ---------- SERVICES (исправленный блок) ---------- */}
-      <section ref={servicesRef} className="section" id="services">
-        <h2>How we deliver value</h2>
-
-        <div className="cards">
-          <article className="card">
-            <div className="svc-illu-wrap">
-              <img
-                className="svc-illu"
-                src="/images/services/branding.png"
-                alt="BRANDING"
-              />
-            </div>
-            <h3>BRANDING</h3>
-            <p>Naming, identity and packaging that build trust across channels and markets.</p>
-          </article>
-
-          <article className="card">
-            <div className="svc-illu-wrap">
-              <img
-                className="svc-illu"
-                src="/images/services/all-in-one.png"
-                alt="ALL IN ONE"
-              />
-            </div>
-            <h3>ALL IN ONE</h3>
-            <p>Full-cycle sourcing and logistics solutions in one package.</p>
-          </article>
-
-          <article className="card">
-            <div className="svc-illu-wrap">
-              <img
-                className="svc-illu"
-                src="/images/services/sourcing.png"
-                alt="SOURCING"
-              />
-            </div>
-            <h3>SOURCING</h3>
-            <p>Finding and managing reliable suppliers worldwide.</p>
-          </article>
-
-          <article className="card">
-            <div className="svc-illu-wrap">
-              <img
-                className="svc-illu"
-                src="/images/services/consulting.png"
-                alt="CONSULTING"
-              />
-            </div>
-            <h3>CONSULTING</h3>
-            <p>Expert advice to optimize procurement and supply chain strategies.</p>
-          </article>
-        </div>
-      </section>
-
-      {/* ---------- CONTACT ---------- */}
-      {/* ...код CONTACT без изменений... */}
-    </main>
-  );
-}
+          <div
