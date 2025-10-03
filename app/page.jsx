@@ -303,7 +303,7 @@ export default function Home() {
       <section ref={contactRef} className="section" id="contact">
         <h3>Contact</h3>
 
-        <form className="contact-form" onSubmit={(e) => e.preventDefault())}>
+<form className="contact-form" onSubmit={(e) => e.preventDefault()}>
           <div className="form-row">
             <input name="name" placeholder="Your name" required />
             <input type="email" name="email" placeholder="Email" required />
