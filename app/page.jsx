@@ -22,15 +22,29 @@ export default function Home() {
     }
   }, []);
 
-  // --- АВТО-ПОДМЕНА ЛОГОТИПА ПО ТЕМЕ ---
+  // ---- ЛОГОТИП: авто-подмена по теме + кэш-бастинг ----
   useEffect(() => {
     if (typeof document === "undefined") return;
-    const root = document.documentElement;
+
+    const ASSET_VERSION = "2025-10-03-01"; // поменяй при обновлении логотипов
+    const withVer = (p) => `${p}?v=${ASSET_VERSION}`;
+
+    // где висит класс "dark": на <html> или на <body>
+    const rootEl =
+      document.documentElement.classList.contains("dark") ||
+      !document.body
+        ? document.documentElement
+        : document.body;
 
     const updateLogo = () => {
-      const isDark = root.classList.contains("dark");
+      const isDark =
+        document.documentElement.classList.contains("dark") ||
+        document.body?.classList.contains("dark");
+
       if (logoRef.current) {
-        logoRef.current.src = isDark ? "/logo-light.png" : "/logo-dark.png";
+        logoRef.current.src = isDark
+          ? withVer("/logo-light.png") // белый для тёмной темы
+          : withVer("/logo-dark.png"); // чёрный для светлой темы
         logoRef.current.alt = isDark
           ? "Maison Global Partners (light logo)"
           : "Maison Global Partners";
@@ -40,11 +54,27 @@ export default function Home() {
     // первичная установка
     updateLogo();
 
-    // следим за изменением класса .dark на <html>
-    const mo = new MutationObserver(updateLogo);
-    mo.observe(root, { attributes: true, attributeFilter: ["class"] });
+    // следим за изменением класса на обоих корнях
+    const mo1 = new MutationObserver(updateLogo);
+    const mo2 = new MutationObserver(updateLogo);
+    mo1.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    if (document.body) {
+      mo2.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+    }
 
-    return () => mo.disconnect();
+    // на всякий случай — реакция на смену prefers-color-scheme
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const mediaHandler = () => updateLogo();
+    media.addEventListener?.("change", mediaHandler);
+
+    return () => {
+      mo1.disconnect();
+      mo2.disconnect();
+      media.removeEventListener?.("change", mediaHandler);
+    };
   }, []);
 
   const scrollTo = (ref) => {
@@ -69,7 +99,7 @@ export default function Home() {
           <a className="mini-btn" href="tel:+14388091901" aria-label="Call">
             <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
               <path
-                d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5л-2.3 2.2z"
+                d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.6"
@@ -140,22 +170,16 @@ export default function Home() {
           </div>
         </div>
 
-        {/* центр — логотип (один <img>, подменяет src по теме) */}
+        {/* центр — ЛОГОТИП (один <img>) */}
         <button
           className="brand-mark"
           aria-label="Scroll to top"
           onClick={() => scrollTo(homeRef)}
         >
-          <img
-            ref={logoRef}
-            className="logo"
-            src="/logo-dark.png"
-            alt="Maison Global Partners"
-            style={{ height: 36, width: "auto", display: "block" }}
-          />
+          <img ref={logoRef} className="logo" src="/logo-dark.png" alt="Maison Global Partners" />
         </button>
 
-        {/* справа — бургер (SVG на currentColor) */}
+        {/* справа — бургер */}
         <button
           className="icon-pill"
           onClick={() => setDrawerOpen(true)}
@@ -178,7 +202,11 @@ export default function Home() {
         <>
           <div className="overlay" onClick={() => setDrawerOpen(false)} />
           <aside className="drawer" role="dialog" aria-label="Menu">
-            <button className="drawer-close" onClick={() => setDrawerOpen(false)} aria-label="Close">
+            <button
+              className="drawer-close"
+              onClick={() => setDrawerOpen(false)}
+              aria-label="Close"
+            >
               ×
             </button>
             <ul className="drawer-list">
@@ -189,7 +217,10 @@ export default function Home() {
               <li><button className="nav-item" onClick={() => scrollTo(contactRef)}><span>Contact</span></button></li>
               <li><a className="nav-item" href="/legal"><span>Legal</span></a></li>
               <li className="drawer-fr">
-                <button className="nav-item" onClick={() => { setDrawerOpen(false); switchLang(); }}>
+                <button
+                  className="nav-item"
+                  onClick={() => { setDrawerOpen(false); switchLang(); }}
+                >
                   <span>{isFr ? "English" : "Français"}</span>
                 </button>
               </li>
@@ -303,7 +334,7 @@ export default function Home() {
       <section ref={contactRef} className="section" id="contact">
         <h3>Contact</h3>
 
-<form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+        <form className="contact-form" onSubmit={(e) => { e.preventDefault(); }}>
           <div className="form-row">
             <input name="name" placeholder="Your name" required />
             <input type="email" name="email" placeholder="Email" required />
@@ -317,7 +348,7 @@ export default function Home() {
         <a className="mail" href="tel:+14388091901">
           <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
             <path
-              d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5л-2.3 2.2z"
+              d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
               fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
             />
           </svg>
