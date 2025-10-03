@@ -487,4 +487,15 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 .dark .logo {
   content: url('/logo-light.png');
 }
+/* одинаковые размеры/поведение */
+.brand-mark { display: inline-flex; align-items: center; justify-content: center; }
+.brand-mark .logo { height: 36px; width: auto; display: block; }
+
+/* по умолчанию светлая тема — показываем тёмный логотип */
+.logo-dark { display: block; }
+.logo-light { display: none; }
+
+/* в тёмной теме — наоборот */
+.dark .logo-dark { display: none; }
+.dark .logo-light { display: block; }
 
