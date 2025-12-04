@@ -1,11 +1,19 @@
 /* ========== Base ========== */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+
+:root{
+  --font-display: "Cormorant Garamond", serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+}
+
 body {
   margin: 0;
   background: #fff;
   color: #333;
-  font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
 }
 
 /* ========== Layout (общий) ========== */
@@ -16,18 +24,26 @@ body {
   margin: 0 auto;
   scroll-margin-top: 108px;
 }
+
 h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
+h1, .h1 { font-family: var(--font-display); font-weight: 300; letter-spacing: .5px; line-height: 1.15; }
+h2, .h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: .3px; line-height: 1.2; }
+h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25; }
+
 .lead { color: #555; }
 
 /* ========== Topbar ========== */
 .topbar{
-  position: sticky; top: 0; z-index: 200; /* было 40 — поднимаем, чтобы бургер не перекрывался */
+  position: sticky; top: 0; z-index: 200;
   display: grid; grid-template-columns: 1fr auto 64px; align-items: center;
   height: 88px;
   padding: 10px 12px;
   background: #fff;
+  color: #1a1a1a;
   box-shadow: 0 4px 24px rgba(0,0,0,.06);
 }
+.dark .topbar { color: #ffffff; }
+
 .top-actions{ display:flex; align-items:center; gap:6px; }
 
 .mini-btn{
@@ -44,8 +60,17 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 .ci{ width:18px; height:18px; display:block; color:inherit; }
 
 .brand-mark{ display:flex; justify-content:center; align-items:center; border:0; background:transparent; cursor:pointer; }
-.brand-mark img{ height: 80px; width:auto; display:block; margin-left: -20px; }
+.brand-mark .logo { height: 48px; width:auto; display:block; }
 
+/* Логотипы под тему */
+.logo { content: url('/logo-dark.png'); }
+.dark .logo { content: url('/logo-light.png'); }
+
+/* Иконки в топбаре берут текущий цвет */
+.topbar .ci [stroke] { stroke: currentColor; }
+.topbar .ci [fill]:not([fill="none"]) { fill: currentColor; }
+
+/* Бургер */
 .icon-pill{
   -webkit-tap-highlight-color: transparent;
   width:56px; height:48px; border:0; background:#fff; border-radius:28px;
@@ -59,6 +84,7 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 }
 .ico-burger::before{ top:18px; } .ico-burger::after{ top:26px; }
 
+/* Языковое меню */
 .lang-wrap{ position:relative; }
 .lang-menu{
   position:absolute; top:50px; left:0; background:#fff; border-radius:12px; padding:6px;
@@ -69,9 +95,9 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 .lang-menu a:hover{ background:#f6f6f6; }
 
 /* ========== Drawer ========== */
-.overlay{ position:fixed; inset:0; background:rgba(0,0,0,.22); z-index:290; animation:fadeIn .2s ease; } /* было 49 */
+.overlay{ position:fixed; inset:0; background:rgba(0,0,0,.22); z-index:290; animation:fadeIn .2s ease; }
 .drawer{
-  position:fixed; top:0; right:0; bottom:0; width:78vw; max-width:380px; background:#fff; z-index:300; /* было 50 */
+  position:fixed; top:0; right:0; bottom:0; width:78vw; max-width:380px; background:#fff; z-index:300;
   padding: 18px 16px 24px; border-radius:16px 0 0 16px; box-shadow:-12px 0 30px rgba(0,0,0,.12);
   transform:translateX(100%); animation:slideIn .28s ease forwards;
 }
@@ -99,7 +125,7 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 .neumorphic-btn{
   display:inline-flex; align-items:center; justify-content:center;
   padding:12px 22px; border-radius:50px; background:#fff; color:#555;
-  font-weight:500; border:none; cursor:pointer;
+  font-family: var(--font-sans); font-weight:500; border:none; cursor:pointer;
   box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
   transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
 }
@@ -118,12 +144,12 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 }
 .card h3{ margin:10px 0 6px; }
 .card p{ margin:0; color:#555; }
-.card-img{ width:100%; height:160px; object-fit:contain; display:block; }
+.card-img{ width:100%; display:block; }
 
 /* ========== Contact ========== */
 .contact-form{
   background:#fff; border-radius:16px; padding:12px;
-  box-shadow: 6px 6px 12px #e2e2e2, -6px -6px 12px #ffffff;
+  box-shadow: 6px 6px 12px #e2e2e2, -8px -8px 12px #ffffff;
   margin: 8px 0 18px;
 }
 .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
@@ -163,8 +189,8 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 /* =========================================================
    ABOUT (компактные отступы, стеклянные блоки)
    ========================================================= */
-.about-page .section        { padding: 12px 16px 28px; }
-.section.section-tight      { padding: 12px 16px 24px; }
+.about-page .section { padding: 12px 16px 28px; }
+.section.section-tight { padding: 12px 16px 24px; }
 
 .glass{
   background: rgba(255,255,255,0.62);
@@ -188,19 +214,9 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 }
 
 .founder-wrap { max-width: 860px; margin: 0 auto; }
-.founder-quote{
-  margin: 0;
-  line-height: 1.7;
-  text-align: justify;
-}
-.founder-line{
-  font-style: italic;
-  font-weight: 500;
-  font-size: 16px;
-  margin: 0 0 12px;
-}
+.founder-quote{ margin: 0; line-height: 1.7; text-align: justify; }
+.founder-line{ font-style: italic; font-weight: 500; font-size: 16px; margin: 0 0 12px; }
 
-/* На мобилках — компактнее */
 @media (max-width: 640px){
   .glass{ padding: 18px 20px; border-radius: 16px; }
   .glass-strong{ padding: 22px 24px; border-radius: 18px; }
@@ -232,7 +248,6 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 }
 .sol-card h3{ margin:0; font-size: clamp(16px,3.8vw,18px); }
 .sol-card p{ margin:0; color:#555; }
-
 .sol-ico{
   width:28px; height:28px; display:grid; place-items:center; color:#333;
   border-radius:10px; background:#fff;
@@ -241,267 +256,37 @@ h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
 .sol-ico svg{ width:20px; height:20px; display:block; }
 
 /* =========================================================
-   SERVICES — единый эффект для иллюстраций (рассеивание + glow + пульсация)
+   SERVICES — изображения: показываем целиком, без масок и «мыла»
    ========================================================= */
 .svc-illu-wrap{
   position: relative;
-  border-radius: 18px;
-  overflow: visible;          /* glow выходит за края */
-  isolation: isolate;         /* корректный слой для псевдоэлемента */
-}
-.svc-illu-wrap::before{
-  content:"";
-  position:absolute; inset:-14px;
-  border-radius: 26px;
-  background: radial-gradient(60% 70% at 50% 45%,
-              rgba(120,180,255,.28) 0%,
-              rgba(120,180,255,.18) 38%,
-              rgba(120,180,255,.06) 70%,
-              transparent 100%);
-  filter: blur(14px);
-  opacity:.9;
-  z-index:-1;
-  transition: opacity .35s ease, filter .35s ease, transform .35s ease;
-}
-.svc-illu{
-  display:block;
-  width:100%;
-  border-radius: 18px;
-  box-shadow: 0 1px 0 rgba(255,255,255,.65) inset;
-  filter: saturate(108%) contrast(104%);
-  transition: transform .35s ease, filter .35s ease, box-shadow .35s ease;
-  -webkit-mask-image: radial-gradient(120% 120% at 50% 50%,
-                      #000 62%, rgba(0,0,0,.85) 75%,
-                      rgba(0,0,0,.45) 88%, transparent 100%);
-          mask-image: radial-gradient(120% 120% at 50% 50%,
-                      #000 62%, rgba(0,0,0,.85) 75%,
-                      rgba(0,0,0,.45) 88%, transparent 100%);
-}
-.svc-illu-wrap:hover .svc-illu,
-.svc-illu-wrap:focus-within .svc-illu{
-  transform: translateY(-2px) scale(1.015);
-  filter: saturate(112%) contrast(106%);
-}
-.svc-illu-wrap:hover::before,
-.svc-illu-wrap:focus-within::before{
-  filter: blur(18px);
-  opacity: 1;
-  transform: translateY(-2px) scale(1.02);
-}
-/* Пульсация — достаточно добавить класс .is-pulsing на <img> */
-.is-pulsing { animation: svcGlow 4.5s ease-in-out infinite; }
-@keyframes svcGlow{
-  0%,100% { filter: saturate(108%) contrast(104%); }
-  50%     { filter: saturate(114%) contrast(108%); }
-}
-/* Доп. вариант — сильнее «распылить» края для контрастных иллюстраций */
-.svc-illu--softer{
-  -webkit-mask-image: radial-gradient(130% 130% at 50% 50%,
-                      #000 56%, rgba(0,0,0,.8) 72%,
-                      rgba(0,0,0,.4) 86%, transparent 100%);
-          mask-image: radial-gradient(130% 130% at 50% 50%,
-                      #000 56%, rgba(0,0,0,.8) 72%,
-                      rgba(0,0,0,.4) 86%, transparent 100%);
-}
-/* НОВОЕ: делаем шапку поверх всего, чтобы бургер всегда кликавый */
-.topbar { z-index: 100; }
-
-/* НОВОЕ: эллиптическая тень над заголовком (как на референсе) */
-.hero-shadow{
-  width: min(520px, 84vw);
-  height: 28px;
-  margin: 18px auto 10px;
-  border-radius: 999px;
-  background: radial-gradient(ellipse at center,
-    rgba(0,0,0,.22) 0%,
-    rgba(0,0,0,.16) 35%,
-    rgba(0,0,0,.08) 65%,
-    rgba(0,0,0,0) 100%);
-  filter: blur(6px);
-  opacity: .85;
-  pointer-events: none; /* не блокируем клики по хедеру */
-}
-
-/* НОВОЕ: эффект «рассеивание + пульсация» для иллюстраций */
-.fx-fade-pulse{
-  border-radius: 18px;
   width: 100%;
-  height: 160px;
-  object-fit: cover;              /* можно заменить на contain, если нужно */
-  /* мягкое «стирание» краёв */
-  -webkit-mask-image: radial-gradient(120% 130% at 50% 45%, #000 62%, rgba(0,0,0,0) 100%);
-  mask-image: radial-gradient(120% 130% at 50% 45%, #000 62%, rgba(0,0,0,0) 100%);
-  /* мягкое свечение */
-  filter: drop-shadow(0 8px 22px rgba(120,180,255,0.28));
-  animation: pulseAura 3.8s ease-in-out infinite;
-}
-@keyframes pulseAura{
-  0%,100% { filter: drop-shadow(0 8px 20px rgba(120,180,255,.28)); }
-  50%     { filter: drop-shadow(0 10px 32px rgba(120,180,255,.48)); }
-}
-/* ===== FIX: иллюстрации услуг без растяжения ===== */
-.svc-illu-wrap{
-  width: 100%;
-  aspect-ratio: 16 / 9;     /* держим пропорции 1920×1080 */
-  position: relative;
-  overflow: visible;
-}
-
-/* единые правила для всех вариантов изображений в карточках */
-.card-img,
-.svc-illu,
-.fx-fade-pulse {
-  width: 100% !important;
-  height: auto !important;   /* убираем фикс 160px */
-  aspect-ratio: 16 / 9;
-  display: block;
-  object-fit: cover;         /* заполняем блок без искажений */
-}
-
-/* сохраняем твои эффекты/маски, но без влияния на размер */
-.svc-illu {
-  box-shadow: 0 1px 0 rgba(255,255,255,.65) inset;
-  filter: saturate(108%) contrast(104%);
-  transition: transform .35s ease, filter .35s ease, box-shadow .35s ease;
-  -webkit-mask-image: radial-gradient(120% 120% at 50% 50%,
-                      #000 62%, rgba(0,0,0,.85) 75%,
-                      rgba(0,0,0,.45) 88%, transparent 100%);
-          mask-image: radial-gradient(120% 120% at 50% 50%,
-                      #000 62%, rgba(0,0,0,.85) 75%,
-                      rgba(0,0,0,.45) 88%, transparent 100%);
-}
-
-/* если нужна «мягкая» версия */
-.svc-illu--softer{
-  -webkit-mask-image: radial-gradient(130% 130% at 50% 50%,
-                      #000 56%, rgba(0,0,0,.8) 72%,
-                      rgba(0,0,0,.4) 86%, transparent 100%);
-          mask-image: radial-gradient(130% 130% at 50% 50%,
-                      #000 56%, rgba(0,0,0,.8) 72%,
-                      rgba(0,0,0,.4) 86%, transparent 100%);
-}
-
-/* при наведении — как было */
-.svc-illu-wrap:hover .svc-illu,
-.svc-illu-wrap:focus-within .svc-illu{
-  transform: translateY(-2px) scale(1.015);
-  filter: saturate(112%) contrast(106%);
-}
-
-/* если где-то остались «старые» миниатюры — тоже не тянем */
-.cards .card-img { object-fit: cover !important; }
-/* ===== КАРТИНКИ УСЛУГ — без обрезки и без мыла ===== */
-.svc-illu,
-.card-img,
-.fx-fade-pulse {
-  width: 100% !important;
-  height: auto !important;         /* сохраняем пропорции */
-  object-fit: contain !important;  /* показываем всю картинку целиком */
-  background: #f5f6f7;             /* светлый фон по краям */
-  display: block;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-}
-
-/* отключаем старые фильтры/маски, которые размывают */
-.svc-illu,
-.fx-fade-pulse {
-  filter: none !important;
-  -webkit-mask-image: none !important;
-  mask-image: none !important;
-  box-shadow: none !important;
-  transition: none !important;
-}
-/* ===== УСЛУГИ: показываем картинку целиком, без обрезки и размытия ===== */
-
-/* 1) Контейнер не навязывает высоту/пропорции: */
-.svc-illu-wrap {
-  position: relative;
-  width: 100%;
-  height: auto !important;     /* убираем фикс высоты */
+  height: auto !important;
   aspect-ratio: auto !important;
-  overflow: visible !important; /* чтобы точно не кромсало края */
+  overflow: visible !important;
   border-radius: 18px;
 }
+.svc-illu-wrap::before{ display: none !important; }
 
-/* 2) Гасим «дымку» вокруг (она мылит): */
-.svc-illu-wrap::before { display: none !important; }
-
-/* 3) Сами изображения — без подрезки: */
-.svc-illu,
 .card-img,
+.svc-illu,
 .fx-fade-pulse {
   width: 100% !important;
-  height: auto !important;           /* сохраняем пропорции оригинала */
-  object-fit: contain !important;    /* НИЧЕГО не режем */
+  height: auto !important;
+  object-fit: contain !important;     /* показываем всю картинку целиком */
+  background: #f5f6f7;                /* аккуратный фон по краям */
   display: block;
-  background: #f5f6f7;               /* аккуратные поля слева/справа при других пропорциях */
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
-}
-
-/* 4) Убираем любые маски/фильтры, чтобы вернуть резкость: */
-.svc-illu,
-.fx-fade-pulse {
+  filter: none !important;
   -webkit-mask-image: none !important;
   mask-image: none !important;
-  filter: none !important;
   box-shadow: none !important;
   transition: none !important;
 }
 
-/* 5) На всякий случай гасим старые высоты в карточках: */
-.card-img { height: auto !important; }
-/* ===== Фикс для картинок услуг ===== */
-.svc-illu,
-.card-img,
-.fx-fade-pulse {
-  width: 100% !important;
-  height: auto !important;       /* сохраняем пропорции */
-  object-fit: contain !important;
-  background: #fff;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  filter: none !important;
-  -webkit-mask-image: none !important;
-  mask-image: none !important;
-}
-/* Цвет текста/иконок в топбаре завязан на тему */
-.topbar { color: #1a1a1a; }       /* светлая */
-.dark .topbar { color: #ffffff; }  /* тёмная */
-
-/* Логотип — PNG, подменяем файл по теме */
-.logo { content: url('/logo-dark.png'); }   /* тёмный логотип для светлой темы */
-.dark .logo { content: url('/logo-light.png'); } /* светлый логотип для тёмной темы */
-
-/* У SVG-иконок внутри топбара используем текущий цвет */
-.topbar .ci [stroke] { stroke: currentColor; }
-.topbar .ci [fill]:not([fill="none"]) { fill: currentColor; }
-
-/* На всякий случай, если где-то бургер рендерится как <img> */
-.topbar img.icon { filter: none; }
-.dark .topbar img.icon { filter: invert(1) brightness(1.2); }
-.logo {
-  content: url('/logo-dark.png');
-}
-.dark .logo {
-  content: url('/logo-light.png');
-}
-/* одинаковые размеры/поведение */
-.brand-mark { display: inline-flex; align-items: center; justify-content: center; }
-.brand-mark .logo { height: 36px; width: auto; display: block; }
-
-/* по умолчанию светлая тема — показываем тёмный логотип */
+/* ========== Footer helpers (логотипы для тем) ========== */
 .logo-dark { display: block; }
 .logo-light { display: none; }
-
-/* в тёмной теме — наоборот */
 .dark .logo-dark { display: none; }
 .dark .logo-light { display: block; }
-/* Размер логотипа тут, а не инлайном */
-.logo { height: 48px; width: auto; display: block; }
-
-/* Контраст иконок и бургера по теме — уже есть через currentColor
-   Убедись, что .topbar имеет color, а .dark .topbar переопределяет его */
-.topbar { color: #1a1a1a; }
-.dark .topbar { color: #ffffff; }
