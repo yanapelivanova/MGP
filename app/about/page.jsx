@@ -1,3 +1,4 @@
+// app/about/page.jsx
 "use client";
 
 export default function AboutPage() {
@@ -5,7 +6,7 @@ export default function AboutPage() {
     <main className="page about-page">
       {/* ---------- ABOUT US ---------- */}
       <section className="section section-tight">
-        <div className="card" style={{ maxWidth: 900, margin: "0 auto", padding: "28px 32px" }}>
+        <div className="glass">
           <h2>About Us</h2>
           <p>
             <strong>Maison Global Partners</strong> is a global agency
@@ -19,7 +20,7 @@ export default function AboutPage() {
 
       {/* ---------- WHAT WE BELIEVE ---------- */}
       <section className="section section-tight">
-        <div className="card" style={{ maxWidth: 900, margin: "0 auto", padding: "28px 32px" }}>
+        <div className="glass">
           <h2>What we believe</h2>
           <p>
             Our approach combines global expertise with a refined sense of detail.
@@ -32,24 +33,12 @@ export default function AboutPage() {
       </section>
 
       {/* ---------- MESSAGE FROM THE FOUNDER ---------- */}
-      <section className="section section-tight" style={{ marginBottom: 16 }}>
-        <div
-          className="glass-block"
-          style={{
-            maxWidth: 860,
-            margin: "0 auto",
-            padding: "32px 36px",
-            borderRadius: 20,
-            background: "rgba(255,255,255,0.38)",
-            boxShadow: "0 8px 24px rgba(0,0,0,0.10)",
-            backdropFilter: "blur(14px)",
-            WebkitBackdropFilter: "blur(14px)",
-          }}
-        >
-          <h2 style={{ marginBottom: 14 }}>Message from the Founder</h2>
+      <section className="section section-tight">
+        <div className="glass-strong founder-wrap">
+          <h2>Message from the Founder</h2>
 
           <blockquote className="founder-quote">
-            <p style={{ fontStyle: "italic", fontWeight: 500, fontSize: 16, marginBottom: 14 }}>
+            <p className="founder-line">
               “Guiding your vision worldwide, with strength and grace.”
             </p>
             <p>
