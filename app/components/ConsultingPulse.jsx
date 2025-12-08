@@ -1,19 +1,33 @@
+// components/ConsultingPulse.jsx
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function ConsultingPulse() {
   const speed = 3.2;
   const accentHex = "#D1D5DB";
 
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduced(!!mq.matches);
+    update();
+    mq.addEventListener?.("change", update);
+    return () => mq.removeEventListener?.("change", update);
+  }, []);
+
   const vw = 1200;
   const vh = 520;
-  const vectorPath = "M 60 410 C 300 360, 520 300, 720 250 C 900 205, 1040 170, 1140 130";
+  const vectorPath =
+    "M 60 410 C 300 360, 520 300, 720 250 C 900 205, 1040 170, 1140 130";
   const cols = [140, 280, 420, 560, 700, 840, 980, 1120];
   const rows = [420, 360, 300, 240, 200, 170];
   const delayForX = (x) => (x / vw) * speed;
 
   return (
     <section className="relative w-full aspect-[28/12] overflow-hidden rounded-3xl bg-gradient-to-b from-zinc-50 to-zinc-100 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)]">
+      {/* лёгкая зернистость */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
@@ -22,7 +36,13 @@ export default function ConsultingPulse() {
         }}
       />
 
-      <svg viewBox={`0 0 ${vw} ${vh}`} className="absolute inset-0 h-full w-full">
+      {/* Декоративный SVG — скрыт от скринридеров */}
+      <svg
+        viewBox={`0 0 ${vw} ${vh}`}
+        className="absolute inset-0 h-full w-full"
+        aria-hidden="true"
+        focusable="false"
+      >
         <defs>
           <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b" />
@@ -45,60 +65,171 @@ export default function ConsultingPulse() {
           </marker>
         </defs>
 
+        {/* сетка */}
         {cols.map((x, i) => (
-          <line key={`vc-${i}`} x1={x} y1={120} x2={x} y2={440} stroke="url(#gridGrad)" strokeWidth={1.2} strokeOpacity={0.55} />
+          <line
+            key={`vc-${i}`}
+            x1={x}
+            y1={120}
+            x2={x}
+            y2={440}
+            stroke="url(#gridGrad)"
+            strokeWidth={1.2}
+            strokeOpacity={0.55}
+          />
         ))}
         {rows.map((y, i) => (
-          <line key={`hr-${i}`} x1={80} y1={y} x2={1140} y2={y} stroke="url(#gridGrad)" strokeWidth={1.2} strokeOpacity={0.55} />
+          <line
+            key={`hr-${i}`}
+            x1={80}
+            y1={y}
+            x2={1140}
+            y2={y}
+            stroke="url(#gridGrad)"
+            strokeWidth={1.2}
+            strokeOpacity={0.55}
+          />
         ))}
 
-        <path d={vectorPath} fill="none" stroke="url(#lineGrad)" strokeWidth={3} strokeLinecap="round" />
-        <path d={vectorPath} fill="none" stroke={accentHex} strokeOpacity={0.18} strokeWidth={10} filter="url(#softGlow)" />
+        {/* основная кривая */}
+        <path
+          d={vectorPath}
+          fill="none"
+          stroke="url(#lineGrad)"
+          strokeWidth={3}
+          strokeLinecap="round"
+        />
         <path
           d={vectorPath}
           fill="none"
           stroke={accentHex}
-          strokeOpacity={0.55}
-          strokeWidth={6}
-          strokeLinecap="round"
-          strokeDasharray="42 260"
-        >
-          <animate attributeName="stroke-dashoffset" from="0" to="-300" dur={`${speed}s`} repeatCount="indefinite" />
-        </path>
+          strokeOpacity={0.18}
+          strokeWidth={10}
+          filter="url(#softGlow)"
+        />
 
-        <path d={vectorPath} fill="none" stroke="#A1A1AA" strokeWidth={0} markerEnd="url(#arrowHead)" />
+        {/* бегущий штрих — отключаем при reduced motion */}
+        {!reduced ? (
+          <path
+            d={vectorPath}
+            fill="none"
+            stroke={accentHex}
+            strokeOpacity={0.55}
+            strokeWidth={6}
+            strokeLinecap="round"
+            strokeDasharray="42 260"
+          >
+            <animate
+              attributeName="stroke-dashoffset"
+              from="0"
+              to="-300"
+              dur={`${speed}s`}
+              repeatCount="indefinite"
+            />
+          </path>
+        ) : (
+          <path
+            d={vectorPath}
+            fill="none"
+            stroke={accentHex}
+            strokeOpacity={0.35}
+            strokeWidth={6}
+            strokeLinecap="round"
+            strokeDasharray="42 260"
+          />
+        )}
+
+        {/* стрелка-направление */}
+        <path d={vectorPath} fill="none" stroke="#A1A1AA" strokeWidth="0" markerEnd="url(#arrowHead)" />
+
         <path id="pulsePath" d={vectorPath} fill="none" stroke="transparent" />
 
+        {/* движущаяся точка — отключаем анимацию при reduced motion */}
         <g filter="url(#softGlow)">
           <circle r="8.5" fill={accentHex} cx="0" cy="0">
-            <animateMotion dur={`${speed}s`} repeatCount="indefinite" rotate="auto">
-              <mpath xlinkHref="#pulsePath" />
-            </animateMotion>
+            {!reduced && (
+              <animateMotion dur={`${speed}s`} repeatCount="indefinite" rotate="auto">
+                <mpath xlinkHref="#pulsePath" />
+              </animateMotion>
+            )}
           </circle>
         </g>
 
+        {/* вертикальные импульсы */}
         {cols.map((x, i) => (
           <g key={`vp-${i}`}>
-            <circle r="5" fill={accentHex} cx={x} cy={440} opacity={0.0} filter="url(#softGlow)">
-              <animate attributeName="opacity" values="0;1;0" dur={`${speed}s`} begin={`${delayForX(x)}s`} repeatCount="indefinite" />
-              <animate attributeName="cy" from="440" to="140" dur={`${speed * 0.6}s`} begin={`${delayForX(x)}s`} repeatCount="indefinite" />
+            <circle
+              r="5"
+              fill={accentHex}
+              cx={x}
+              cy={reduced ? 290 : 440}
+              opacity={reduced ? 0.28 : 0.0}
+              filter="url(#softGlow)"
+            >
+              {!reduced && (
+                <>
+                  <animate
+                    attributeName="opacity"
+                    values="0;1;0"
+                    dur={`${speed}s`}
+                    begin={`${delayForX(x)}s`}
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="cy"
+                    from="440"
+                    to="140"
+                    dur={`${speed * 0.6}s`}
+                    begin={`${delayForX(x)}s`}
+                    repeatCount="indefinite"
+                  />
+                </>
+              )}
             </circle>
           </g>
         ))}
 
+        {/* горизонтальные импульсы */}
         {rows.map((y, i) => (
           <g key={`hp-${i}`}>
-            <circle r="4.5" fill={accentHex} cx={80} cy={y} opacity={0.0} filter="url(#softGlow)">
-              <animate attributeName="opacity" values="0;1;0" dur={`${speed}s`} begin={`${(y / vh) * (speed * 0.5)}s`} repeatCount="indefinite" />
-              <animate attributeName="cx" from="80" to="1140" dur={`${speed * 0.75}s`} begin={`${(y / vh) * (speed * 0.5)}s`} repeatCount="indefinite" />
+            <circle
+              r="4.5"
+              fill={accentHex}
+              cx={reduced ? 610 : 80}
+              cy={y}
+              opacity={reduced ? 0.24 : 0.0}
+              filter="url(#softGlow)"
+            >
+              {!reduced && (
+                <>
+                  <animate
+                    attributeName="opacity"
+                    values="0;1;0"
+                    dur={`${speed}s`}
+                    begin={`${(y / vh) * (speed * 0.5)}s`}
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="cx"
+                    from="80"
+                    to="1140"
+                    dur={`${speed * 0.75}s`}
+                    begin={`${(y / vh) * (speed * 0.5)}s`}
+                    repeatCount="indefinite"
+                  />
+                </>
+              )}
             </circle>
           </g>
         ))}
       </svg>
 
+      {/* бейдж с подписью — явно Inter */}
       <div className="absolute inset-x-0 bottom-6 flex w-full justify-center">
         <div className="px-10 sm:px-12 py-3 sm:py-3.5 rounded-full bg-white/35 text-zinc-800 backdrop-blur-xl border border-white/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_8px_30px_rgba(0,0,0,0.12)]">
-          <span className="tracking-[0.18em] font-semibold text-lg sm:text-2xl">CONSULTING</span>
+          <span className="font-sans tracking-[0.18em] font-semibold text-lg sm:text-2xl">
+            CONSULTING
+          </span>
         </div>
       </div>
     </section>
