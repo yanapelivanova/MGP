@@ -1,7 +1,7 @@
 // app/contact/page.jsx
 "use client";
 
-import GlassCard from "../components/GlassCard";
+import GlassCard from "../../components/GlassCard";
 
 export default function ContactPage() {
   return (
