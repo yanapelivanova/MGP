@@ -14,3 +14,7 @@ module.exports = {
   },
   plugins: [],
 };
+content: [
+  "./app/**/*.{js,jsx,ts,tsx,mjs}",
+  "./components/**/*.{js,jsx,ts,tsx,mjs}",
+],
