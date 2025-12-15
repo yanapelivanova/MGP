@@ -305,31 +305,3 @@ html, body {
 @media (max-width: 640px) {
   :root { --flow-core: #fdfefe; }
 }
-
-/* ===== Flow background layer ===== */
-.flow-bg{
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  /* Фоновая «компенсация» — ультра деликатная,
-     помогает свету проявиться на чисто белом */
-  background:
-    radial-gradient(
-      46% 32% at 50% 28%,
-      rgba(235,240,255,0.22) 0%,
-      rgba(255,255,255,0.96) 70%
-    );
-  /* На высоких DPI можно каплю усилить */
-  image-rendering: -webkit-optimize-contrast;
-}
-
-.flow-svg{
-  width: 100vw;
-  height: 100vh;
-  display: block;
-}
-
-/* Гарантируем слои поверх фона */
-.page { position: relative; z-index: 1; }
-.topbar { position: sticky; z-index: 200; }
