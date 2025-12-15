@@ -22,7 +22,7 @@ body {
   padding: 16px 16px 72px;
   max-width: 1100px;
   margin: 0 auto;
-  scroll-margin-top: 108px;
+  scroll-margin-top: 156px; /* CHANGED: было 108px */
 }
 
 h1, h2, h3 { margin: 0 0 16px; color: #222; line-height: 1.2; }
@@ -36,7 +36,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 .topbar{
   position: sticky; top: 0; z-index: 200;
   display: grid; grid-template-columns: 1fr auto 64px; align-items: center;
-  height: 88px;
+  height: 136px; /* CHANGED: было 88px */
   padding: 10px 12px;
   background: #fff;
   color: #1a1a1a;
@@ -60,7 +60,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 .ci{ width:18px; height:18px; display:block; color:inherit; }
 
 .brand-mark{ display:flex; justify-content:center; align-items:center; border:0; background:transparent; cursor:pointer; }
-.brand-mark .logo { height: 48px; width:auto; display:block; }
+.brand-mark .logo { height: 96px; width:auto; display:block; } /* CHANGED: было 48px */
 
 /* Логотипы под тему */
 .logo { content: url('/logo-dark.png'); }
