@@ -3,98 +3,113 @@
 import { usePathname } from "next/navigation";
 
 /**
- * Full-bleed glowing flows with moving "thickening" pulses.
- * Показываем только на /, если scope="home".
+ * Glowing flow lines on white background.
+ * - Светятся за счёт plus-lighter + двух bloom-слоёв.
+ * - Импульсы это утолщение самой линии (не точки).
+ * - Тянется на всю ширину/высоту.
  */
 export default function FlowBackground({ scope = "home" }) {
   const pathname = usePathname();
   const show = scope === "home" ? pathname === "/" : true;
   if (!show) return null;
 
-  // Растягиваем на весь вьюпорт
-  const vw = 1000, vh = 600;
+  // Холст: произвольный, тянем preserveAspectRatio="none"
+  const vw = 1440, vh = 900;
 
-  // Формы дуг (оставила как у нас, хаотичные и пересекающиеся)
+  // Хаотичные дуги (оставляем твой характер: разные направления, частично пересекаются)
   const arcs = [
-    { id: "arc1", d: "M 0 420 C 220 360, 480 300, 1000 260" },
-    { id: "arc2", d: "M 40 120 C 260 240, 520 100, 960 200" },
-    { id: "arc3", d: "M 0 520 C 320 480, 620 560, 1000 420" },
-    { id: "arc4", d: "M 80 260 C 340 160, 660 360, 980 140" },
+    "M 0 620 C 260 520, 520 700, 1440 560",
+    "M 0 320 C 340 220, 880 420, 1440 260",
+    "M 0 180 C 380 340, 780 120, 1440 300",
+    "M 0 760 C 420 700, 920 820, 1440 660",
   ];
 
-  // Параметры импульсов: короткие «утолщения», бегут по линии
-  const pulseLen = 80;   // длина утолщения
-  const gapLen   = 520;  // расстояние между утолщениями
-  const baseDur  = 11;   // скорость (сек)
-  const delays   = [0, 0.6, 1.2]; // несколько «дорожек» импульсов на каждой дуге
+  // Импульс (утолщение)
+  const pulseLen = 100;   // длина «вспухания»
+  const gapLen   = 700;   // расстояние между вспуханиями
+  const baseDur  = 12;    // скорость
+  const lanes    = [0, 0.8]; // 2 дорожки на каждой линии (смещение старта)
 
   return (
     <div className="flow-bg" aria-hidden>
+      {/* Едва-заметная подложка для контраста (иначе чистый белый «съедает» свечение) */}
+      <div className="flow-haze" />
+
       <svg
         className="flow-svg"
         viewBox={`0 0 ${vw} ${vh}`}
         preserveAspectRatio="none"
       >
         <defs>
-          {/* Мягкий широкий ореол — заметен на светлой теме */}
-          <filter id="flowGlowStrong" x="-40%" y="-40%" width="180%" height="180%">
-            <feGaussianBlur stdDeviation="14" result="b" />
+          {/* Широкий bloom (внешнее свечение) */}
+          <filter id="bloomWide" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="18" result="g1" />
             <feMerge>
-              <feMergeNode in="b" />
+              <feMergeNode in="g1" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
 
-          {/* Дополнительное лёгкое свечение для «ядра» */}
-          <filter id="flowGlowSoft" x="-25%" y="-25%" width="150%" height="150%">
-            <feGaussianBlur stdDeviation="6" result="s" />
+          {/* Средний bloom (внутренний ореол) */}
+          <filter id="bloomMid" x="-25%" y="-25%" width="150%" height="150%">
+            <feGaussianBlur stdDeviation="8" result="g2" />
             <feMerge>
-              <feMergeNode in="s" />
+              <feMergeNode in="g2" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
 
-          {/* Ядро линии: чуть серовато-белое, чтобы читалось на белом фоне */}
-          <linearGradient id="flowCore" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%"   stopColor="#eef2f7" />
+          {/* Очень лёгкая голубовато-белая «жила», чтобы читалось на белом */}
+          <linearGradient id="core" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stopColor="#f8fbff" />
             <stop offset="50%"  stopColor="#ffffff" />
-            <stop offset="100%" stopColor="#eef2f7" />
+            <stop offset="100%" stopColor="#f0f6ff" />
           </linearGradient>
         </defs>
 
-        {arcs.map(({ id, d }, i) => (
-          <g key={id} style={{ mixBlendMode: "screen" }}>
-            {/* 1) ШИРОКИЙ РАЗМЫТЫЙ ОРЕОЛ */}
+        {arcs.map((d, i) => (
+          // Критично: аддитивное смешивание — реально «загорается» на белом
+          <g key={i} style={{ mixBlendMode: "plus-lighter" }}>
+            {/* 1) Широкая размытая подложка (видно «свечение» на белом) */}
             <path
               d={d}
-              filter="url(#flowGlowStrong)"
+              filter="url(#bloomWide)"
               stroke="#ffffff"
-              strokeOpacity="0.65"
+              strokeOpacity="0.85"
               strokeWidth="26"
               strokeLinecap="round"
               fill="none"
             />
 
-            {/* 2) ТЕЛО ЛИНИИ (тонкое «ядро») */}
+            {/* 2) Средний ореол */}
             <path
               d={d}
-              filter="url(#flowGlowSoft)"
-              stroke="url(#flowCore)"
-              strokeWidth="2.6"
+              filter="url(#bloomMid)"
+              stroke="#eaf2ff"
+              strokeOpacity="0.75"
+              strokeWidth="12"
               strokeLinecap="round"
-              strokeLinejoin="round"
               fill="none"
             />
 
-            {/* 3) ДВИЖУЩЕЕСЯ УТОЛЩЕНИЕ (сам импульс) — выглядит как "всплеск" света в самой линии */}
-            {delays.map((delay, k) => (
-              <g key={`${id}-pulse-${k}`} filter="url(#flowGlowStrong)">
-                {/* Яркое «ядро» утолщения */}
+            {/* 3) Тонкая «жила» в центре */}
+            <path
+              d={d}
+              stroke="url(#core)"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              fill="none"
+            />
+
+            {/* 4) Импульс = утолщение той же линии (не точка!) */}
+            {lanes.map((delay, k) => (
+              <g key={k} style={{ mixBlendMode: "plus-lighter" }}>
+                {/* Ядро вспухания */}
                 <path
                   d={d}
                   stroke="#ffffff"
                   strokeOpacity="0.95"
-                  strokeWidth="8"
+                  strokeWidth="10"
                   strokeLinecap="round"
                   fill="none"
                   strokeDasharray={`${pulseLen} ${gapLen}`}
@@ -103,18 +118,19 @@ export default function FlowBackground({ scope = "home" }) {
                     attributeName="stroke-dashoffset"
                     from="0"
                     to={`-${pulseLen + gapLen}`}
-                    dur={`${baseDur + i * 1.1}s`}
+                    dur={`${baseDur + i * 0.9}s`}
                     begin={`${delay}s`}
                     repeatCount="indefinite"
                   />
                 </path>
 
-                {/* Более широкий мягкий ореол того же утолщения */}
+                {/* Широкий ореол того же вспухания (даёт «свет» вокруг, без «точки») */}
                 <path
                   d={d}
+                  filter="url(#bloomWide)"
                   stroke="#ffffff"
                   strokeOpacity="0.55"
-                  strokeWidth="22"
+                  strokeWidth="26"
                   strokeLinecap="round"
                   fill="none"
                   strokeDasharray={`${pulseLen} ${gapLen}`}
@@ -123,16 +139,13 @@ export default function FlowBackground({ scope = "home" }) {
                     attributeName="stroke-dashoffset"
                     from="0"
                     to={`-${pulseLen + gapLen}`}
-                    dur={`${baseDur + i * 1.1}s`}
+                    dur={`${baseDur + i * 0.9}s`}
                     begin={`${delay}s`}
                     repeatCount="indefinite"
                   />
                 </path>
               </g>
             ))}
-
-            {/* скрытая референс-кривая (на случай mpath в будущем) */}
-            <path id={id} d={d} stroke="none" fill="none" />
           </g>
         ))}
       </svg>
