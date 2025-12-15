@@ -11,7 +11,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         {/* временно везде, чтобы убедиться, что дуги есть */}
-        <FlowBackground scope="all" />
 
         {children}
 
