@@ -293,11 +293,11 @@ html, body {
   z-index: 0;
   pointer-events: none;
 
-  /* Make it clearly visible on LIGHT theme */
-  opacity: 0.70;                 /* ↑ was ~0.55 */
+  /* Светлая тема — заметнее, но без грязи */
+  opacity: 0.78;
 }
 
-.dark .flow-bg { opacity: 0.32; } /* gentler on dark theme */
+.dark .flow-bg{ opacity: 0.34; }   /* деликатнее в тёмной теме */
 
 .flow-svg{
   width: 100%;
@@ -305,25 +305,25 @@ html, body {
   display: block;
 }
 
-/* Soft fade to bottom so it doesn't stack under footer */
+/* Плавное затухание к низу, чтобы не спорило с футером */
 .flow-bg{
   -webkit-mask-image: linear-gradient(to bottom,
     rgba(0,0,0,1) 0%,
-    rgba(0,0,0,1) 72%,
+    rgba(0,0,0,1) 75%,
     rgba(0,0,0,0) 100%
   );
           mask-image: linear-gradient(to bottom,
     rgba(0,0,0,1) 0%,
-    rgba(0,0,0,1) 72%,
+    rgba(0,0,0,1) 75%,
     rgba(0,0,0,0) 100%
   );
 }
 
-/* Ensure content stays above */
+/* Контент поверх */
 .page { position: relative; z-index: 1; }
 .topbar { position: sticky; z-index: 200; }
 
-/* Mobile: keep visible but slightly softer */
+/* Мобайл — чуть мягче, но всё ещё заметно */
 @media (max-width: 640px){
-  .flow-bg { opacity: 0.58; }
+  .flow-bg { opacity: 0.66; }
 }
