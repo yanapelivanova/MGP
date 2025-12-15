@@ -286,22 +286,3 @@ html, body {
   margin-bottom: -6px;
   pointer-events: none;
 }
-/* ===== Flow background variables ===== */
-:root{
-  /* Цвет «света» почти белый. Можно слегка «холодить» на мобайле. */
-  --flow-core: #ffffff;
-
-  /* Сила общего ореола (на белом нужна маленькая!) */
-  --flow-halo-opacity: 0.22;
-}
-
-/* Тёмная тема — ореол можно сильнее */
-.dark {
-  --flow-halo-opacity: 0.35;
-}
-
-/* Небольшая адаптация для мобильных — каплю холодного тона,
-   чтобы лучше читалось на OLED с True Tone */
-@media (max-width: 640px) {
-  :root { --flow-core: #fdfefe; }
-}
