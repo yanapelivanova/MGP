@@ -1,7 +1,7 @@
 // app/legal/page.jsx
 "use client";
 
-import GlassCard from "../../components/GlassCard";
+import GlassCard from "../components/GlassCard";
 
 export default function LegalPage() {
   return (
