@@ -144,7 +144,6 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 .card h3{ margin:10px 0 6px; }
 .card p{ margin:0; color:#555; }
-.card-img{ width:100%; display:block; }
 
 /* ========== Contact ========== */
 .contact-form{
@@ -255,41 +254,12 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 .sol-ico svg{ width:20px; height:20px; display:block; }
 
-/* =========================================================
-   SERVICES — изображения: показываем целиком, без масок и «мыла»
-   ========================================================= */
-.svc-illu-wrap{
-  position: relative;
-  width: 100%;
-  height: auto !important;
-  aspect-ratio: auto !important;
-  overflow: visible !important;
-  border-radius: 18px;
-}
-.svc-illu-wrap::before{ display: none !important; }
-
-.card-img,
-.svc-illu,
-.fx-fade-pulse {
-  width: 100% !important;
-  height: auto !important;
-  object-fit: contain !important;     /* показываем всю картинку целиком */
-  background: #f5f6f7;                /* аккуратный фон по краям */
-  display: block;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  filter: none !important;
-  -webkit-mask-image: none !important;
-  mask-image: none !important;
-  box-shadow: none !important;
-  transition: none !important;
-}
-
 /* ========== Footer helpers (логотипы для тем) ========== */
 .logo-dark { display: block; }
 .logo-light { display: none; }
 .dark .logo-dark { display: none; }
 .dark .logo-light { display: block; }
+
 /* =========================================================
    POLISH: font smoothing + focus visibility
    ========================================================= */
@@ -302,40 +272,17 @@ html, body {
   box-shadow:
     0 0 0 3px rgba(255,255,255,0.9),
     0 0 0 6px rgba(0,0,0,0.08),
-    8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff; /* сохраняем неоморфный стиль */
+    8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
 }
 
 /* =========================================================
-   HERO SHADOW (wrap)
+   HERO SHADOW (wrap) — опционально
    ========================================================= */
 .hero-shadow-wrap {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 8px;
-  margin-bottom: -6px; /* лёгкий «подвес» тени */
-  pointer-events: none; /* клики проходят сквозь */
-}
-
-/* =========================================================
-   SERVICES — SOFT GLOW (для компонента SvcImage)
-   ========================================================= */
-.svc-soft-wrap { position: relative; display: block; }
-.svc-soft-glow {
-  content: "";
-  position: absolute;
-  inset: -12px;                 /* воздух вокруг изображения */
-  border-radius: 20px;
-  background: radial-gradient(
-    60% 60% at center,
-    rgba(255,255,255,0.65) 0%,
-    rgba(255,255,255,0.25) 40%,
-    rgba(255,255,255,0) 100%
-  );
-  filter: blur(18px);
-  z-index: 1;
+  margin-bottom: -6px;
   pointer-events: none;
-  opacity: .65;
-  transition: opacity .25s ease;
 }
-.svc-soft-wrap:hover .svc-soft-glow { opacity: .9; }
