@@ -58,10 +58,6 @@ public/
 ├── logo-dark.png       # Dark version of the logo
 ├── logo-light.png      # Light version (for dark theme)
 ├── shadow.png          # Hero shadow strip
-├── svc-branding.png
-├── svc-optim.png
-├── svc-sourcing.png
-├── svc-turnkey.png
 └── ... other images
 
 🛠 Installation & Development
