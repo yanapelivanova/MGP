@@ -60,3 +60,82 @@ export default function FlowBackground({ scope = "home" }) {
             <stop offset="50%"  stopColor="#ffffff" />
             <stop offset="100%" stopColor="#eef2f7" />
           </linearGradient>
+        </defs>
+
+        {arcs.map(({ id, d }, i) => (
+          <g key={id} style={{ mixBlendMode: "screen" }}>
+            {/* 1) ШИРОКИЙ РАЗМЫТЫЙ ОРЕОЛ */}
+            <path
+              d={d}
+              filter="url(#flowGlowStrong)"
+              stroke="#ffffff"
+              strokeOpacity="0.65"
+              strokeWidth="26"
+              strokeLinecap="round"
+              fill="none"
+            />
+
+            {/* 2) ТЕЛО ЛИНИИ (тонкое «ядро») */}
+            <path
+              d={d}
+              filter="url(#flowGlowSoft)"
+              stroke="url(#flowCore)"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            />
+
+            {/* 3) ДВИЖУЩЕЕСЯ УТОЛЩЕНИЕ (сам импульс) — выглядит как "всплеск" света в самой линии */}
+            {delays.map((delay, k) => (
+              <g key={`${id}-pulse-${k}`} filter="url(#flowGlowStrong)">
+                {/* Яркое «ядро» утолщения */}
+                <path
+                  d={d}
+                  stroke="#ffffff"
+                  strokeOpacity="0.95"
+                  strokeWidth="8"
+                  strokeLinecap="round"
+                  fill="none"
+                  strokeDasharray={`${pulseLen} ${gapLen}`}
+                >
+                  <animate
+                    attributeName="stroke-dashoffset"
+                    from="0"
+                    to={`-${pulseLen + gapLen}`}
+                    dur={`${baseDur + i * 1.1}s`}
+                    begin={`${delay}s`}
+                    repeatCount="indefinite"
+                  />
+                </path>
+
+                {/* Более широкий мягкий ореол того же утолщения */}
+                <path
+                  d={d}
+                  stroke="#ffffff"
+                  strokeOpacity="0.55"
+                  strokeWidth="22"
+                  strokeLinecap="round"
+                  fill="none"
+                  strokeDasharray={`${pulseLen} ${gapLen}`}
+                >
+                  <animate
+                    attributeName="stroke-dashoffset"
+                    from="0"
+                    to={`-${pulseLen + gapLen}`}
+                    dur={`${baseDur + i * 1.1}s`}
+                    begin={`${delay}s`}
+                    repeatCount="indefinite"
+                  />
+                </path>
+              </g>
+            ))}
+
+            {/* скрытая референс-кривая (на случай mpath в будущем) */}
+            <path id={id} d={d} stroke="none" fill="none" />
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
