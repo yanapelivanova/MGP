@@ -304,3 +304,39 @@ html, body {
 /* гарантируем, что контент выше фона */
 .page { position: relative; z-index: 1; }
 .topbar { position: sticky; z-index: 200; }
+/* ===== Flow background (global) ===== */
+.flow-bg{
+  position: fixed;
+  inset: 0;
+  z-index: 0;             /* ниже контента */
+  pointer-events: none;   /* не перехватывает клики */
+  /* На светлой теме делаем заметнее, на тёмной — деликатнее */
+  opacity: 0.55;
+}
+
+.dark .flow-bg { opacity: 0.28; }
+
+.flow-svg{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Fade вниз, чтобы под футером не «копилось» свечения */
+.flow-bg{
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%,
+                                                rgba(0,0,0,1) 70%,
+                                                rgba(0,0,0,0) 100%);
+          mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%,
+                                                rgba(0,0,0,1) 70%,
+                                                rgba(0,0,0,0) 100%);
+}
+
+/* Гарантируем, что контент поверх фона */
+.page { position: relative; z-index: 1; }
+.topbar { position: sticky; z-index: 200; }
+
+/* Мобильная деликатность */
+@media (max-width: 640px){
+  .flow-bg { opacity: 0.42; }
+}
