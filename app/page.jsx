@@ -15,26 +15,19 @@ export default function Home() {
   const contactRef = useRef(null);
   const logoRef = useRef(null);
 
-  // определяем текущий язык по адресу
+  // detect current language by path
   useEffect(() => {
     if (typeof window !== "undefined") {
       setIsFr(window.location.pathname.startsWith("/fr"));
     }
   }, []);
 
-  // ---- ЛОГОТИП: авто-подмена по теме + кэш-бастинг ----
+  // ---- LOGO: theme-aware swap + cache-busting ----
   useEffect(() => {
     if (typeof document === "undefined") return;
 
-    const ASSET_VERSION = "2025-10-03-01"; // поменяй при обновлении логотипов
+    const ASSET_VERSION = "2025-10-03-01";
     const withVer = (p) => `${p}?v=${ASSET_VERSION}`;
-
-    // где висит класс "dark": на <html> или на <body>
-    const rootEl =
-      document.documentElement.classList.contains("dark") ||
-      !document.body
-        ? document.documentElement
-        : document.body;
 
     const updateLogo = () => {
       const isDark =
@@ -43,18 +36,18 @@ export default function Home() {
 
       if (logoRef.current) {
         logoRef.current.src = isDark
-          ? withVer("/logo-light.png") // белый для тёмной темы
-          : withVer("/logo-dark.png"); // чёрный для светлой темы
+          ? withVer("/logo-light.png") // white logo for dark theme
+          : withVer("/logo-dark.png"); // dark logo for light theme
         logoRef.current.alt = isDark
           ? "Maison Global Partners (light logo)"
           : "Maison Global Partners";
       }
     };
 
-    // первичная установка
+    // initial set
     updateLogo();
 
-    // следим за изменением класса на обоих корнях
+    // observe class changes on html/body
     const mo1 = new MutationObserver(updateLogo);
     const mo2 = new MutationObserver(updateLogo);
     mo1.observe(document.documentElement, {
@@ -65,7 +58,7 @@ export default function Home() {
       mo2.observe(document.body, { attributes: true, attributeFilter: ["class"] });
     }
 
-    // на всякий случай — реакция на смену prefers-color-scheme
+    // react to prefers-color-scheme changes
     const media = window.matchMedia("(prefers-color-scheme: dark)");
     const mediaHandler = () => updateLogo();
     media.addEventListener?.("change", mediaHandler);
@@ -93,7 +86,7 @@ export default function Home() {
     <main className="page" ref={homeRef}>
       {/* ---------- TOPBAR ---------- */}
       <header className="topbar">
-        {/* слева — мини-кнопки */}
+        {/* left — quick actions */}
         <div className="top-actions">
           {/* phone */}
           <a className="mini-btn" href="tel:+14388091901" aria-label="Call">
@@ -109,7 +102,7 @@ export default function Home() {
             </svg>
           </a>
 
-          {/* email -> к контактам */}
+          {/* email -> contact section */}
           <button
             className="mini-btn"
             onClick={() => scrollTo(contactRef)}
@@ -170,7 +163,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* центр — ЛОГОТИП (один <img>) */}
+        {/* center — logo */}
         <button
           className="brand-mark"
           aria-label="Scroll to top"
@@ -179,7 +172,7 @@ export default function Home() {
           <img ref={logoRef} className="logo" src="/logo-dark.png" alt="Maison Global Partners" />
         </button>
 
-        {/* справа — бургер */}
+        {/* right — burger */}
         <button
           className="icon-pill"
           onClick={() => setDrawerOpen(true)}
@@ -299,31 +292,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- SERVICES ---------- */}
+      {/* ---------- SERVICES (no images) ---------- */}
       <section ref={servicesRef} className="section" id="services">
         <h2>How we deliver value</h2>
 
         <div className="cards">
           <article className="card">
-            <img className="card-img fx-fade-pulse" src="/svc-branding.png" alt="BRANDING" />
             <h3>BRANDING</h3>
             <p>Naming, identity and packaging that build trust across channels and markets.</p>
           </article>
 
           <article className="card">
-            <img className="card-img fx-fade-pulse" src="/svc-optim.png" alt="ALL IN ONE" />
             <h3>ALL IN ONE</h3>
             <p>Full-cycle sourcing and logistics solutions in one package.</p>
           </article>
 
           <article className="card">
-            <img className="card-img fx-fade-pulse" src="/svc-sourcing.png" alt="SOURCING" />
             <h3>SOURCING</h3>
             <p>Finding and managing reliable suppliers worldwide.</p>
           </article>
 
           <article className="card">
-            <img className="card-img fx-fade-pulse" src="/svc-turnkey.png" alt="CONSULTING" />
             <h3>CONSULTING</h3>
             <p>Expert advice to optimize procurement and supply chain strategies.</p>
           </article>
