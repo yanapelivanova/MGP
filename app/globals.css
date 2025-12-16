@@ -50,6 +50,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   background: #fff;
   color: #1a1a1a;
   box-shadow: 0 4px 24px rgba(0,0,0,.06);
+transform: translateY(-10px);
 }
 .dark .topbar { color: #ffffff; }
 
