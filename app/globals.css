@@ -34,7 +34,6 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
 /* ========== Topbar ========== */
 .topbar{
-.topbar{
   position: sticky; top: 0; z-index: 200;
   display: grid;
   grid-template-columns: 1fr auto 64px;
