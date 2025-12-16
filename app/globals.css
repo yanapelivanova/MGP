@@ -290,3 +290,27 @@ html, body {
   margin-bottom: -6px;
   pointer-events: none;
 }
+/* =========================
+   TOPBAR PATCH (safe)
+   ========================= */
+
+/* делаем хедер ниже и поднимаем содержимое чуть выше */
+.topbar{
+  height: 66px;              /* было 88 — короче на ~1/4 */
+  padding: 4px 12px 6px;     /* контент выше */
+  align-items: start;        /* не по центру */
+}
+
+/* логотип: НЕ 2x на мобиле (иначе ломает),
+   но крупнее, аккуратно */
+.brand-mark .logo{
+  height: 56px;              /* мобильный размер */
+  width: auto;
+  display: block;
+}
+
+/* на десктопе увеличиваем сильнее */
+@media (min-width: 900px){
+  .topbar{ height: 72px; }
+  .brand-mark .logo{ height: 96px; }  /* почти 2x от 48px */
+}
