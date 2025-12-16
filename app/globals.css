@@ -17,7 +17,7 @@ body {
 }
 
 /* ========== Layout (общий) ========== */
-.page { display: grid; gap: 48px; }
+.page { display: grid; gap: 24px; }
 .section {
   padding: 16px 16px 72px;
   max-width: 1100px;
