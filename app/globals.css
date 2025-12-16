@@ -44,13 +44,16 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   /* поднимаем содержимое вверх, но без ломания */
   align-items: start;
 
-  height: 65px;
+  /* ВАЖНО: нормальная высота хедера (чтобы логотип не "раздувал" всё) */
+  height: 88px;
   padding: 6px 12px 10px;
 
   background: #fff;
   color: #1a1a1a;
   box-shadow: 0 4px 24px rgba(0,0,0,.06);
-transform: translateY(20px);
+
+  /* УБРАЛА: из-за этого хедер уезжал вниз */
+  /* transform: translateY(20px); */
 }
 .dark .topbar { color: #ffffff; }
 
@@ -93,17 +96,15 @@ transform: translateY(20px);
 }
 .ci{ width:18px; height:18px; display:block; color:inherit; }
 
-/* ЛОГО: мобилка 64, десктоп 96 (≈2x от 48) */
+/* ЛОГО: крупнее, но без раздутия хедера */
 .brand-mark .logo{
-  height: 90px;   /* было 64 — стало визуально уверенно */
+  height: 80px;
   width: auto;
   display: block;
 }
-
 @media (min-width: 900px){
   .brand-mark .logo{
-    height: 112px; /* было 96 — теперь логотип «дышит» */
-    margin-top: -6px; /* 
+    height: 96px;
   }
 }
 
@@ -164,7 +165,7 @@ transform: translateY(20px);
   max-width:1100px;
   margin: 0 auto;
 
-  /* ВОТ ГЛАВНОЕ: поднимаем весь блок под хедером вверх */
+  /* поднимаем весь блок под хедером вверх */
   margin-top: -18px;
 }
 .hero-title{ font-size: clamp(26px, 5.2vw, 44px); letter-spacing:.2px; margin-top:0; color:#1f1f1f; }
@@ -335,4 +336,4 @@ html, body {
   margin-top: 8px;
   margin-bottom: -6px;
   pointer-events: none;
-  }
+}
