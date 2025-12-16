@@ -95,7 +95,7 @@ transform: translateY(20px);
 
 /* ЛОГО: мобилка 64, десктоп 96 (≈2x от 48) */
 .brand-mark .logo{
-  height: 76px;   /* было 64 — стало визуально уверенно */
+  height: 90px;   /* было 64 — стало визуально уверенно */
   width: auto;
   display: block;
 }
