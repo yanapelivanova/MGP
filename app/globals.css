@@ -40,16 +40,15 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
   display: grid;
   grid-template-columns: 1fr auto 64px;
+  align-items: center;
 
-  align-items: center;   /* ВСЕГДА центр */
-  height: 88px;          /* высоту НЕ трогаем */
-  padding: 10px 12px;
+  height: 78px;              /* ↓ минус 10px */
+  padding: 8px 12px;         /* ↓ чуть плотнее */
+  transform: translateY(5px);/* ↓ сохраняем «ниже центра» */
 
   background: #fff;
   color: #1a1a1a;
   box-shadow: 0 4px 24px rgba(0,0,0,.06);
-
-  transform: translateY(6px); /* ← ВНИЗ, ниже центра */
 }
 .dark .topbar { color: #ffffff; }
 
