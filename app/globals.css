@@ -41,19 +41,15 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   display: grid;
   grid-template-columns: 1fr auto 64px;
 
-  /* поднимаем содержимое вверх, но без ломания */
-  align-items: start;
-
-  /* ВАЖНО: нормальная высота хедера (чтобы логотип не "раздувал" всё) */
-  height: 88px;
-  padding: 6px 12px 10px;
+  align-items: center;   /* ВСЕГДА центр */
+  height: 88px;          /* высоту НЕ трогаем */
+  padding: 10px 12px;
 
   background: #fff;
   color: #1a1a1a;
   box-shadow: 0 4px 24px rgba(0,0,0,.06);
 
-  /* УБРАЛА: из-за этого хедер уезжал вниз */
-  /* transform: translateY(20px); */
+  transform: translateY(6px); /* ← ВНИЗ, ниже центра */
 }
 .dark .topbar { color: #ffffff; }
 
