@@ -103,6 +103,7 @@ transform: translateY(20px);
 @media (min-width: 900px){
   .brand-mark .logo{
     height: 112px; /* было 96 — теперь логотип «дышит» */
+    margin-top: -6px; /* 
   }
 }
 
