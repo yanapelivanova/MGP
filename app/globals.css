@@ -44,7 +44,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   /* поднимаем содержимое вверх, но без ломания */
   align-items: start;
 
-  height: 75px;
+  height: 65px;
   padding: 6px 12px 10px;
 
   background: #fff;
