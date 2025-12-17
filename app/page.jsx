@@ -172,21 +172,25 @@ export default function Home() {
           <img ref={logoRef} className="logo" src="/logo-dark.png" alt="Maison Global Partners" />
         </button>
 
-        {/* right — burger */}
-        <svg className="ci burger-arch" viewBox="0 0 24 24" aria-hidden="true">
-  <path
-    d="M5 7.6h14
-       M7 12h12
-       M9 16.4h10"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.4"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  />
-</svg>
-      </header>
-
+{/* right — burger */}
+<button
+  className="icon-pill"
+  onClick={() => setDrawerOpen(true)}
+  aria-label="Open menu"
+  type="button"
+>
+  <svg className="ci burger-arch" viewBox="0 0 24 24" aria-hidden="true">
+    <path
+      d="M6 8h12
+         M8 12h10
+         M10 16h8"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.35"
+      strokeLinecap="round"
+    />
+  </svg>
+</button>
       {/* ---------- DRAWER ---------- */}
       {drawerOpen && (
         <>
