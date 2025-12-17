@@ -122,12 +122,36 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 .icon-pill:active{
   box-shadow: inset 6px 6px 12px #d1d1d1, inset -6px -6px 12px #ffffff;
 }
-.ico-burger::before, .ico-burger::after{
-  content:""; position:absolute; left:50%; transform:translateX(-50%);
-  width:22px; height:2px; background:#444; border-radius:2px;
+.ico-burger::before,
+.ico-burger::after,
+.ico-burger span {
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:20px;
+  height:1.2px;              /* тоньше */
+  background:#2a2a2a;
+  border-radius:1px;
 }
-.ico-burger::before{ top:18px; }
-.ico-burger::after{ top:26px; }
+
+/* верхняя линия */
+.ico-burger::before{
+  top:17px;
+  width:18px;                /* короче */
+}
+
+/* средняя линия */
+.ico-burger span{
+  top:22px;
+  width:20px;
+}
+
+/* нижняя линия */
+.ico-burger::after{
+  top:27px;
+  width:14px;                /* ещё короче */
+}
 
 /* Языковое меню */
 .lang-wrap{ position:relative; }
