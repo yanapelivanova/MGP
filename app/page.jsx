@@ -173,21 +173,18 @@ export default function Home() {
         </button>
 
         {/* right — burger */}
-        <button
-          className="icon-pill"
-          onClick={() => setDrawerOpen(true)}
-          aria-label="Open menu"
-        >
-          <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="M4 7.5h16M4 12h16M4 16.5h16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-        </button>
+        <svg className="ci burger-arch" viewBox="0 0 24 24" aria-hidden="true">
+  <path
+    d="M5 7.6h14
+       M7 12h12
+       M9 16.4h10"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.4"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  />
+</svg>
       </header>
 
       {/* ---------- DRAWER ---------- */}
