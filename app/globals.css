@@ -76,13 +76,13 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
 /* ЛОГО: увеличиваем, но держим в адекватных рамках хедера */
 .brand-mark .logo{
-  height: 64px;
+  height: 72px;
   width: auto;
   display: block;
 }
 @media (min-width: 900px){
   .brand-mark .logo{
-    height: 84px;
+    height: 92px;
   }
 }
 
