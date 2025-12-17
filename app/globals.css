@@ -39,7 +39,8 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   z-index: 200;
 
   display: grid;
-  grid-template-columns: 1fr auto 64px;
+  grid-template-columns: 1fr auto 80px;
+column-gap: 10px;
   align-items: center;
 
   /* было 88px — чуть уменьшаем, но без ломания */
