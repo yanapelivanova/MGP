@@ -185,15 +185,15 @@ column-gap: 10px;
 @keyframes slideIn{ to{ transform:translateX(0);} }
 @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
 
-/* ===== HERO (SOURCE OF TRUTH) ===== */
+/* ===== HERO (FINAL) ===== */
 .hero{
-  padding: 26px 16px 26px;
+  padding: 32px 16px 28px;   /* больше воздуха сверху */
   text-align: center;
   max-width: 1100px;
   margin: 0 auto;
-  margin-top: 0;                 /* убираем отрицательный сдвиг */
 }
 
+/* Заголовок */
 .hero-title{
   font-size: clamp(28px, 4.6vw, 56px);
   letter-spacing: 0.075em;
@@ -201,7 +201,7 @@ column-gap: 10px;
   color: #1f1f1f;
   font-weight: 500;
   text-transform: uppercase;
-  line-height: 1.06;             /* фикс вертикального ритма */
+  line-height: 1.05;         /* КЛЮЧ — фикс вертикали */
 
   white-space: nowrap;
   max-width: min(980px, 92vw);
@@ -212,8 +212,9 @@ column-gap: 10px;
   text-overflow: clip;
 }
 
+/* Подзаголовок */
 .hero-tagline{
-  margin: 14px 0 22px;
+  margin: 16px 0 26px;       /* ровный отступ от H1 */
   color: #4a4a4a;
   font-size: clamp(15px, 1.4vw, 18px);
   line-height: 1.25;
@@ -221,10 +222,12 @@ column-gap: 10px;
   opacity: 0.82;
 }
 
+/* Mobile */
 @media (max-width: 480px){
   .hero{
-    padding-top: 22px;
+    padding-top: 26px;
   }
+
   .hero-title{
     font-size: clamp(22px, 6.1vw, 30px);
     letter-spacing: clamp(0.02em, 1.2vw, 0.045em);
