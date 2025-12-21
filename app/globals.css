@@ -196,16 +196,10 @@ column-gap: 10px;
 
 /* Название — одна строка, бренд-сигнатура */
 .hero-title{
-  font-size: clamp(30px, 4.8vw, 56px); /* крупнее и увереннее */
-  letter-spacing: 0.08em;              /* “дорогой” трекинг */
-  margin: 0;
-  color: #1f1f1f;
-  font-weight: 500;
+  white-space: nowrap;
   text-transform: uppercase;
-  white-space: nowrap;                 /* СТРОГО одна строка */
-  max-width: min(980px, 92vw);
-  margin-left: auto;
-  margin-right: auto;
+  overflow: visible;        /* ВАЖНО */
+  text-overflow: clip;      /* ВАЖНО */
 }
 
 /* Подпись — спокойная, архитектурная */
@@ -414,8 +408,8 @@ html, body {
 /* ===== Smart mobile fitting for hero title ===== */
 @media (max-width: 480px){
   .hero-title{
-    font-size: clamp(22px, 6.0vw, 30px);
-    letter-spacing: clamp(0.02em, 1.2vw, 0.055em);
+    font-size: clamp(22px, 6.1vw, 30px);
+    letter-spacing: clamp(0.02em, 1.2vw, 0.045em);
     max-width: 96vw;
   }
 }
