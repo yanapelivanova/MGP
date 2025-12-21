@@ -1,4 +1,3 @@
-// app/page.jsx
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -35,9 +34,7 @@ export default function Home() {
         document.body?.classList.contains("dark");
 
       if (logoRef.current) {
-        logoRef.current.src = isDark
-          ? withVer("/logo-light.png") // white logo for dark theme
-          : withVer("/logo-dark.png"); // dark logo for light theme
+        logoRef.current.src = isDark ? withVer("/logo-light.png") : withVer("/logo-dark.png");
         logoRef.current.alt = isDark
           ? "Maison Global Partners (light logo)"
           : "Maison Global Partners";
@@ -50,12 +47,17 @@ export default function Home() {
     // observe class changes on html/body
     const mo1 = new MutationObserver(updateLogo);
     const mo2 = new MutationObserver(updateLogo);
+
     mo1.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class"],
     });
+
     if (document.body) {
-      mo2.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+      mo2.observe(document.body, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
     }
 
     // react to prefers-color-scheme changes
@@ -137,7 +139,14 @@ export default function Home() {
               aria-label="Language"
             >
               <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                />
                 <path
                   d="M3.5 12h17M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"
                   fill="none"
@@ -146,6 +155,7 @@ export default function Home() {
                 />
               </svg>
             </button>
+
             {langOpen && (
               <div className="lang-menu">
                 <a
@@ -169,29 +179,33 @@ export default function Home() {
           aria-label="Scroll to top"
           onClick={() => scrollTo(homeRef)}
         >
-          <img ref={logoRef} className="logo" src="/logo-dark.png" alt="Maison Global Partners" />
+          <img
+            ref={logoRef}
+            className="logo"
+            src="/logo-dark.png"
+            alt="Maison Global Partners"
+          />
         </button>
 
-{/* right — burger */}
-<button
-  className="icon-pill"
-  onClick={() => setDrawerOpen(true)}
-  aria-label="Open menu"
-  type="button"
->
-  <svg className="ci burger-arch" viewBox="0 0 24 24" aria-hidden="true">
-    <path
-      d="M6 8h12
-         M8 12h10
-         M10 16h8"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.35"
-      strokeLinecap="round"
-    />
-  </svg>
-</button>
-        </header>
+        {/* right — burger */}
+        <button
+          className="icon-pill"
+          onClick={() => setDrawerOpen(true)}
+          aria-label="Open menu"
+          type="button"
+        >
+          <svg className="ci burger-arch" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M6 8h12 M8 12h10 M10 16h8"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.35"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
+      </header>
+
       {/* ---------- DRAWER ---------- */}
       {drawerOpen && (
         <>
@@ -205,16 +219,43 @@ export default function Home() {
               ×
             </button>
             <ul className="drawer-list">
-              <li><button className="nav-item" onClick={() => scrollTo(homeRef)}><span>Home</span></button></li>
-              <li><a className="nav-item" href="/about"><span>About Us</span></a></li>
-              <li><button className="nav-item" onClick={() => scrollTo(solutionsRef)}><span>Solutions</span></button></li>
-              <li><button className="nav-item" onClick={() => scrollTo(servicesRef)}><span>Services</span></button></li>
-              <li><button className="nav-item" onClick={() => scrollTo(contactRef)}><span>Contact</span></button></li>
-              <li><a className="nav-item" href="/legal"><span>Legal</span></a></li>
+              <li>
+                <button className="nav-item" onClick={() => scrollTo(homeRef)}>
+                  <span>Home</span>
+                </button>
+              </li>
+              <li>
+                <a className="nav-item" href="/about">
+                  <span>About Us</span>
+                </a>
+              </li>
+              <li>
+                <button className="nav-item" onClick={() => scrollTo(solutionsRef)}>
+                  <span>Solutions</span>
+                </button>
+              </li>
+              <li>
+                <button className="nav-item" onClick={() => scrollTo(servicesRef)}>
+                  <span>Services</span>
+                </button>
+              </li>
+              <li>
+                <button className="nav-item" onClick={() => scrollTo(contactRef)}>
+                  <span>Contact</span>
+                </button>
+              </li>
+              <li>
+                <a className="nav-item" href="/legal">
+                  <span>Legal</span>
+                </a>
+              </li>
               <li className="drawer-fr">
                 <button
                   className="nav-item"
-                  onClick={() => { setDrawerOpen(false); switchLang(); }}
+                  onClick={() => {
+                    setDrawerOpen(false);
+                    switchLang();
+                  }}
                 >
                   <span>{isFr ? "English" : "Français"}</span>
                 </button>
@@ -225,20 +266,24 @@ export default function Home() {
       )}
 
       {/* ---------- HERO (HOME) ---------- */}
-<section className="hero section" id="home">
-  <h1 className="hero-title hero-title-oneLine">Maison Global Partners</h1>
+      <section className="hero section" id="home">
+        <h1 className="hero-title">Maison Global Partners</h1>
 
-  <p className="hero-tagline">
-    Global sourcing
-    <br />
-    and supply-chain solutions
-  </p>
+        <p className="hero-tagline">
+          Global sourcing
+          <br />
+          and supply-chain solutions
+        </p>
 
-  <div className="btnbar">
-    <button className="neumorphic-btn" onClick={() => scrollTo(contactRef)}>Contact</button>
-    <button className="neumorphic-btn" onClick={() => scrollTo(servicesRef)}>Services</button>
-  </div>
-</section>
+        <div className="btnbar">
+          <button className="neumorphic-btn" onClick={() => scrollTo(contactRef)}>
+            Contact
+          </button>
+          <button className="neumorphic-btn" onClick={() => scrollTo(servicesRef)}>
+            Services
+          </button>
+        </div>
+      </section>
 
       {/* ---------- SOLUTIONS ---------- */}
       <section ref={solutionsRef} className="section" id="solutions">
@@ -253,50 +298,92 @@ export default function Home() {
               <svg viewBox="0 0 24 24">
                 <path
                   d="M3 7.5l9-4 9 4-9 4-9-4Z M3 7.5v9l9 4 9-4v-9"
-                  fill="none" stroke="currentColor" strokeWidth="1.5"
-                  strokeLinecap="round" strokeLinejoin="round"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </div>
             <h3 className="sol-title">Vendor Discovery</h3>
-            <p className="sol-text">Scouting + due diligence across the Americas, Europe, Asia.</p>
+            <p className="sol-text">
+              Scouting + due diligence across the Americas, Europe, Asia.
+            </p>
           </article>
 
           <article className="sol-card">
             <div className="sol-ico" aria-hidden="true">
               <svg viewBox="0 0 24 24">
-                <path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3Z" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                <path d="M9 12l2.2 2.2L15.5 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path
+                  d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3Z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
+                <path
+                  d="M9 12l2.2 2.2L15.5 10"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </div>
             <h3 className="sol-title">Contract &amp; Compliance</h3>
-            <p className="sol-text">Terms, QA, audits, documentation — clean, enforceable, traceable.</p>
+            <p className="sol-text">
+              Terms, QA, audits, documentation — clean, enforceable, traceable.
+            </p>
           </article>
 
           <article className="sol-card">
             <div className="sol-ico" aria-hidden="true">
               <svg viewBox="0 0 24 24">
-                <path d="M4 19h16M6 16l4-4 3 3 5-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                <path
+                  d="M4 19h16M6 16l4-4 3 3 5-6"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </div>
             <h3 className="sol-title">Process Optimisation</h3>
-            <p className="sol-text">Network design, planning, logistics — measurable KPI uplift.</p>
+            <p className="sol-text">
+              Network design, planning, logistics — measurable KPI uplift.
+            </p>
           </article>
 
           <article className="sol-card">
             <div className="sol-ico" aria-hidden="true">
               <svg viewBox="0 0 24 24">
-                <path d="M6 18l-1.5 3L7.5 20M12 13l3 3M12 13l-3-3" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M14 4a6 6 0 016 6l-6 6-4-4 4-8Z" fill="none" stroke="currentColor" strokeWidth="1.4" />
+                <path
+                  d="M6 18l-1.5 3L7.5 20M12 13l3 3M12 13l-3-3"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M14 4a6 6 0 016 6l-6 6-4-4 4-8Z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                />
               </svg>
             </div>
             <h3 className="sol-title">Turnkey Launch</h3>
-            <p className="sol-text">BOM, specs, packaging, full docs — end-to-end to market.</p>
+            <p className="sol-text">
+              BOM, specs, packaging, full docs — end-to-end to market.
+            </p>
           </article>
         </div>
       </section>
 
-      {/* ---------- SERVICES (no images) ---------- */}
+      {/* ---------- SERVICES ---------- */}
       <section ref={servicesRef} className="section" id="services">
         <h2>How we deliver value</h2>
 
@@ -327,14 +414,16 @@ export default function Home() {
       <section ref={contactRef} className="section" id="contact">
         <h3>Contact</h3>
 
-        <form className="contact-form" onSubmit={(e) => { e.preventDefault(); }}>
+        <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
           <div className="form-row">
             <input name="name" placeholder="Your name" required />
             <input type="email" name="email" placeholder="Email" required />
           </div>
           <textarea name="message" rows={3} placeholder="Message" />
           <div className="form-actions">
-            <button className="neumorphic-btn" type="submit">Send</button>
+            <button className="neumorphic-btn" type="submit">
+              Send
+            </button>
           </div>
         </form>
 
@@ -342,7 +431,11 @@ export default function Home() {
           <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
             <path
               d="M6.8 10.7a14.5 14.5 0 006.5 6.5l2.3-2.3a1.6 1.6 0 011.6-.36l3.2 1.28c.5.2.8.67.8 1.2v2.2a2 2 0 01-2.2 2A18 18 0 013.5 5.1 2 2 0 015.6 3h2.3c.52 0 1 .31 1.2.79L10.4 7c.2.5.1 1.1-.3 1.5l-2.3 2.2z"
-              fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
           +1 (438) 809-1901
@@ -351,34 +444,85 @@ export default function Home() {
         <div className="mail mail-stack">
           <div className="stack-row">
             <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
-              <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              <rect
+                x="3"
+                y="5.5"
+                width="18"
+                height="13"
+                rx="2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+              />
+              <path
+                d="M4 7l8 6 8-6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+              />
             </svg>
             <div>
               <div className="stack-label">for inquiries</div>
-              <a className="stack-link" href="mailto:welcome@maisongp.com">welcome@maisongp.com</a>
+              <a className="stack-link" href="mailto:welcome@maisongp.com">
+                welcome@maisongp.com
+              </a>
             </div>
           </div>
 
           <div className="stack-row">
             <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
-              <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              <rect
+                x="3"
+                y="5.5"
+                width="18"
+                height="13"
+                rx="2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+              />
+              <path
+                d="M4 7l8 6 8-6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+              />
             </svg>
             <div>
               <div className="stack-label">for partners</div>
-              <a className="stack-link" href="mailto:partners@maisongp.com">partners@maisongp.com</a>
+              <a className="stack-link" href="mailto:partners@maisongp.com">
+                partners@maisongp.com
+              </a>
             </div>
           </div>
 
           <div className="stack-row">
             <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
-              <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              <rect
+                x="3"
+                y="5.5"
+                width="18"
+                height="13"
+                rx="2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+              />
+              <path
+                d="M4 7l8 6 8-6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+              />
             </svg>
             <div>
               <div className="stack-label">for careers</div>
-              <a className="stack-link" href="mailto:careers@maisongp.com">careers@maisongp.com</a>
+              <a className="stack-link" href="mailto:careers@maisongp.com">
+                careers@maisongp.com
+              </a>
             </div>
           </div>
         </div>
@@ -390,9 +534,23 @@ export default function Home() {
           rel="noopener"
         >
           <svg className="ci" viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" strokeWidth="1.6" />
-            <path d="M8 17V10M8 7.5h.01M11 17v-4.2c0-1.7 2.2-1.8 2.2 0V17M13.2 12.8c0-1.9 2.6-2 2.6.1V17"
-              fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            <rect
+              x="3"
+              y="3"
+              width="18"
+              height="18"
+              rx="3"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+            />
+            <path
+              d="M8 17V10M8 7.5h.01M11 17v-4.2c0-1.7 2.2-1.8 2.2 0V17M13.2 12.8c0-1.9 2.6-2 2.6.1V17"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+            />
           </svg>
           LinkedIn
         </a>
