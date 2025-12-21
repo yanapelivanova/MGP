@@ -1,6 +1,7 @@
 /* ========== Base ========== */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+html, body { width: 100%; overflow-x: hidden; }
 
 :root{
   --font-display: "Cormorant Garamond", serif;
@@ -16,9 +17,8 @@ body {
   line-height: 1.55;
 }
 
-/* ========== Layout (общий) ========== */
-.page { display: grid; gap: 24px; }
-
+/* ========== Layout ========== */
+.page { display: grid; gap: 24px; width: 100%; }
 .section {
   padding: 16px 16px 72px;
   max-width: 1100px;
@@ -46,7 +46,6 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
   height: 78px;
   padding: 12px 12px 6px;
-  transform: translateY(3px);
 
   background: #fff;
   color: #1a1a1a;
@@ -73,7 +72,6 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   transform-origin: center;
 }
 
-/* ЛОГО */
 .brand-mark .logo{
   height: 64px;
   width: auto;
@@ -150,50 +148,42 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 @keyframes slideIn{ to{ transform:translateX(0);} }
 @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
 
-/* ===== HERO (единственный источник правды) ===== */
-.hero.section{
-  padding-bottom: 26px;
-}
-
+/* ========== HERO (единственный источник правды) ========== */
 .hero{
   padding: 32px 16px 28px;
-  max-width: 1100px;
-  margin: 0 auto;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
+  max-width:1100px;
+  margin: 0 auto;
 }
 
 .hero-title{
+  /* делает “ровно” по вертикали на serif: */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  display: block;
-  text-align: center;
+  padding-block: 0.08em; /* оптическая правка для Cormorant */
 
   font-family: var(--font-display);
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: #1f1f1f;
+  color:#1f1f1f;
 
-  margin: 0;
-  line-height: 1.05;
   font-size: clamp(28px, 4.6vw, 56px);
+  letter-spacing: 0.07em;
+  line-height: 1; /* ключ */
 
   white-space: nowrap;
   max-width: min(980px, 92vw);
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 
-  /* важно: без hidden, без ellipsis */
   overflow: visible;
   text-overflow: clip;
 }
 
 .hero-tagline{
   margin: 16px 0 26px;
-  color: #4a4a4a;
+  color:#4a4a4a;
   font-size: clamp(15px, 1.4vw, 18px);
   line-height: 1.25;
   letter-spacing: 0.02em;
@@ -201,15 +191,14 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 
 @media (max-width: 480px){
-  .hero{
-    padding-top: 26px;
-  }
+  .hero{ padding-top: 26px; }
   .hero-title{
     font-size: clamp(22px, 6.1vw, 30px);
     letter-spacing: 0.04em;
     max-width: 96vw;
   }
 }
+
 /* ========== Buttons (neumorphic) ========== */
 .btnbar{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
 .neumorphic-btn{
@@ -275,56 +264,12 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 .foot a{ color:#666; text-decoration:none; }
 
-/* =========================================================
-   ABOUT (компактные отступы, стеклянные блоки)
-   ========================================================= */
-.about-page .section { padding: 12px 16px 28px; }
-.section.section-tight { padding: 12px 16px 24px; }
-
-.glass{
-  background: rgba(255,255,255,0.62);
-  backdrop-filter: blur(14px) saturate(135%);
-  -webkit-backdrop-filter: blur(14px) saturate(135%);
-  border-radius: 20px;
-  padding: 24px 28px;
-  margin: 0 auto 18px;
-  box-shadow: 0 6px 22px rgba(0,0,0,0.06);
-  max-width: 900px;
-}
-.glass-strong{
-  background: rgba(255,255,255,0.50);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  border-radius: 22px;
-  padding: 28px 32px;
-  margin: 0 auto 18px;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
-  max-width: 900px;
-}
-
-.founder-wrap { max-width: 860px; margin: 0 auto; }
-.founder-quote{ margin: 0; line-height: 1.7; text-align: justify; }
-.founder-line{ font-style: italic; font-weight: 500; font-size: 16px; margin: 0 0 12px; }
-
-@media (max-width: 640px){
-  .glass{ padding: 18px 20px; border-radius: 16px; }
-  .glass-strong{ padding: 22px 24px; border-radius: 18px; }
-}
-
-/* Полностью выключаем любые «крошки» */
-.breadcrumbs { display: none !important; visibility: hidden !important; }
-
-/* =========================================================
-   SOLUTIONS (4 плитки, минималистичные иконки)
-   ========================================================= */
+/* ========== Solutions grid ========== */
 .sol-title{ margin:0 0 6px; font-size: clamp(22px,4.6vw,32px); }
-.sol-sub{ margin:0 0 16px; color:#666; }
-
 .sol-grid{
   display:grid; gap:14px;
   grid-template-columns: repeat(2, 1fr);
 }
-
 .sol-card{
   background:#fff; border-radius:16px; padding:16px 16px 18px;
   box-shadow: 8px 8px 16px #e9e9e9, -8px -8px 16px #ffffff;
@@ -344,15 +289,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 .sol-ico svg{ width:20px; height:20px; display:block; }
 
-/* ========== Footer helpers (логотипы для тем) ========== */
-.logo-dark { display: block; }
-.logo-light { display: none; }
-.dark .logo-dark { display: none; }
-.dark .logo-light { display: block; }
-
-/* =========================================================
-   POLISH: font smoothing + focus visibility
-   ========================================================= */
+/* polish */
 html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -364,4 +301,3 @@ html, body {
     0 0 0 6px rgba(0,0,0,0.08),
     8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
 }
-.hero-title { outline: 2px solid red !important; }
