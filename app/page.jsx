@@ -224,18 +224,20 @@ export default function Home() {
       )}
 
       {/* ---------- HERO (HOME) ---------- */}
-      <section className="hero section" id="home">
-        <h1 className="hero-title">Maison Global Partners</h1>
-        <p className="hero-tagline">
-          Global sourcing
-          <br />
-          and supply-chain solutions
-        </p>
-        <div className="btnbar">
-          <button className="neumorphic-btn" onClick={() => scrollTo(contactRef)}>Contact</button>
-          <button className="neumorphic-btn" onClick={() => scrollTo(servicesRef)}>Services</button>
-        </div>
-      </section>
+<section className="hero section" id="home">
+  <h1 className="hero-title hero-title-oneLine">Maison Global Partners</h1>
+
+  <p className="hero-tagline">
+    Global sourcing
+    <br />
+    and supply-chain solutions
+  </p>
+
+  <div className="btnbar">
+    <button className="neumorphic-btn" onClick={() => scrollTo(contactRef)}>Contact</button>
+    <button className="neumorphic-btn" onClick={() => scrollTo(servicesRef)}>Services</button>
+  </div>
+</section>
 
       {/* ---------- SOLUTIONS ---------- */}
       <section ref={solutionsRef} className="section" id="solutions">
