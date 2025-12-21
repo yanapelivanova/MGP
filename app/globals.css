@@ -185,38 +185,50 @@ column-gap: 10px;
 @keyframes slideIn{ to{ transform:translateX(0);} }
 @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
 
-/* ========== Hero ========== */
+/* ===== HERO (SOURCE OF TRUTH) ===== */
 .hero{
-  padding: 28px 16px 24px;             /* больше воздуха */
+  padding: 26px 16px 26px;
   text-align: center;
   max-width: 1100px;
   margin: 0 auto;
-  margin-top: -18px;                   /* оставляем как было */
+  margin-top: 0;                 /* убираем отрицательный сдвиг */
 }
 
-/* Название — одна строка, бренд-сигнатура */
 .hero-title{
-  white-space: nowrap;
+  font-size: clamp(28px, 4.6vw, 56px);
+  letter-spacing: 0.075em;
+  margin: 0;
+  color: #1f1f1f;
+  font-weight: 500;
   text-transform: uppercase;
-  overflow: visible;        /* ВАЖНО */
-  text-overflow: clip;      /* ВАЖНО */
+  line-height: 1.06;             /* фикс вертикального ритма */
+
+  white-space: nowrap;
+  max-width: min(980px, 92vw);
+  margin-left: auto;
+  margin-right: auto;
+
+  overflow: visible;
+  text-overflow: clip;
 }
 
-/* Подпись — спокойная, архитектурная */
 .hero-tagline{
-  margin: 14px 0 22px;                 /* чёткий вертикальный ритм */
+  margin: 14px 0 22px;
   color: #4a4a4a;
   font-size: clamp(15px, 1.4vw, 18px);
   line-height: 1.25;
   letter-spacing: 0.02em;
-  font-weight: 400;
-  opacity: 0.82;                       /* не спорит с названием */
+  opacity: 0.82;
 }
 
-/* Мобилка — всё ещё одна строка, без суеты */
-@media (max-width: 420px){
+@media (max-width: 480px){
+  .hero{
+    padding-top: 22px;
+  }
   .hero-title{
-    letter-spacing: 0.06em;
+    font-size: clamp(22px, 6.1vw, 30px);
+    letter-spacing: clamp(0.02em, 1.2vw, 0.045em);
+    max-width: 96vw;
   }
 }
 /* ========== Buttons (neumorphic) ========== */
