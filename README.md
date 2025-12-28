@@ -24,7 +24,7 @@ Responsive, mobile-first design
 
 Dynamic theme-aware logo switching
 
-Component-based architecture (GlassCard, SvcImage, ParallaxBg, Footer)
+Component-based architecture (GlassCard, ParallaxBg, Footer)
 
 📁 Project Structure
 
@@ -48,7 +48,6 @@ app/
 └── components/
     ├── Footer.jsx      # Global footer
     ├── GlassCard.jsx   # Universal glass-style card component
-    ├── SvcImage.jsx    # Service images with soft-glow effect
     ├── ShelfShadow.jsx # Elliptical hero shadow under titles
     ├── ParallaxBg.jsx  # Optional parallax background
     └── Button.jsx      # Additional pill-style button component
