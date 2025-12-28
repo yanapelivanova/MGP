@@ -44,13 +44,14 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   column-gap: 10px;
   align-items: center;
 
-  height: 78px;
-  padding: 12px 12px 6px;
+  height: 96px;                /* ↑ высота была 78px */
+  padding: 18px 18px 10px;     /* ↑ немного больше воздуха */
 
   background: #fff;
   color: #1a1a1a;
   box-shadow: 0 4px 24px rgba(0,0,0,.06);
 }
+
 .dark .topbar { color: #ffffff; }
 
 .top-actions{
