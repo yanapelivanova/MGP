@@ -300,3 +300,38 @@ html, body {
     0 0 0 6px rgba(0,0,0,0.08),
     8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
 }
+@media (min-width: 900px){
+  /* 1) Меняем раскладку: левый блок фиксируем, центр — под лого, справа — под бургер */
+  .topbar{
+    grid-template-columns: 360px 1fr 140px; /* было: 1fr auto 80px */
+    column-gap: 18px;
+    padding-left: 22px;
+    padding-right: 28px; /* даёт “воздух” справа, бургер не липнет к краю */
+  }
+
+  /* 2) Три кнопки: чуть больше и шире “занимают пространство” */
+  .top-actions{
+    width: 320px;                 /* растягиваем область */
+    justify-content: space-between; /* распределяем по ширине */
+    gap: 14px;                    /* на всякий — но space-between главное */
+  }
+
+  .mini-btn{
+    width: 44px;
+    height: 44px;
+  }
+  .ci{ width: 20px; height: 20px; }
+
+  /* 3) Лого остаётся своим размером, но становится более “центральным” */
+  .brand-mark{
+    justify-self: center;
+  }
+
+  /* 4) Бургер: чуть больше и чуть левее */
+  .icon-pill{
+    width: 62px;
+    height: 52px;
+    justify-self: end;
+    margin-right: 10px; /* сдвиг влево от края */
+  }
+}
