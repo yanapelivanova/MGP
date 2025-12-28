@@ -74,7 +74,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 
 .brand-mark .logo{
-  height: 64px;
+  height: 51px; /* −20% от 64px */
   width: auto;
   display: block;
 }
