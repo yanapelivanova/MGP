@@ -1,20 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./app/**/*.{js,jsx,ts,tsx}",
-    "./components/**/*.{js,jsx,ts,tsx}",
+    "./app/**/*.{js,jsx,ts,tsx,mjs}",
+    "./components/**/*.{js,jsx,ts,tsx,mjs}",
   ],
   theme: {
     extend: {
       fontFamily: {
-        display: ['var(--font-display)'],   // Cormorant Garamond
-        sans: ['var(--font-sans)'],         // Inter
+        display: ["var(--font-display)"],
+        sans: ["var(--font-sans)"],
       },
     },
   },
   plugins: [],
 };
-content: [
-  "./app/**/*.{js,jsx,ts,tsx,mjs}",
-  "./components/**/*.{js,jsx,ts,tsx,mjs}",
-],
