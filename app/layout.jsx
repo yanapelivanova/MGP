@@ -10,7 +10,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {/* временно везде, чтобы убедиться, что дуги есть */}
 
         {children}
 
