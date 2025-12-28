@@ -8,21 +8,21 @@ export default function Home() {
   const [langOpen, setLangOpen] = useState(false);
   const [isFr, setIsFr] = useState(false);
 
-  // refs
+// Section refs for smooth scroll
   const homeRef = useRef(null);
   const solutionsRef = useRef(null);
   const servicesRef = useRef(null);
   const contactRef = useRef(null);
   const logoRef = useRef(null);
 
-  // detect current language by path
+// Detect current language from URL path
   useEffect(() => {
     if (typeof window !== "undefined") {
       setIsFr(window.location.pathname.startsWith("/fr"));
     }
   }, []);
 
-  // ---- LOGO: theme-aware swap + cache-busting ----
+// Theme-aware logo handling
   useEffect(() => {
     if (typeof document === "undefined") return;
 
@@ -81,7 +81,7 @@ export default function Home() {
 
   return (
     <main className="page" ref={homeRef}>
-      {/* ---------- TOPBAR ---------- */}
+{/* Top navigation bar */}
       <header className="topbar">
         <div className="top-actions">
           <a className="mini-btn" href="tel:+14388091901" aria-label="Call">
@@ -185,7 +185,7 @@ export default function Home() {
         </button>
       </header>
 
-      {/* ---------- DRAWER ---------- */}
+{/* Mobile navigation drawer */}
       {drawerOpen && (
         <>
           <div className="overlay" onClick={() => setDrawerOpen(false)} />
@@ -219,7 +219,7 @@ export default function Home() {
         </>
       )}
 
-      {/* ---------- HERO (HOME) ---------- */}
+{/* Hero section */}
       <section className="hero section" id="home">
         <h1 className="hero-title">MAISON GLOBAL PARTNERS</h1>
         <p className="hero-tagline">
@@ -233,7 +233,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- SOLUTIONS ---------- */}
+{/* Solutions section */}
       <section ref={solutionsRef} className="section" id="solutions">
         <h2>Solutions</h2>
         <p className="lead" style={{ marginTop: 6, marginBottom: 18 }}>
@@ -289,7 +289,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- SERVICES ---------- */}
+{/* Services section */}
       <section ref={servicesRef} className="section" id="services">
         <h2>How we deliver value</h2>
 
@@ -316,7 +316,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- CONTACT ---------- */}
+{/* Contact section */}
       <section ref={contactRef} className="section" id="contact">
         <h3>Contact</h3>
 
