@@ -300,3 +300,35 @@ html, body {
     0 0 0 6px rgba(0,0,0,0.08),
     8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
 }
+/* ===== Desktop header tuning (ONLY desktop) ===== */
+@media (min-width: 1024px){
+
+  /* 1) Иконки слева — в “кучу”, без огромных расстояний */
+  .top-actions{
+    gap: 12px;              /* было 6px — чуть шире, но компактно */
+    justify-content: flex-start;
+    width: auto;            /* важно: НЕ фиксируем ширину */
+  }
+
+  /* 2) Чуть увеличиваем три маленькие кнопки */
+  .mini-btn{
+    width: 44px;
+    height: 44px;
+  }
+  .ci{
+    width: 20px;
+    height: 20px;
+  }
+
+  /* 3) Бургер — чуть больше */
+  .icon-pill{
+    width: 62px;
+    height: 52px;
+  }
+
+  /* 4) Лого — сдвиг вправо (регулируется одной цифрой) */
+  .brand-mark{
+    justify-self: center;
+    transform: translateX(var(--logo-shift-x, 120px)); /* <-- сдвиг вправо */
+  }
+}
