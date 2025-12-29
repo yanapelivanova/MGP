@@ -33,7 +33,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
 .lead { color: #555; }
 
-/* ========== Topbar ========== */
+/* ========== Topbar (MOBILE = compact truth) ========== */
 .topbar{
   position: sticky;
   top: 0;
@@ -44,14 +44,13 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   column-gap: 10px;
   align-items: center;
 
-  height: 96px;                /* ↑ высота была 78px */
-  padding: 18px 18px 10px;     /* ↑ немного больше воздуха */
+  height: 78px;
+  padding: 12px 12px 6px;
 
   background: #fff;
   color: #1a1a1a;
   box-shadow: 0 4px 24px rgba(0,0,0,.06);
 }
-
 .dark .topbar { color: #ffffff; }
 
 .top-actions{
@@ -69,21 +68,11 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   background:transparent;
   cursor:pointer;
   margin-top: 0;
-  transform: scale(1.22);
-  transform-origin: center;
 }
-
 .brand-mark .logo{
-  height: 51px; /* −20% от 64px */
+  height: 64px;
   width: auto;
   display: block;
-}
-@media (min-width: 900px){
-  .brand-mark .logo{
-    height: 84px;
-    transform: scale(1.14);
-    transform-origin: center;
-  }
 }
 
 /* Логотипы под тему */
@@ -96,8 +85,15 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
 .mini-btn{
   -webkit-tap-highlight-color: transparent;
-  width: 38px; height: 38px; border: 0; border-radius: 50%;
-  cursor: pointer; color:#444; display:grid; place-items:center; background:#fff;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  color:#444;
+  display:grid;
+  place-items:center;
+  background:#fff;
   box-shadow: 7px 7px 14px #dcdcdc, -7px -7px 14px #ffffff;
   transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
 }
@@ -110,9 +106,15 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 /* Бургер */
 .icon-pill{
   -webkit-tap-highlight-color: transparent;
-  width:56px; height:48px; border:0; background:#fff; border-radius:28px;
+  width:56px;
+  height:48px;
+  border:0;
+  background:#fff;
+  border-radius:28px;
   box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
-  display:grid; place-items:center; position:relative;
+  display:grid;
+  place-items:center;
+  position:relative;
   margin-top: 0;
 }
 .icon-pill:active{
@@ -122,12 +124,59 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 /* Языковое меню */
 .lang-wrap{ position:relative; }
 .lang-menu{
-  position:absolute; top:50px; left:0; background:#fff; border-radius:12px; padding:6px;
+  position:absolute;
+  top:50px;
+  left:0;
+  background:#fff;
+  border-radius:12px;
+  padding:6px;
   box-shadow: 8px 8px 16px #e2e2e2, -8px -8px 16px #ffffff;
-  display:grid; gap:4px; min-width:160px;
+  display:grid;
+  gap:4px;
+  min-width:160px;
 }
 .lang-menu a{ text-decoration:none; color:#333; padding:10px 12px; border-radius:10px; }
 .lang-menu a:hover{ background:#f6f6f6; }
+
+/* ========== Desktop header tuning (ONLY DESKTOP, horizontal only) ========== */
+@media (min-width: 1024px){
+  /* Высоту НЕ трогаем здесь. Если ты уже увеличила — оставь твою высоту выше.
+     Этот блок двигает только по горизонтали и чуть увеличивает контролы. */
+
+  /* 3 кнопки: немного больше и чуть больше воздуха, но не “растягивать по всей ширине” */
+  .top-actions{
+    gap: 12px;
+  }
+
+  .mini-btn{
+    width: 44px;
+    height: 44px;
+  }
+  .ci{ width:20px; height:20px; }
+
+  /* бургер чуть больше */
+  .icon-pill{
+    width: 62px;
+    height: 52px;
+  }
+
+  /* лого и бургер чуть вправо (без изменения размера лого) */
+  .brand-mark{
+    justify-self: center;
+    transform: translateX(42px);
+  }
+  .icon-pill{
+    transform: translateX(8px);
+  }
+
+  /* чуть больше “дорогих” боковых полей на десктопе */
+  .topbar{
+    padding-left: 22px;
+    padding-right: 22px;
+    column-gap: 16px;
+    grid-template-columns: 1fr auto 96px;
+  }
+}
 
 /* ========== Drawer ========== */
 .overlay{ position:fixed; inset:0; background:rgba(0,0,0,.22); z-index:290; animation:fadeIn .2s ease; }
@@ -140,8 +189,19 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 .drawer-list{ list-style:none; padding:56px 0 0; margin:0; display:grid; gap:12px; }
 
 .nav-item{
-  width:100%; display:flex; align-items:center; justify-content:space-between; gap:10px;
-  padding:14px 16px; border-radius:12px; background:#fff; color:#333; text-align:left; border:0; cursor:pointer; font:inherit;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:14px 16px;
+  border-radius:12px;
+  background:#fff;
+  color:#333;
+  text-align:left;
+  border:0;
+  cursor:pointer;
+  font:inherit;
   box-shadow: 6px 6px 12px #e2e2e2, -6px -6px 12px #ffffff;
 }
 .drawer-fr{ margin-top:6px; }
@@ -158,12 +218,11 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 
 .hero-title{
-  /* делает “ровно” по вертикали на serif: */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding-block: 0.08em; /* оптическая правка для Cormorant */
+  padding-block: 0.08em;
 
   font-family: var(--font-display);
   font-weight: 400;
@@ -172,7 +231,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
   font-size: clamp(28px, 4.6vw, 56px);
   letter-spacing: 0.07em;
-  line-height: 1; /* ключ */
+  line-height: 1;
 
   white-space: nowrap;
   max-width: min(980px, 92vw);
@@ -195,6 +254,8 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   .hero{ padding-top: 26px; }
   .hero-title{
     font-size: clamp(22px, 6.1vw, 30px);
+    letter-spacing: 0.04em;
+    max-width: 96vw;
   }
 }
 
@@ -299,91 +360,4 @@ html, body {
     0 0 0 3px rgba(255,255,255,0.9),
     0 0 0 6px rgba(0,0,0,0.08),
     8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
-}
-/* ===== Desktop header tuning (ONLY desktop) ===== */
-@media (min-width: 1024px){
-
-  /* 1) Иконки слева — в “кучу”, без огромных расстояний */
-  .top-actions{
-    gap: 12px;              /* было 6px — чуть шире, но компактно */
-    justify-content: flex-start;
-    width: auto;            /* важно: НЕ фиксируем ширину */
   }
-
-  /* 2) Чуть увеличиваем три маленькие кнопки */
-  .mini-btn{
-    width: 44px;
-    height: 44px;
-  }
-  .ci{
-    width: 20px;
-    height: 20px;
-  }
-
-  /* 3) Бургер — чуть больше */
-  .icon-pill{
-    width: 62px;
-    height: 52px;
-  }
-
-  /* 4) Лого — сдвиг вправо (регулируется одной цифрой) */
-  .brand-mark{
-    justify-self: center;
-    transform: translateX(var(--logo-shift-x, 120px)); /* <-- сдвиг вправо */
-  }
-}
-/* ===== Header baseline (mobile-first, compact) ===== */
-.topbar{
-  grid-template-columns: 1fr auto 80px;
-  column-gap: 10px;
-  align-items: center;
-
-  height: 78px;
-  padding: 12px 12px 6px;
-}
-
-.top-actions{
-  gap: 6px;
-  justify-content: flex-start;
-  width: auto;
-}
-
-.mini-btn{
-  width: 38px;
-  height: 38px;
-}
-
-.icon-pill{
-  width: 56px;
-  height: 48px;
-  margin-right: 0;
-}
-
-.brand-mark{
-  transform: none;
-}
-/* ===== Desktop header tuning (only desktop) ===== */
-@media (min-width: 1024px){
-  /* чуть больше кнопки + немного воздуха */
-  .top-actions{ gap: 12px; }
-
-  .mini-btn{
-    width: 44px;
-    height: 44px;
-  }
-
-  .icon-pill{
-    width: 62px;
-    height: 52px;
-  }
-
-  /* лого не меняем по размеру — только чуть вправо */
-  .brand-mark{
-    justify-self: center;
-    transform: translateX(56px);
-  }
-
-  /* бургер тоже чуть вправо (не трогая высоту хедера) */
-  .topbar{ padding-right: 12px; } /* меньше правый внутренний отступ = бургер ближе к краю */
-  .icon-pill{ transform: translateX(6px); }
-}
