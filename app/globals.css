@@ -198,7 +198,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 80%;
+  width: 100%;
   padding-block: 0.08em; /* оптическая правка для Cormorant */
 
   font-family: var(--font-display);
@@ -212,7 +212,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
   white-space: nowrap;
   max-width: min(980px, 92vw);
-  margin: 0 auto;
+  margin: 10 px;
 
   overflow: visible;
   text-overflow: clip;
