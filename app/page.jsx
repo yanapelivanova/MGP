@@ -234,7 +234,6 @@ export default function Home() {
           <button className="neumorphic-btn" onClick={() => scrollTo(servicesRef)} type="button">Services</button>
         </div>
       </section>
-      }
       <WorldClock />
       
 {/* Solutions section */}
