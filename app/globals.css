@@ -257,11 +257,11 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   margin-top: 12px;   /* ⬅ опускаем кнопки вниз */
 }
 .neumorphic-btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:12px 22px; border-radius:50px; background:#fff; color:#555;
-  font-family: var(--font-sans); font-weight:500; border:none; cursor:pointer;
-  box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
-  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+  padding: 14px 28px;        /* ⬅ было меньше */
+  font-size: 14.5px;         /* ⬅ немного крупнее */
+  font-weight: 600;
+
+  border-radius: 56px;       /* сохраняем «мягкость» */
 }
 .neumorphic-btn:hover{ opacity:.95; }
 .neumorphic-btn:active{
