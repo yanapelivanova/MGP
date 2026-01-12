@@ -1,26 +1,41 @@
 "use client";
+import { useEffect } from "react";
 
-const CITIES = [
-  { name: "Montreal", tz: "America/Toronto" },
-  { name: "London", tz: "Europe/London" },
-  { name: "Hong Kong", tz: "Asia/Hong_Kong" },
-];
+export default function WorldClock({ offset = 0 }) {
+  useEffect(() => {
+    const update = () => {
+      const now = new Date(Date.now() + offset * 3600000);
+      const h = now.getHours() % 12;
+      const m = now.getMinutes();
+      const s = now.getSeconds();
 
-export default function WorldClock() {
+      const hourDeg = h * 30 + m * 0.5;
+      const minDeg = m * 6;
+      const secDeg = s * 6;
+
+      document.documentElement.style.setProperty("--h", `${hourDeg}deg`);
+      document.documentElement.style.setProperty("--m", `${minDeg}deg`);
+      document.documentElement.style.setProperty("--s", `${secDeg}deg`);
+    };
+
+    update();
+    const i = setInterval(update, 1000);
+    return () => clearInterval(i);
+  }, [offset]);
+
   return (
-    <section className="world-clocks" aria-hidden="true">
-      {CITIES.map(city => (
-        <div className="clock-item" key={city.name}>
-          <div className="clock-face">
-            <div className="clock-marks" />
-            <div className="clock-glow" />
-            <div className="clock-hand hand-hour" />
-            <div className="clock-hand hand-minute" />
-            <div className="clock-hand hand-second" />
-          </div>
-          <div className="clock-city">{city.name}</div>
-        </div>
-      ))}
-    </section>
+    <div className="clock-face">
+      <div className="clock-marks">
+        {[...Array(60)].map((_, i) => (
+          <span key={i} style={{ transform: `rotate(${i * 6}deg)` }} />
+        ))}
+      </div>
+
+      <div className="clock-glow" />
+
+      <div className="clock-hand hand-hour" />
+      <div className="clock-hand hand-minute" />
+      <div className="clock-hand hand-second" />
+    </div>
   );
 }
