@@ -286,31 +286,53 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   transform: translateY(1px);
 }
 /* ========== World Clocks ========== */
+
 .world-clocks {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 32px;
   max-width: 1100px;
   margin: 56px auto 0;
   padding: 0 16px;
 }
 
+@media (max-width: 640px) {
+  .world-clocks {
+    grid-template-columns: repeat(3, 1fr); /* всегда 3 в линию */
+    gap: 16px;
+  }
+}
+
 .clock-item {
   text-align: center;
 }
 
+/* ЦИФЕРБЛАТ */
 .clock-face {
   position: relative;
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   margin: 0 auto 14px;
   border-radius: 50%;
-  background: #fff;
+  background: radial-gradient(
+    circle at 30% 30%,
+    #ffffff,
+    #f2f2f2 65%,
+    #e8e8e8 100%
+  );
   box-shadow:
-    0 30px 60px rgba(0,0,0,0.08),
-    inset 0 2px 6px rgba(255,255,255,0.8);
+    0 24px 48px rgba(0,0,0,0.12),
+    inset 0 3px 8px rgba(255,255,255,0.9);
 }
 
+@media (max-width: 640px) {
+  .clock-face {
+    width: 96px;
+    height: 96px;
+  }
+}
+
+/* МЕТКИ */
 .clock-marks {
   position: absolute;
   inset: 10px;
@@ -319,42 +341,63 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
 .clock-marks span {
   position: absolute;
-  width: 1px;
-  height: 8px;
-  background: rgba(0,0,0,0.25);
   top: 0;
   left: 50%;
-  transform-origin: center 80px;
+  width: 1px;
+  height: 8px;
+  background: rgba(0,0,0,0.28);
+  transform-origin: center 70px;
 }
 
+@media (max-width: 640px) {
+  .clock-marks span {
+    height: 6px;
+    transform-origin: center 42px;
+  }
+}
+
+/* СВЕТОВАЯ ПЫЛЬ */
+.clock-glow {
+  position: absolute;
+  inset: 14px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* СТРЕЛКИ */
 .clock-hand {
   position: absolute;
   left: 50%;
   bottom: 50%;
   transform-origin: bottom center;
-  background: #2a2a2a;
   border-radius: 2px;
+  background: #2a2a2a;
 }
 
 .hand-hour {
   width: 3px;
-  height: 48px;
+  height: 38px;
 }
 
 .hand-minute {
   width: 2px;
-  height: 64px;
+  height: 54px;
 }
 
 .hand-second {
   width: 1px;
-  height: 72px;
+  height: 62px;
   background: rgba(0,0,0,0.4);
 }
 
+/* ГОРОД */
 .clock-city {
-  font-size: 13px;
-  letter-spacing: 0.18em;
+  font-size: 12px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #6a6a6a;
 }
