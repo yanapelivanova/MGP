@@ -224,9 +224,9 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
   font-family: var(--font-sans); /* Inter */
   font-size: clamp(12.5px, 2.2vw, 14px);
-  font-weight: 650;
+  font-weight: 700;
 
-  letter-spacing: 0.11em;   /* было шире — собираем */
+  letter-spacing: 0.12em;   /* было шире — собираем */
   line-height: 1.18;        /* ключ к компактности */
 
   text-transform: uppercase;
@@ -253,7 +253,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   gap:16px;
   flex-wrap:wrap;
   justify-content:center;
-  margin-top: 16px; /* аккуратно опустили */
+  margin-top: 20px; /* аккуратно опустили */
 }
 
 .neumorphic-btn{
