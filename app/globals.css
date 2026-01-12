@@ -220,18 +220,20 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 
 .hero-tagline{
-  margin: 14px 0 24px;
-  color: #4f4f4f;
+  margin: 12px 0 22px;
 
-  font-size: clamp(13px, 2.4vw, 15px); /* ↓ примерно −25% */
-  font-weight: 500;
-  letter-spacing: 0.09em;              /* было 0.12em → компактнее */
-  line-height: 1.35;
+  font-family: var(--font-sans); /* Inter */
+  font-size: clamp(12px, 2.2vw, 14px);
+  font-weight: 600;
+
+  letter-spacing: 0.16em;
+  line-height: 1.3;
 
   text-transform: uppercase;
   text-align: center;
 
-  opacity: 0.9;
+  color: #3f3f3f;
+  opacity: 0.85;
 }
 
 @media (max-width: 480px) {
