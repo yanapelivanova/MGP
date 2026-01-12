@@ -220,16 +220,17 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 
 .hero-tagline{
-  margin: 18px 0 28px;
-  color: #4a4a4a;
+  margin: 20px 0 30px;
+  color: #5a5a5a;
 
-  font-size: clamp(15px, 3.6vw, 18px); /* чуть выразительнее на мобиле */
-  line-height: 1.35;                  /* воздух + читаемость */
-  letter-spacing: 0.08em;             /* внушительность */
-  text-transform: uppercase;          /* ключевой эффект */
+  font-family: var(--font-display);   /* ВАЖНО: serif как у бренда */
+  font-size: clamp(16px, 3.2vw, 19px);
+  line-height: 1.45;
 
-  opacity: 0.78;
+  letter-spacing: 0.02em;
   text-align: center;
+
+  opacity: 0.9;
 }
 
 @media (max-width: 480px) {
