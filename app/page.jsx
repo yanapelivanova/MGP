@@ -223,7 +223,7 @@ export default function Home() {
       <section className="hero section" id="home">
         <h1 className="hero-title">MAISON GLOBAL PARTNERS</h1>
         <p className="hero-tagline">
-          Global sourcing
+          global sourcing
           <br />
           and supply-chain solutions
         </p>
