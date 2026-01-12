@@ -372,3 +372,96 @@ html, body {
     0 0 0 6px rgba(0,0,0,0.08),
     8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
 }
+/* =========================================================
+   LUXURY WORLD CLOCK (decorative)
+   ========================================================= */
+
+.world-clock-wrap{
+  display:flex;
+  justify-content:center;
+  margin: 48px 0 64px;
+  pointer-events:none;
+}
+
+.clock-face{
+  position:relative;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+}
+
+/* тончайшие метки */
+.clock-marks{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      rgba(0,0,0,0.18) 0deg 0.5deg,
+      transparent 0.5deg 6deg
+    );
+  mask: radial-gradient(circle at center, transparent 62%, #000 63%);
+}
+
+/* световая пыль */
+.clock-glow{
+  position:absolute;
+  inset:18px;
+  border-radius:50%;
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(0,0,0,0.06),
+      transparent 60%
+    );
+  filter: blur(8px);
+  opacity:0.5;
+}
+
+/* стрелки */
+.hand{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform-origin: bottom center;
+  background:#1f1f1f;
+  border-radius:2px;
+}
+
+.hand.hour{
+  width:3px;
+  height:48px;
+  transform: translateX(-50%) translateY(-100%) rotate(40deg);
+  opacity:0.9;
+}
+
+.hand.minute{
+  width:2px;
+  height:68px;
+  transform: translateX(-50%) translateY(-100%) rotate(120deg);
+  opacity:0.75;
+}
+
+.hand.second{
+  width:1px;
+  height:82px;
+  transform: translateX(-50%) translateY(-100%) rotate(260deg);
+  opacity:0.35;
+  animation: clockSweep 90s linear infinite;
+}
+
+/* медленное движение */
+@keyframes clockSweep{
+  from{ transform: translateX(-50%) translateY(-100%) rotate(0deg); }
+  to{ transform: translateX(-50%) translateY(-100%) rotate(360deg); }
+}
+
+/* мобильная адаптация */
+@media (max-width: 480px){
+  .clock-face{
+    width:180px;
+    height:180px;
+  }
+}
+
