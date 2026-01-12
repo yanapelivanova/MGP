@@ -234,7 +234,7 @@ export default function Home() {
           <button className="neumorphic-btn" onClick={() => scrollTo(servicesRef)} type="button">Services</button>
         </div>
       </section>
-      
+      }
       {/* ---------- WORLD TIME ---------- */}
 <section className="world-time">
   <div className="world-time-row">
