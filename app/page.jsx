@@ -234,7 +234,40 @@ export default function Home() {
           <button className="neumorphic-btn" onClick={() => scrollTo(servicesRef)} type="button">Services</button>
         </div>
       </section>
-      <WorldClock />
+      
+      {/* ---------- WORLD TIME ---------- */}
+<section className="world-time">
+  <div className="world-time-row">
+
+    <div className="clock-block">
+      <div className="clock-face montreal">
+        <div className="clock-marks"></div>
+        <div className="hand hour"></div>
+        <div className="hand minute"></div>
+      </div>
+      <div className="clock-city">Montreal</div>
+    </div>
+
+    <div className="clock-block">
+      <div className="clock-face london">
+        <div className="clock-marks"></div>
+        <div className="hand hour"></div>
+        <div className="hand minute"></div>
+      </div>
+      <div className="clock-city">London</div>
+    </div>
+
+    <div className="clock-block">
+      <div className="clock-face hongkong">
+        <div className="clock-marks"></div>
+        <div className="hand hour"></div>
+        <div className="hand minute"></div>
+      </div>
+      <div className="clock-city">Hong Kong</div>
+    </div>
+
+  </div>
+</section>
 
 {/* Solutions section */}
       <section ref={solutionsRef} className="section" id="solutions">
