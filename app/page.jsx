@@ -1,6 +1,8 @@
 // app/page.jsx
 "use client";
 
+import WorldClock from "./components/WorldClock";
+
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
@@ -232,6 +234,7 @@ export default function Home() {
           <button className="neumorphic-btn" onClick={() => scrollTo(servicesRef)} type="button">Services</button>
         </div>
       </section>
+      <WorldClock />
 
 {/* Solutions section */}
       <section ref={solutionsRef} className="section" id="solutions">
