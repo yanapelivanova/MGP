@@ -253,22 +253,40 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   gap:16px;
   flex-wrap:wrap;
   justify-content:center;
-
-  margin-top: 12px;   /* ⬅ опускаем кнопки вниз */
+  margin-top: 16px; /* аккуратно опустили */
 }
+
 .neumorphic-btn{
-  padding: 14px 28px;        /* ⬅ было меньше */
-  font-size: 14.5px;         /* ⬅ немного крупнее */
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding: 14px 30px;
+  font-size: 14.5px;
   font-weight: 600;
 
-  border-radius: 56px;       /* сохраняем «мягкость» */
-}
-.neumorphic-btn:hover{ opacity:.95; }
-.neumorphic-btn:active{
-  box-shadow: inset 6px 6px 12px #d1d1d1, inset -6px -6px 12px #ffffff;
-  transform: translateY(1px);
+  color:#444;
+  background:#fff;
+  border: none;                 /* 🔴 ОБЯЗАТЕЛЬНО */
+  border-radius: 56px;
+
+  box-shadow:                   /* 🔴 ОБЯЗАТЕЛЬНО */
+    8px 8px 16px #d1d1d1,
+    -8px -8px 16px #ffffff;
+
+  transition: box-shadow .15s ease, transform .15s ease, opacity .15s ease;
 }
 
+.neumorphic-btn:hover{
+  opacity:.95;
+}
+
+.neumorphic-btn:active{
+  box-shadow:
+    inset 6px 6px 12px #d1d1d1,
+    inset -6px -6px 12px #ffffff;
+  transform: translateY(1px);
+}
 /* ========== Cards (Services) ========== */
 .cards{ display:grid; gap:18px; }
 @media (min-width:860px){ .cards{ grid-template-columns:repeat(2,1fr);} }
