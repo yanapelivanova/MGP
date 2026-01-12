@@ -366,9 +366,89 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   background-size: 16px 16px;
   opacity: 0.35;
   pointer-events: none;
+/* ========== World Clocks ========== */
+
+.world-clocks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 3vw, 32px);
+  max-width: 1100px;
+  margin: 64px auto 0;
+  padding: 0 16px;
 }
 
-/* СТРЕЛКИ */
+/* ❗️ВАЖНО: мы НЕ меняем количество колонок на мобиле */
+/* только уменьшаем масштаб элементов */
+
+.clock-item {
+  text-align: center;
+}
+
+/* ========== ЦИФЕРБЛАТ ========== */
+
+.clock-face {
+  position: relative;
+
+  /* 🔑 КЛЮЧЕВОЕ ИЗМЕНЕНИЕ */
+  width: clamp(92px, 22vw, 160px);
+  height: clamp(92px, 22vw, 160px);
+
+  margin: 0 auto 14px;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle at 30% 30%,
+    #ffffff,
+    #f2f2f2 65%,
+    #e8e8e8 100%
+  );
+
+  box-shadow:
+    0 22px 44px rgba(0,0,0,0.12),
+    inset 0 2px 6px rgba(255,255,255,0.85);
+}
+
+/* ========== МЕТКИ ========== */
+
+.clock-marks {
+  position: absolute;
+  inset: clamp(6px, 1.8vw, 10px);
+  border-radius: 50%;
+}
+
+.clock-marks span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: clamp(5px, 1.4vw, 8px);
+  background: rgba(0,0,0,0.28);
+
+  /* масштабируем origin синхронно */
+  transform-origin: center calc(50% - clamp(28px, 7vw, 56px));
+}
+
+/* ========== СВЕТОВАЯ ПЫЛЬ ========== */
+
+.clock-glow {
+  position: absolute;
+  inset: clamp(8px, 2vw, 14px);
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,0.35) 1px,
+      transparent 1px
+    );
+
+  background-size: 14px 14px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ========== СТРЕЛКИ ========== */
+
 .clock-hand {
   position: absolute;
   left: 50%;
@@ -380,22 +460,24 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
 .hand-hour {
   width: 3px;
-  height: 38px;
+  height: clamp(22px, 6vw, 38px);
 }
 
 .hand-minute {
   width: 2px;
-  height: 54px;
+  height: clamp(32px, 9vw, 54px);
 }
 
 .hand-second {
   width: 1px;
-  height: 62px;
+  height: clamp(36px, 10vw, 62px);
   background: rgba(0,0,0,0.4);
 }
 
-/* ГОРОД */
+/* ========== ГОРОД ========== */
+
 .clock-city {
+  margin-top: 6px;
   font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
