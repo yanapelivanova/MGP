@@ -248,7 +248,14 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 
 /* ========== Buttons (neumorphic) ========== */
-.btnbar{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+.btnbar{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  justify-content:center;
+
+  margin-top: 12px;   /* ⬅ опускаем кнопки вниз */
+}
 .neumorphic-btn{
   display:inline-flex; align-items:center; justify-content:center;
   padding:12px 22px; border-radius:50px; background:#fff; color:#555;
