@@ -211,7 +211,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   line-height: 1; /* ключ */
 
   white-space: nowrap;
-  max-width: 900 px;
+  max-width: 900px;
   margin: 0 auto;
 
   overflow: visible;
