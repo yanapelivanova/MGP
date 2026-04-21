@@ -1,41 +1,78 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export default function WorldClock({ offset = 0 }) {
+function ClockFace({ timeZone }) {
+  const [angles, setAngles] = useState({ h: 0, m: 0, s: 0 });
+
   useEffect(() => {
     const update = () => {
-      const now = new Date(Date.now() + offset * 3600000);
-      const h = now.getHours() % 12;
-      const m = now.getMinutes();
-      const s = now.getSeconds();
+      const now = new Date();
 
-      const hourDeg = h * 30 + m * 0.5;
-      const minDeg = m * 6;
-      const secDeg = s * 6;
+      const parts = new Intl.DateTimeFormat("en-GB", {
+        timeZone,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      }).formatToParts(now);
 
-      document.documentElement.style.setProperty("--h", `${hourDeg}deg`);
-      document.documentElement.style.setProperty("--m", `${minDeg}deg`);
-      document.documentElement.style.setProperty("--s", `${secDeg}deg`);
+      const hour = Number(parts.find((p) => p.type === "hour")?.value ?? 0);
+      const minute = Number(parts.find((p) => p.type === "minute")?.value ?? 0);
+      const second = Number(parts.find((p) => p.type === "second")?.value ?? 0);
+
+      const h = (hour % 12) * 30 + minute * 0.5;
+      const m = minute * 6 + second * 0.1;
+      const s = second * 6;
+
+      setAngles({ h, m, s });
     };
 
     update();
-    const i = setInterval(update, 1000);
-    return () => clearInterval(i);
-  }, [offset]);
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
+  }, [timeZone]);
 
   return (
     <div className="clock-face">
       <div className="clock-marks">
         {[...Array(60)].map((_, i) => (
-          <span key={i} style={{ transform: `rotate(${i * 6}deg)` }} />
+          <span key={i} style={{ transform: `translateX(-50%) rotate(${i * 6}deg)` }} />
         ))}
       </div>
 
       <div className="clock-glow" />
 
-      <div className="clock-hand hand-hour" />
-      <div className="clock-hand hand-minute" />
-      <div className="clock-hand hand-second" />
+      <div
+        className="clock-hand hand-hour"
+        style={{ transform: `translateX(-50%) rotate(${angles.h}deg)` }}
+      />
+      <div
+        className="clock-hand hand-minute"
+        style={{ transform: `translateX(-50%) rotate(${angles.m}deg)` }}
+      />
+      <div
+        className="clock-hand hand-second"
+        style={{ transform: `translateX(-50%) rotate(${angles.s}deg)` }}
+      />
     </div>
+  );
+}
+
+export default function WorldClock() {
+  const clocks = [
+    { city: "Montreal", timeZone: "America/Toronto" },
+    { city: "London", timeZone: "Europe/London" },
+    { city: "Hong Kong", timeZone: "Asia/Hong_Kong" },
+  ];
+
+  return (
+    <section className="world-clocks" aria-label="World clocks">
+      {clocks.map((clock) => (
+        <div className="clock-item" key={clock.city}>
+          <ClockFace timeZone={clock.timeZone} />
+          <div className="clock-city">{clock.city}</div>
+        </div>
+      ))}
+    </section>
   );
 }
