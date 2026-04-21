@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 function ClockFace({ timeZone }) {
-  const [angles, setAngles] = useState({ h: 0, m: 0, s: 0 });
+  const [angles, setAngles] = useState({ h: 0, m: 0 });
 
   useEffect(() => {
     const update = () => {
@@ -18,13 +18,11 @@ function ClockFace({ timeZone }) {
 
       const hour = Number(parts.find((p) => p.type === "hour")?.value ?? 0);
       const minute = Number(parts.find((p) => p.type === "minute")?.value ?? 0);
-      const second = Number(parts.find((p) => p.type === "second")?.value ?? 0);
 
       const h = (hour % 12) * 30 + minute * 0.5;
-      const m = minute * 6 + second * 0.1;
-      const s = second * 6;
+      const m = minute * 6;
 
-      setAngles({ h, m, s });
+      setAngles({ h, m });
     };
 
     update();
@@ -34,13 +32,13 @@ function ClockFace({ timeZone }) {
 
   return (
     <div className="clock-face">
+      <div className="clock-rim" />
+      <div className="clock-glass" />
       <div className="clock-marks">
         {[...Array(60)].map((_, i) => (
           <span key={i} style={{ transform: `translateX(-50%) rotate(${i * 6}deg)` }} />
         ))}
       </div>
-
-      <div className="clock-glow" />
 
       <div
         className="clock-hand hand-hour"
@@ -50,10 +48,7 @@ function ClockFace({ timeZone }) {
         className="clock-hand hand-minute"
         style={{ transform: `translateX(-50%) rotate(${angles.m}deg)` }}
       />
-      <div
-        className="clock-hand hand-second"
-        style={{ transform: `translateX(-50%) rotate(${angles.s}deg)` }}
-      />
+      <div className="clock-pin" />
     </div>
   );
 }
