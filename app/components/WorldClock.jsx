@@ -35,8 +35,8 @@ function ClockFace({ timeZone }) {
       <div className="clock-rim" />
       <div className="clock-glass" />
       <div className="clock-marks">
-        {[...Array(60)].map((_, i) => (
-          <span key={i} style={{ transform: `translateX(-50%) rotate(${i * 6}deg)` }} />
+        {[...Array(48)].map((_, i) => (
+          <span key={i} style={{ transform: `translateX(-50%) rotate(${i * 7.5}deg)` }} />
         ))}
       </div>
 
