@@ -9,14 +9,12 @@ const CLOCKS = [
 ];
 
 function getAngles(timeZone) {
-  const now = new Date();
-
   const parts = new Intl.DateTimeFormat("en-GB", {
     timeZone,
     hour: "2-digit",
     minute: "2-digit",
     hour12: false,
-  }).formatToParts(now);
+  }).formatToParts(new Date());
 
   const hour = Number(parts.find((p) => p.type === "hour")?.value || 0);
   const minute = Number(parts.find((p) => p.type === "minute")?.value || 0);
@@ -31,13 +29,10 @@ function ClockFace({ timeZone }) {
   const [angles, setAngles] = useState({ h: 0, m: 0 });
 
   useEffect(() => {
-    const update = () => {
-      setAngles(getAngles(timeZone));
-    };
-
+    const update = () => setAngles(getAngles(timeZone));
     update();
-    const id = setInterval(update, 60000);
 
+    const id = setInterval(update, 60000);
     return () => clearInterval(id);
   }, [timeZone]);
 
@@ -47,12 +42,10 @@ function ClockFace({ timeZone }) {
       <div className="clock-glass" />
 
       <div className="clock-marks">
-        {Array.from({ length: 48 }).map((_, i) => (
+        {Array.from({ length: 12 }).map((_, i) => (
           <span
             key={i}
-            style={{
-              transform: `translateX(-50%) rotate(${i * 7.5}deg)`,
-            }}
+            style={{ transform: `translateX(-50%) rotate(${i * 30}deg)` }}
           />
         ))}
       </div>
