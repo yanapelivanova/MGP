@@ -243,6 +243,10 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
     max-width: 100%;
     white-space: nowrap;
   }
+  /* tighter hero-to-clocks spacing */
+.hero.section{
+  padding-bottom: 18px;
+}
 }
 
 /* ========== Buttons (neumorphic) ========== */
