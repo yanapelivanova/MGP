@@ -12,21 +12,20 @@ function ClockFace({ timeZone }) {
         timeZone,
         hour: "2-digit",
         minute: "2-digit",
-        second: "2-digit",
         hour12: false,
       }).formatToParts(now);
 
       const hour = Number(parts.find((p) => p.type === "hour")?.value ?? 0);
       const minute = Number(parts.find((p) => p.type === "minute")?.value ?? 0);
 
-      const h = (hour % 12) * 30 + minute * 0.5;
-      const m = minute * 6;
-
-      setAngles({ h, m });
+      setAngles({
+        h: (hour % 12) * 30 + minute * 0.5,
+        m: minute * 6,
+      });
     };
 
     update();
-    const id = setInterval(update, 1000);
+    const id = setInterval(update, 60000);
     return () => clearInterval(id);
   }, [timeZone]);
 
@@ -34,9 +33,13 @@ function ClockFace({ timeZone }) {
     <div className="clock-face">
       <div className="clock-rim" />
       <div className="clock-glass" />
+
       <div className="clock-marks">
         {[...Array(48)].map((_, i) => (
-          <span key={i} style={{ transform: `translateX(-50%) rotate(${i * 7.5}deg)` }} />
+          <span
+            key={i}
+            style={{ transform: `translateX(-50%) rotate(${i * 7.5}deg)` }}
+          />
         ))}
       </div>
 
@@ -48,6 +51,7 @@ function ClockFace({ timeZone }) {
         className="clock-hand hand-minute"
         style={{ transform: `translateX(-50%) rotate(${angles.m}deg)` }}
       />
+
       <div className="clock-pin" />
     </div>
   );
