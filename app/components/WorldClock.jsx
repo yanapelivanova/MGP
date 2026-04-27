@@ -13,46 +13,50 @@ function getAngles(timeZone) {
     timeZone,
     hour: "2-digit",
     minute: "2-digit",
+    second: "2-digit",
     hour12: false,
   }).formatToParts(new Date());
 
   const hour = Number(parts.find((p) => p.type === "hour")?.value || 0);
   const minute = Number(parts.find((p) => p.type === "minute")?.value || 0);
+  const second = Number(parts.find((p) => p.type === "second")?.value || 0);
 
   return {
     h: (hour % 12) * 30 + minute * 0.5,
-    m: minute * 6,
+    m: minute * 6 + second * 0.1,
+    s: second * 6,
   };
 }
 
 function ClockFace({ timeZone }) {
-  const [angles, setAngles] = useState({ h: 0, m: 0 });
+  const [angles, setAngles] = useState({ h: 0, m: 0, s: 0 });
 
   useEffect(() => {
     const update = () => setAngles(getAngles(timeZone));
     update();
 
-    const id = setInterval(update, 60000);
+    const id = setInterval(update, 1000);
     return () => clearInterval(id);
   }, [timeZone]);
 
   return (
-    <div className="clock-face">
-      <div className="clock-rim" />
-      <div className="clock-minute-marks" />
-      <div className="clock-hour-marks" />
-      <div className="clock-glass" />
+    <div className="clock-shell">
+      <div className="clock-image" />
 
       <div
-        className="clock-hand hand-hour"
+        className="clock-hand-img hand-hour-img"
         style={{ transform: `translateX(-50%) rotate(${angles.h}deg)` }}
       />
       <div
-        className="clock-hand hand-minute"
+        className="clock-hand-img hand-minute-img"
         style={{ transform: `translateX(-50%) rotate(${angles.m}deg)` }}
       />
+      <div
+        className="clock-hand-img hand-second-img"
+        style={{ transform: `translateX(-50%) rotate(${angles.s}deg)` }}
+      />
 
-      <div className="clock-pin" />
+      <div className="clock-center-img" />
     </div>
   );
 }
