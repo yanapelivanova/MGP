@@ -39,22 +39,14 @@ function ClockFace({ timeZone }) {
   return (
     <div className="clock-face">
       <div className="clock-rim" />
+      <div className="clock-minute-marks" />
+      <div className="clock-hour-marks" />
       <div className="clock-glass" />
-
-      <div className="clock-marks">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <span
-            key={i}
-            style={{ transform: `translateX(-50%) rotate(${i * 30}deg)` }}
-          />
-        ))}
-      </div>
 
       <div
         className="clock-hand hand-hour"
         style={{ transform: `translateX(-50%) rotate(${angles.h}deg)` }}
       />
-
       <div
         className="clock-hand hand-minute"
         style={{ transform: `translateX(-50%) rotate(${angles.m}deg)` }}
