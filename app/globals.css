@@ -248,7 +248,158 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   padding-bottom: 18px;
 }
 }
+/* ========== World Clocks ========== */
 
+.hero.section {
+  padding-bottom: 8px;
+}
+
+.world-clocks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(10px, 2.6vw, 26px);
+  max-width: 880px;
+  margin: -8px auto 0;
+  padding: 0 14px;
+  align-items: start;
+}
+
+.clock-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 0;
+}
+
+.clock-shell {
+  --clock-size: clamp(96px, 24vw, 148px);
+
+  position: relative;
+  width: var(--clock-size);
+  height: var(--clock-size);
+  margin: 0 auto 8px;
+  border-radius: 50%;
+  overflow: visible;
+
+  filter: drop-shadow(0 16px 20px rgba(0, 0, 0, 0.13));
+}
+
+.clock-image {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-image: url("/clock-face.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  box-shadow:
+    0 18px 30px rgba(0, 0, 0, 0.10),
+    0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* общая база стрелок */
+.clock-hand-img {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform-origin: bottom center;
+  border-radius: 999px;
+  z-index: 4;
+  pointer-events: none;
+
+  background: linear-gradient(
+    to right,
+    rgba(135, 135, 135, 0.15),
+    rgba(255, 255, 255, 0.96),
+    rgba(118, 118, 118, 0.28)
+  );
+
+  box-shadow:
+    2px 5px 7px rgba(0, 0, 0, 0.16),
+    -1px -1px 2px rgba(255, 255, 255, 0.9);
+}
+
+.hand-hour-img {
+  width: 2px;
+  height: 28%;
+  opacity: 0.86;
+}
+
+.hand-minute-img {
+  width: 1.55px;
+  height: 40%;
+  opacity: 0.82;
+}
+
+.hand-second-img {
+  width: 0.65px;
+  height: 43%;
+  opacity: 0.34;
+
+  background: rgba(120, 120, 120, 0.5);
+
+  box-shadow:
+    1px 4px 5px rgba(0, 0, 0, 0.12),
+    0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+.clock-center-img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 6;
+
+  background:
+    radial-gradient(circle at 32% 28%,
+      #ffffff 0%,
+      #eeeeee 34%,
+      #b8b8b8 70%,
+      #888888 100%
+    );
+
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.18),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+.clock-city {
+  margin-top: 2px;
+  font-size: clamp(8.5px, 2.1vw, 10px);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #777;
+  line-height: 1.1;
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+
+@media (max-width: 420px) {
+  .hero.section {
+    padding-bottom: 6px;
+  }
+
+  .world-clocks {
+    gap: 8px;
+    max-width: 100%;
+    padding: 0 10px;
+    margin-top: -10px;
+  }
+
+  .clock-shell {
+    --clock-size: 98px;
+  }
+
+  .clock-city {
+    font-size: 8.5px;
+    letter-spacing: 0.07em;
+  }
+}
 /* ========== Buttons (neumorphic) ========== */
 .btnbar{
   display:flex;
@@ -289,222 +440,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
     inset -6px -6px 12px #ffffff;
   transform: translateY(1px);
 }
-/* ========== World Clocks ========== */
 
-.hero.section{
-  padding-bottom: 8px;
-}
-
-.world-clocks {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(10px, 2.4vw, 22px);
-  max-width: 820px;
-  margin: -10px auto 0;
-  padding: 0 12px;
-  align-items: start;
-}
-
-.clock-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  min-width: 0;
-}
-
-.clock-face {
-  --clock-size: clamp(94px, 24vw, 136px);
-
-  position: relative;
-  width: var(--clock-size);
-  height: var(--clock-size);
-  margin: 0 auto 8px;
-  border-radius: 50%;
-  overflow: hidden;
-
-  background:
-    radial-gradient(circle at 34% 28%,
-      #ffffff 0%,
-      #f7f7f7 34%,
-      #ececec 64%,
-      #d8d8d8 100%
-    );
-
-  box-shadow:
-    0 18px 34px rgba(0,0,0,0.16),
-    inset 0 1px 1px rgba(255,255,255,0.95),
-    inset 0 -16px 22px rgba(0,0,0,0.08),
-    inset 0 0 0 1px rgba(0,0,0,0.06);
-}
-
-/* тонкий внешний обод, как у настенных часов */
-.clock-rim {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  z-index: 5;
-  pointer-events: none;
-
-  box-shadow:
-    inset 0 0 0 1px rgba(70,80,75,0.28),
-    inset 0 0 0 3px rgba(255,255,255,0.55),
-    inset -8px -10px 18px rgba(0,0,0,0.12),
-    inset 8px 8px 18px rgba(255,255,255,0.45);
-}
-
-/* тончайшие минутные риски по самому краю */
-.clock-minute-marks {
-  position: absolute;
-  inset: 6px;
-  border-radius: 50%;
-  z-index: 2;
-
-  background:
-    repeating-conic-gradient(
-      from 0deg,
-      rgba(0,0,0,0.16) 0deg 0.32deg,
-      transparent 0.32deg 6deg
-    );
-
-  -webkit-mask:
-    radial-gradient(circle, transparent 72%, #000 72.5%, #000 76%, transparent 76.5%);
-  mask:
-    radial-gradient(circle, transparent 72%, #000 72.5%, #000 76%, transparent 76.5%);
-}
-
-/* чуть заметнее часовые риски */
-.clock-hour-marks {
-  position: absolute;
-  inset: 6px;
-  border-radius: 50%;
-  z-index: 3;
-
-  background:
-    repeating-conic-gradient(
-      from 0deg,
-      rgba(0,0,0,0.24) 0deg 0.8deg,
-      transparent 0.8deg 30deg
-    );
-
-  -webkit-mask:
-    radial-gradient(circle, transparent 69%, #000 69.5%, #000 77%, transparent 77.5%);
-  mask:
-    radial-gradient(circle, transparent 69%, #000 69.5%, #000 77%, transparent 77.5%);
-}
-
-/* стекло: большой мягкий отблеск + затемнение снизу */
-.clock-glass {
-  position: absolute;
-  inset: 2px;
-  border-radius: 50%;
-  z-index: 6;
-  pointer-events: none;
-
-  background:
-    radial-gradient(ellipse at 25% 16%,
-      rgba(255,255,255,0.95) 0%,
-      rgba(255,255,255,0.42) 18%,
-      rgba(255,255,255,0.08) 38%,
-      transparent 54%
-    ),
-    linear-gradient(135deg,
-      rgba(255,255,255,0.34) 0%,
-      rgba(255,255,255,0.12) 26%,
-      transparent 58%
-    ),
-    radial-gradient(ellipse at 78% 86%,
-      rgba(0,0,0,0.07) 0%,
-      transparent 34%
-    );
-}
-
-/* тонкие металлические стрелки */
-.clock-hand {
-  position: absolute;
-  left: 50%;
-  bottom: 50%;
-  transform-origin: bottom center;
-  border-radius: 999px;
-  z-index: 4;
-
-  background:
-    linear-gradient(to right,
-      #151515 0%,
-      #656565 44%,
-      #f3f3f3 50%,
-      #242424 100%
-    );
-
-  box-shadow:
-    0 0 1px rgba(255,255,255,0.5),
-    0 1px 3px rgba(0,0,0,0.22);
-}
-
-.hand-hour {
-  width: 1.5px;
-  height: clamp(22px, 5.5vw, 32px);
-}
-
-.hand-minute {
-  width: 1.1px;
-  height: clamp(34px, 8vw, 48px);
-}
-
-.clock-pin {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 6px;
-  height: 6px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  z-index: 7;
-
-  background:
-    radial-gradient(circle at 32% 28%,
-      #ffffff 0%,
-      #9a9a9a 30%,
-      #2d2d2d 72%
-    );
-
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.35),
-    0 2px 4px rgba(0,0,0,0.20);
-}
-
-.clock-city {
-  margin-top: 2px;
-  font-size: clamp(8.5px, 2.1vw, 10px);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #777;
-  line-height: 1.1;
-  font-family: var(--font-sans);
-  font-weight: 500;
-}
-
-@media (max-width: 420px) {
-  .hero.section{
-    padding-bottom: 6px;
-  }
-
-  .world-clocks {
-    gap: 8px;
-    max-width: 100%;
-    padding: 0 10px;
-    margin-top: -12px;
-  }
-
-  .clock-face {
-    --clock-size: 96px;
-  }
-
-  .clock-city {
-    font-size: 8.5px;
-    letter-spacing: 0.07em;
-  }
-}
 /* ========== Cards (Services) ========== */
 .cards{ display:grid; gap:18px; }
 @media (min-width:860px){ .cards{ grid-template-columns:repeat(2,1fr);} }
