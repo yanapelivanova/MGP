@@ -271,9 +271,8 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   text-align: center;
   min-width: 0;
 }
-
 .clock-shell {
-  --clock-size: clamp(96px, 24vw, 148px);
+  --clock-size: clamp(120px, 29vw, 176px);
 
   position: relative;
   width: var(--clock-size);
@@ -282,7 +281,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   border-radius: 50%;
   overflow: visible;
 
-  filter: drop-shadow(0 16px 20px rgba(0, 0, 0, 0.13));
+  filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.10));
 }
 
 .clock-image {
@@ -294,9 +293,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   background-position: center;
   background-repeat: no-repeat;
 
-  box-shadow:
-    0 18px 30px rgba(0, 0, 0, 0.10),
-    0 4px 10px rgba(0, 0, 0, 0.06);
+  box-shadow: none;
 }
 
 /* общая база стрелок */
@@ -392,7 +389,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   }
 
   .clock-shell {
-    --clock-size: 98px;
+    --clock-size: 126px;
   }
 
   .clock-city {
