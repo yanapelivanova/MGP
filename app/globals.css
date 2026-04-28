@@ -326,13 +326,13 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
 .hand-minute-img {
   width: 1.55px;
-  height: 39%;
+  height: 28%;
   opacity: 0.82;
 }
 
 .hand-second-img {
   width: 0.65px;
-  height: 39%;
+  height: 28%;
   opacity: 0.28;
   background: rgba(120, 120, 120, 0.45);
   box-shadow:
