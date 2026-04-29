@@ -28,7 +28,7 @@ function getAngles(timeZone) {
   };
 }
 
-function ClockFace({ timeZone }) {
+function ClockFace({ timeZone, city }) {
   const [angles, setAngles] = useState({ h: 0, m: 0, s: 0 });
 
   useEffect(() => {
@@ -57,17 +57,22 @@ function ClockFace({ timeZone }) {
       />
 
       <div className="clock-center-img" />
+
+      {/* город внутри */}
+      <div className="clock-city-inside">{city}</div>
     </div>
   );
 }
 
 export default function WorldClock() {
   return (
-    <section className="world-clocks" aria-label="World clocks">
+    <section className="world-clocks">
       {CLOCKS.map((clock) => (
         <div className="clock-item" key={clock.city}>
-          <ClockFace timeZone={clock.timeZone} />
-          <div className="clock-city">{clock.city}</div>
+          <ClockFace
+            timeZone={clock.timeZone}
+            city={clock.city}
+          />
         </div>
       ))}
     </section>
