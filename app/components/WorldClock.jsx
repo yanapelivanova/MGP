@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const CLOCKS = [
   { city: "Montreal", timeZone: "America/Toronto" },
   { city: "London", timeZone: "Europe/London" },
-  { city: "Hong Kong", timeZone: "Asia/Hong_Kong" },
+  { city: "Hong\u00A0Kong", timeZone: "Asia/Hong_Kong" },,
 ];
 
 function getAngles(timeZone) {
