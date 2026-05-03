@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const CLOCKS = [
   { city: "Montreal", timeZone: "America/Toronto" },
   { city: "London", timeZone: "Europe/London" },
-  { city: "Hong\u00A0Kong", timeZone: "Asia/Hong_Kong" },,
+  { city: "Hong\u00A0Kong", timeZone: "Asia/Hong_Kong" },
 ];
 
 function getAngles(timeZone) {
@@ -43,6 +43,8 @@ function ClockFace({ timeZone, city }) {
     <div className="clock-shell">
       <div className="clock-image" />
 
+      <div className="clock-city-inside">{city}</div>
+
       <div
         className="clock-hand-img hand-hour-img"
         style={{ transform: `translateX(-50%) rotate(${angles.h}deg)` }}
@@ -57,22 +59,16 @@ function ClockFace({ timeZone, city }) {
       />
 
       <div className="clock-center-img" />
-
-      {/* город внутри */}
-      <div className="clock-city-inside">{city}</div>
     </div>
   );
 }
 
 export default function WorldClock() {
   return (
-    <section className="world-clocks">
+    <section className="world-clocks" aria-label="World clocks">
       {CLOCKS.map((clock) => (
         <div className="clock-item" key={clock.city}>
-          <ClockFace
-            timeZone={clock.timeZone}
-            city={clock.city}
-          />
+          <ClockFace timeZone={clock.timeZone} city={clock.city} />
         </div>
       ))}
     </section>
