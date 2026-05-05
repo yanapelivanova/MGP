@@ -397,15 +397,15 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
     padding-bottom: 8px;
   }
 
-  .world-clocks {
-    margin: 2px auto 0;
-    padding: 0 16px;
-    gap: 12px;
-    transform: none;
-  }
+.world-clocks {
+  margin: 2px auto 0;
+  padding: 0 8px;
+  gap: 4px;
+  transform: none;
+}
 
   .clock-shell {
-    --clock-size: 112px;
+    --clock-size: 130px;
   }
 
   .clock-city-inside {
