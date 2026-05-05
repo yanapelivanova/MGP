@@ -256,14 +256,14 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
 .world-clocks {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  max-width: 720px;
-  margin: 4px auto 0;
-  padding: 0 10px;
-  align-items: start;
-  justify-items: center;
-  transform: translateX(-6px);
+  grid-template-columns: repeat(3, 1fr); /* 3 равные колонки */
+  justify-items: center; /* центр внутри колонок */
+  
+  max-width: 360px; /* фикс ширины под 3 часа */
+  margin: 0 auto; /* центр блока */
+  
+  gap: 16px; /* расстояние МЕЖДУ часами */
+  padding: 0; /* убираем лишнее */
 }
 
 .clock-item {
