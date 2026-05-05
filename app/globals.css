@@ -311,7 +311,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   background-repeat: no-repeat;
 
   /* ключ: увеличиваем сам циферблат, чтобы исчезла “тарелка” */
-  background-size: 148%;
+  background-size: 100%;
 
   filter: contrast(1.09) brightness(1.015);
   box-shadow: none;
@@ -415,7 +415,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   }
 
   .clock-image {
-    background-size: 150%;
+    background-size: 100%;
   }
 
   .clock-city-inside {
