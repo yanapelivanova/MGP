@@ -405,7 +405,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 
   .clock-shell {
-    --clock-size: 200px;
+    --clock-size: 130px;
   }
 
   .clock-city-inside {
