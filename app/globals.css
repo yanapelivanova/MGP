@@ -255,28 +255,32 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 
 .world-clocks {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 
   width: 100%;
-  max-width: 640px;
-  margin: 2px auto 0;
-  padding: 0 24px;
-  gap: 0;
+  max-width: 100%;
+
+  padding: 0 16px; /* одинаковые края */
+  margin: 0 auto;
+
+  gap: 12px;
+
+  box-sizing: border-box; /* 🔴 ключ */
 }
 
 .clock-item {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  width: 100%; /* 🔴 ключ */
   min-width: 0;
-  width: 100%;
 }
 
 .clock-shell {
-  --clock-size: clamp(116px, 29vw, 164px);
-
+  --clock-size: clamp(110px, 30vw, 150px);
+}
   position: relative;
   width: var(--clock-size);
   height: var(--clock-size);
