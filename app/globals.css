@@ -251,7 +251,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 /* ========== World Clocks ========== */
 
 .hero.section {
-  padding-bottom: 10px;
+  padding-bottom: 8px;
 }
 
 .world-clocks {
@@ -405,7 +405,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   width: 100%;
   max-width: 100%;
   margin: 2px auto 0;
-  padding: 0 2px;
+  padding: 0;
   gap: 0;
 
   overflow: visible;
@@ -414,7 +414,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 
   .clock-shell {
-    --clock-size: 122px;
+    --clock-size: 142px;
   }
 
   .clock-image {
