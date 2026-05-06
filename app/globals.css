@@ -394,7 +394,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
 @media (max-width: 420px) {
   .hero.section {
-    padding-bottom: 8px;
+    padding-bottom: 12px;
   }
 
 .world-clocks {
@@ -418,7 +418,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   }
 
   .clock-image {
-    background-size: 116%;
+    background-size: 100%;
   }
 
   .clock-city-inside {
