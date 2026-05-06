@@ -71,14 +71,14 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 
 .brand-mark .logo{
-  height: 70px; /* mobile logo size (restore + keep compact) */
+  height: 64px; /* mobile logo size (restore + keep compact) */
   width: auto;
   display: block;
 }
 
 @media (min-width: 900px){
   .brand-mark .logo{
-    height: 70px;
+    height: 64px;
     transform: scale(1.14);
     transform-origin: center;
   }
