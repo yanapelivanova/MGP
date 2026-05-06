@@ -352,20 +352,20 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
 .hand-hour-img {
   width: 1.1px;
-  height: 28%;
+  height: 25%;
   opacity: 0.72;
 }
 
 .hand-minute-img {
   width: 0.9px;
-  height: 28%;
+  height: 30%;
   opacity: 0.56;
 }
 
 .hand-second-img {
   width: 0.4px;
-  height: 28%;
-  opacity: 0.2;
+  height: 30%;
+  opacity: 0.35;
   background: rgba(80, 80, 80, 0.38);
   box-shadow: 1px 3px 4px rgba(0,0,0,0.07);
 }
@@ -425,7 +425,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
     bottom: 32%;
     font-size: 4.1px;
     letter-spacing: 0.13em;
-    color: rgba(50, 50, 50, 0.17);
+    color: rgba(50, 50, 50, 0.26);
   }
 }
 /* ========== Buttons (neumorphic) ========== */
