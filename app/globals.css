@@ -397,26 +397,27 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
     padding-bottom: 8px;
   }
 
-.world-clocks {
-  display: flex;
-  justify-content: space-between;
+  .world-clocks {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
 
-  width: calc(100% - 20px);
-  max-width: 390px;
+    width: 100%;
+    max-width: 100%;
+    margin: 2px auto 0;
+    padding: 0 2px;
+    gap: 0;
 
-  margin: 2px auto 0;
-  padding: 0;
-
-  gap: 0;
-  transform: none;
-}
+    overflow: visible;
+    transform: none;
+  }
 
   .clock-shell {
-    --clock-size: 126px;
+    --clock-size: 122px;
   }
 
   .clock-image {
-    background-size: 120%;
+    background-size: 116%;
   }
 
   .clock-city-inside {
