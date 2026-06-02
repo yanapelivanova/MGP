@@ -79,27 +79,16 @@ useEffect(() => {
         observer.disconnect();
       }
     },
-    { threshold: 0.25 }
+    {
+      threshold: 0.02,
+      rootMargin: "0px 0px -10% 0px",
+    }
   );
 
   observer.observe(solutionsRef.current);
 
   return () => observer.disconnect();
 }, []);
-  const scrollTo = (ref) => {
-    setDrawerOpen(false);
-    setLangOpen(false);
-    if (!ref?.current) return;
-    const y = ref.current.getBoundingClientRect().top + window.scrollY - 108;
-    window.scrollTo({ top: y, behavior: "smooth" });
-  };
-
-  const switchLang = () => {
-    window.location.href = isFr ? "/" : "/fr";
-  };
-
-  return (
-    <main className="page" ref={homeRef}>
 {/* Top navigation bar */}
       <header className="topbar">
         <div className="top-actions">
