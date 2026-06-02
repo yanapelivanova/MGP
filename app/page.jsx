@@ -9,6 +9,7 @@ export default function Home() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [isFr, setIsFr] = useState(false);
+  const [solutionsVisible, setSolutionsVisible] = useState(false);
 
 // Section refs for smooth scroll
   const homeRef = useRef(null);
@@ -68,7 +69,23 @@ export default function Home() {
       media.removeEventListener?.("change", mediaHandler);
     };
   }, []);
+useEffect(() => {
+  if (!solutionsRef.current) return;
 
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setSolutionsVisible(true);
+        observer.disconnect();
+      }
+    },
+    { threshold: 0.25 }
+  );
+
+  observer.observe(solutionsRef.current);
+
+  return () => observer.disconnect();
+}, []);
   const scrollTo = (ref) => {
     setDrawerOpen(false);
     setLangOpen(false);
@@ -237,60 +254,43 @@ export default function Home() {
       <WorldClock />
       
 {/* Solutions section */}
-      <section ref={solutionsRef} className="section" id="solutions">
-        <h2>Solutions</h2>
-        <p className="lead" style={{ marginTop: 6, marginBottom: 18 }}>
-          From idea to scale — clear, measurable, on time.
-        </p>
+<section
+  ref={solutionsRef}
+  className={`solutions-dark ${solutionsVisible ? "is-visible" : ""}`}
+  id="solutions"
+>
+  <div className="solutions-bg-word">SOLUTIONS</div>
 
-        <div className="sol-grid">
-          <article className="sol-card">
-            <div className="sol-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M3 7.5l9-4 9 4-9 4-9-4Z M3 7.5v9l9 4 9-4v-9"
-                  fill="none" stroke="currentColor" strokeWidth="1.5"
-                  strokeLinecap="round" strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-            <h3 className="sol-title">Vendor Discovery</h3>
-            <p className="sol-text">Scouting + due diligence across the Americas, Europe, Asia.</p>
-          </article>
+  <div className="solutions-inner">
+    <div className="solutions-head">
+      <div className="solutions-kicker">SOLUTIONS</div>
+      <h2>
+        From idea to scale —
+        <br />
+        clear, measurable, on time.
+      </h2>
+    </div>
 
-          <article className="sol-card">
-            <div className="sol-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3Z" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                <path d="M9 12l2.2 2.2L15.5 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <h3 className="sol-title">Contract &amp; Compliance</h3>
-            <p className="sol-text">Terms, QA, audits, documentation — clean, enforceable, traceable.</p>
-          </article>
-
-          <article className="sol-card">
-            <div className="sol-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M4 19h16M6 16l4-4 3 3 5-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <h3 className="sol-title">Process Optimisation</h3>
-            <p className="sol-text">Network design, planning, logistics — measurable KPI uplift.</p>
-          </article>
-
-          <article className="sol-card">
-            <div className="sol-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M6 18l-1.5 3L7.5 20M12 13l3 3M12 13l-3-3" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M14 4a6 6 0 016 6l-6 6-4-4 4-8Z" fill="none" stroke="currentColor" strokeWidth="1.4" />
-              </svg>
-            </div>
-            <h3 className="sol-title">Turnkey Launch</h3>
-            <p className="sol-text">BOM, specs, packaging, full docs — end-to-end to market.</p>
-          </article>
-        </div>
-      </section>
+    <div className="solutions-list">
+      {[
+        ["01", "Vendor Discovery", "Scouting and due diligence across the Americas, Europe and Asia."],
+        ["02", "Contract & Compliance", "Terms, QA, audits and documentation — clean, enforceable, traceable."],
+        ["03", "Process Optimisation", "Network design, planning and logistics with measurable KPI improvement."],
+        ["04", "Turnkey Launch", "BOM, specifications, packaging and full documentation from concept to market."],
+      ].map(([num, title, text], i) => (
+        <article className="solution-row" style={{ "--delay": `${i * 0.16}s` }} key={num}>
+          <div className="solution-num">{num}</div>
+          <div className="solution-line" />
+          <div className="solution-content">
+            <h3>{title}</h3>
+            <div className="solution-gold-line" />
+            <p>{text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
 
 {/* Services section */}
       <section ref={servicesRef} className="section" id="services">
