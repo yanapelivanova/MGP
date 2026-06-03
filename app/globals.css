@@ -18,7 +18,7 @@ body {
 }
 
 /* ========== Layout ========== */
-.page { display: grid; gap: 24px; width: 100%; }
+.page { display: block; width: 100%; }
 .section {
   padding: 16px 16px 72px;
   max-width: 1100px;
