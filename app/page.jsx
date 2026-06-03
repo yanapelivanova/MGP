@@ -257,44 +257,7 @@ return (
       </section>
       <WorldClock />
       
-{/* Solutions section */}
-<section
-  ref={solutionsRef}
-  className={`solutions-dark ${solutionsVisible ? "is-visible" : ""}`}
-  id="solutions"
->
-  <div className="solutions-bg-word">SOLUTIONS</div>
-
-  <div className="solutions-inner">
-    <div className="solutions-head">
-      <div className="solutions-kicker">SOLUTIONS</div>
-      <h2>
-        From idea to scale —
-        <br />
-        clear, measurable, on time.
-      </h2>
-    </div>
-
-    <div className="solutions-list">
-      {[
-        ["01", "Vendor Discovery", "Scouting and due diligence across the Americas, Europe and Asia."],
-        ["02", "Contract & Compliance", "Terms, QA, audits and documentation — clean, enforceable, traceable."],
-        ["03", "Process Optimisation", "Network design, planning and logistics with measurable KPI improvement."],
-        ["04", "Turnkey Launch", "BOM, specifications, packaging and full documentation from concept to market."],
-      ].map(([num, title, text], i) => (
-        <article className="solution-row" style={{ "--delay": `${i * 0.16}s` }} key={num}>
-          <div className="solution-num">{num}</div>
-          <div className="solution-line" />
-          <div className="solution-content">
-            <h3>{title}</h3>
-            <div className="solution-gold-line" />
-            <p>{text}</p>
-          </div>
-        </article>
-      ))}
-    </div>
-  </div>
-</section>
+{/* Solutions temporarily disabled */}
 
 {/* Services section */}
       <section ref={servicesRef} className="section" id="services">
