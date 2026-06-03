@@ -307,7 +307,7 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   inset: 0;
   border-radius: 50%;
   z-index: 1;
-  background-image: url("/clock-face.jpg");
+  background-image: url("/clock-face.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
