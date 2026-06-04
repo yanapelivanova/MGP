@@ -260,11 +260,11 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
   justify-items: center;
   align-items: start;
 
-  width: 92%;
-  max-width: 520px;
+  width: 100%;
+  max-width: 100%;
   margin: -20px 0 auto;
   padding: 0 16px;
-  gap: 8px;
+  gap: 0;
   box-sizing: border-box;
 }
 
@@ -397,13 +397,25 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
     padding-bottom: 12px;
   }
 
+  .clock-item:first-child {
+  transform: translateX(12px);
+}
+
+.clock-item:nth-child(2) {
+  transform: translateX(0);
+}
+
+.clock-item:last-child {
+  transform: translateX(-12px);
+}
+  
 .world-clocks {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   justify-items: center;
 
-  width: 96%;
-  max-width: 520px;
+  width: 100%;
+  max-width: 100%;
   margin: -20px auto 0;
   padding: 0;
   gap: 0;
