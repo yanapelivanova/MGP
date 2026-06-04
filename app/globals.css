@@ -262,9 +262,9 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 
   width: 100%;
   max-width: 100%;
-  margin: 0 auto;
+  margin: -20px 0 auto;
   padding: 0 16px;
-  gap: 12px;
+  gap: 8px;
   box-sizing: border-box;
 }
 
