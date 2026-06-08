@@ -534,28 +534,28 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 /* ========== TIMING ========== */
 
 .timing-transition {
-  height: 32vh;
-  min-height: 220px;
+  height: 18vh;
+  min-height: 120px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  overflow: hidden;
   background: #fff;
+  overflow: hidden;
 }
 
 .timing-word {
   font-family: var(--font-display);
 
-  font-size: clamp(90px, 24vw, 280px);
-
+  font-size: clamp(34px, 7vw, 52px);
   font-weight: 400;
-  letter-spacing: 0.12em;
 
-  color: rgba(0,0,0,0.035);
+  letter-spacing: 0.7em;
 
-  transform: translateX(4vw);
+  color: rgba(0,0,0,0.12);
+
+  text-transform: uppercase;
 
   user-select: none;
   pointer-events: none;
