@@ -531,6 +531,36 @@ h3, .h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.25;
 }
 .foot a{ color:#666; text-decoration:none; }
 
+/* ========== TIMING ========== */
+
+.timing-transition {
+  height: 32vh;
+  min-height: 220px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  background: #fff;
+}
+
+.timing-word {
+  font-family: var(--font-display);
+
+  font-size: clamp(90px, 24vw, 280px);
+
+  font-weight: 400;
+  letter-spacing: 0.12em;
+
+  color: rgba(0,0,0,0.035);
+
+  transform: translateX(4vw);
+
+  user-select: none;
+  pointer-events: none;
+}
+
 /* ========== Solutions dark editorial ========== */
 .solutions-dark {
   position: relative;
