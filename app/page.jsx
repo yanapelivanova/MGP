@@ -256,6 +256,10 @@ return (
         </div>
       </section>
       <WorldClock />
+
+    <section className="timing-transition">
+  <div className="timing-word">TIMING</div>
+</section>
       
 {/* Solutions temporarily disabled */}
 
